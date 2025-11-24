@@ -9,7 +9,12 @@ interface NavigationProps {
   activeSection: string
 }
 
-const navItems = [
+interface NavItem {
+  id: string
+  label: string
+}
+
+const navItems: NavItem[] = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
   { id: 'projects', label: 'Projects' },
@@ -99,7 +104,7 @@ function MobileMenu({
   navItems,
   scrollToSection,
 }: {
-  navItems: typeof navItems
+  navItems: NavItem[]
   scrollToSection: (id: string) => void
 }) {
   const [isOpen, setIsOpen] = useState(false)

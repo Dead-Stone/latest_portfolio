@@ -7,6 +7,8 @@ interface Project {
   title: string
   description: string
   technologies: string[]
+  period: string
+  organization: string
   github?: string
   demo?: string
 }
@@ -14,38 +16,50 @@ interface Project {
 const projects: Project[] = [
   {
     title: 'Agentic Grading System',
-    description: 'Built multimodal RAG system with an agentic framework to grade students efficiently. Implemented using Weaviate vector DB, CrewAI, UnstructuredIO, and Gemini models. This system automates the grading process while maintaining accuracy and providing detailed feedback.',
-    technologies: ['Python', 'Weaviate', 'CrewAI', 'UnstructuredIO', 'Gemini', 'RAG', 'Vector DB'],
+    organization: 'SJSU',
+    period: 'Dec 2024 – May 2025',
+    description: 'Built an automated agentic grading platform using CrewAI, Weaviate, and Gemini to evaluate text and image submissions. The system uses multimodal RAG, rubric-based reasoning, and multi-agent workflows to produce consistent grading decisions. Designed vector search pipelines and fine-grained retrieval logic to map student answers to rubric criteria, reducing manual grading workload by 60% and improving scoring consistency across evaluators.',
+    technologies: ['CrewAI', 'Weaviate', 'Gemini', 'Multimodal RAG', 'Python', 'Vector DB', 'Multi-agent Workflows'],
+    github: 'https://github.com/Dead-Stone',
+  },
+  {
+    title: 'Movie Ticket Booking System',
+    organization: 'SJSU',
+    period: 'Aug 2023 – Nov 2023',
+    description: 'Developed a full-stack movie ticket booking platform using React, Node.js, and GraphQL for real-time seat selection and dynamic showtime updates. Implemented optimized resolvers and schema design to eliminate over-fetching and improve query performance. Built microservice-based backend services with MongoDB, containerized using Docker, and deployed via a CI/CD pipeline inspired by Harness automation. Added caching and rate-limiting to ensure responsiveness under high concurrent user load.',
+    technologies: ['React', 'Node.js', 'GraphQL', 'MongoDB', 'Docker', 'CI/CD', 'Microservices', 'Harness'],
     github: 'https://github.com/Dead-Stone',
   },
   {
     title: 'Remote Joystick',
-    description: 'Created a Google Stadia-like TCP system application to play high-end games on a lightweight system with less hardware components. Achieved less than 10ms latency using ReactJS and Python, enabling seamless cloud gaming experiences.',
-    technologies: ['ReactJS', 'Python', 'TCP', 'Network Programming'],
+    organization: 'Osmania University',
+    period: 'Nov 2019 – Jan 2020',
+    description: 'Built a real-time remote joystick system using React and Python with optimized TCP socket communication. The architecture achieved sub-10ms input latency, enabling responsive gameplay even on low-end client devices. Implemented client-side prediction and real-time state synchronization to avoid lag spikes during gameplay, improving usability and reducing input jitter under fluctuating network conditions.',
+    technologies: ['React', 'Python', 'TCP', 'Socket Programming', 'Real-time Systems', 'Network Optimization'],
     github: 'https://github.com/Dead-Stone',
   },
   {
-    title: 'Gembizz Progressive Web App',
-    description: 'Modern progressive web application for business districts and merchants. Built with FastAPI backend and React frontend with Vite, featuring real-time communication, scalable microservices architecture, and automated CI/CD pipelines.',
-    technologies: ['FastAPI', 'React', 'Vite', 'MongoDB', 'Docker', 'AWS EC2', 'CI/CD'],
+    title: 'Expira',
+    organization: '',
+    period: '',
+    description: 'Flutter mobile application that scans ID documents and tracks expiry dates. Features OCR-based ID scanning, automatic expiry date extraction, and notification system to alert users before documents expire. Built with Flutter for cross-platform compatibility and integrated with camera and image processing capabilities for seamless document scanning.',
+    technologies: ['Flutter', 'Dart', 'OCR', 'Camera', 'Image Processing', 'Mobile Development'],
     github: 'https://github.com/Dead-Stone',
   },
   {
     title: 'Multimodal RAG System',
+    organization: '',
+    period: '',
     description: 'Developed a Retrieval-Augmented Generation system for AI applications using Python, Django, Weaviate, and GraphQL. Deployed serverless architecture with AWS Lambda, optimized with Apollo Router for improved query performance.',
     technologies: ['Python', 'Django', 'Weaviate', 'GraphQL', 'Apollo Router', 'AWS Lambda', 'OpenAI'],
     github: 'https://github.com/Dead-Stone',
   },
   {
     title: 'Fintech Web Application',
+    organization: '',
+    period: '',
     description: 'Enterprise-grade fintech web application built with React and TypeScript. Features GraphQL API integrations, real-time functionality, automated CI/CD with Harness, and comprehensive testing frameworks for high reliability.',
     technologies: ['React', 'TypeScript', 'GraphQL', 'Harness', 'Jest', 'Testing'],
-    github: 'https://github.com/Dead-Stone',
-  },
-  {
-    title: 'Educational Platform API',
-    description: 'RESTful API for high-traffic educational platform supporting 100,000+ monthly users. Built with Scala and SQL, optimized with AWS DynamoDB for low-latency data storage and scalable database architecture.',
-    technologies: ['Scala', 'SQL', 'AWS DynamoDB', 'REST API', 'Microservices'],
     github: 'https://github.com/Dead-Stone',
   },
 ]

@@ -18,6 +18,7 @@ const skills = [
   'Svelte',
   'Spring Boot',
   'Apollo Router',
+  'GraphQL',
   'Django',
   'Flask',
   'Tailwind',

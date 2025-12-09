@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { ThemeProvider } from '@/contexts/ThemeContext'
+import { PageTransitionProvider } from '@/contexts/PageTransitionContext'
+import PageTransition from '@/components/PageTransition'
 
 export const metadata: Metadata = {
   title: 'Mohana Moganti - Software Engineer & AI Engineer',
@@ -15,7 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <PageTransitionProvider>
+            <PageTransition />
+            {children}
+          </PageTransitionProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

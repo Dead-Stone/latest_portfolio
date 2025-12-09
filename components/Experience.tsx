@@ -32,7 +32,7 @@ export default function Experience() {
                 className="relative"
               >
                 {/* Timeline Dot with Company Logo */}
-                <div className="absolute left-4 md:left-1/2 w-16 h-16 bg-white dark:bg-gray-800 rounded-full border-4 border-gray-900 dark:border-gray-100 transform -translate-x-1/2 z-10 shadow-lg dark:shadow-gray-900/50 flex items-center justify-center overflow-hidden">
+                <div className="absolute left-4 md:left-1/2 w-16 h-16 bg-white rounded-full border-4 border-gray-900 dark:border-gray-100 transform -translate-x-1/2 z-10 shadow-lg flex items-center justify-center overflow-hidden">
                   {exp.logo ? (
                     <Image
                       src={exp.logo}
@@ -56,7 +56,15 @@ export default function Experience() {
                 
                 {/* Content Card - Alternating sides on desktop */}
                 <div className={`ml-12 md:ml-0 md:w-[45%] ${index % 2 === 0 ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'}`}>
-                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 p-6 hover:shadow-xl dark:hover:shadow-gray-900 transition-all duration-300 border-l-4 border-gray-900 dark:border-blue-500">
+                  <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 p-6 hover:shadow-xl dark:hover:shadow-gray-900 transition-all duration-300 border-l-4 border-gray-900 dark:border-blue-500">
+                    {/* Chat bubble tail */}
+                    <div 
+                      className={`absolute top-8 hidden md:block w-0 h-0 z-0 ${
+                        index % 2 === 0 
+                          ? 'right-0 translate-x-full border-t-[12px] border-b-[12px] border-l-[16px] border-t-transparent border-b-transparent border-l-white dark:border-l-gray-800 drop-shadow-[2px_0_2px_rgba(0,0,0,0.1)] dark:drop-shadow-[2px_0_2px_rgba(0,0,0,0.3)]' 
+                          : 'left-0 -translate-x-full border-t-[12px] border-b-[12px] border-r-[16px] border-t-transparent border-b-transparent border-r-white dark:border-r-gray-800 drop-shadow-[-2px_0_2px_rgba(0,0,0,0.1)] dark:drop-shadow-[-2px_0_2px_rgba(0,0,0,0.3)]'
+                      }`}
+                    />
                     <div className="mb-4">
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white">{exp.company}</h3>
                       <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mt-1">{exp.role}</h4>

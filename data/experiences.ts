@@ -104,7 +104,7 @@ export const experiences: Experience[] = [
   },
   {
     company: 'YuppTV Inc.',
-    role: 'Job Intern',
+    role: 'Intern',
     location: 'Hyderabad, TS',
     period: 'Jan 2020 - Sep 2020',
     logo: '/exp/yupptv-dark-logo-1974195674.png',

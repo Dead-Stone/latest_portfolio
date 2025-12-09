@@ -14,6 +14,13 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState('home')
 
   useEffect(() => {
+    // Reset scroll on mount (especially for mobile)
+    if (window.innerWidth < 768) {
+      window.scrollTo(0, 0)
+    }
+  }, [])
+
+  useEffect(() => {
     const handleScroll = () => {
       const sections = ['home', 'about', 'projects', 'skills', 'experience', 'contact']
       const scrollPosition = window.scrollY + 100

@@ -94,8 +94,9 @@ body {
 /* Smooth Scrolling */
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
 }
+
+/* Scroll snap removed to allow natural scrolling */
 
 @media (prefers-reduced-motion: no-preference) {
   html {
@@ -127,5 +128,43 @@ html {
 
 .dark ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(to bottom, #9333ea, #ec4899);
+}
+
+/* Range Slider Styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #9333ea;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #9333ea;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dark input[type="range"]::-webkit-slider-thumb {
+  background: #a855f7;
+  border-color: #1f2937;
+}
+
+.dark input[type="range"]::-moz-range-thumb {
+  background: #a855f7;
+  border-color: #1f2937;
 }
 

@@ -14,6 +14,14 @@ export default function PageToggle() {
   useEffect(() => {
     // End transition when pathname changes
     endTransition()
+    // Always restore scroll when pathname changes (important for art page)
+    document.body.style.overflow = ''
+    document.documentElement.style.overflow = ''
+    
+    // Reset scroll position on mobile when page changes
+    if (window.innerWidth < 768) {
+      window.scrollTo(0, 0)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
@@ -32,7 +40,8 @@ export default function PageToggle() {
   return (
     <button
       onClick={togglePage}
-      className="fixed bottom-6 right-6 z-50 w-14 h-8 rounded-full bg-gray-300 dark:bg-gray-700 p-1 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+      className="fixed bottom-6 right-6 z-50 w-14 h-8 rounded-full bg-gray-300 dark:bg-gray-700 p-1 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 touch-none"
+      style={{ touchAction: 'manipulation' }}
       aria-label={isArtPage ? 'Go to Portfolio' : 'Go to Art Gallery'}
     >
       <div

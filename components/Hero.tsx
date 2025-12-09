@@ -6,7 +6,7 @@ import { FaLinkedin, FaGithub, FaArrowDown } from 'react-icons/fa'
 
 export default function Hero() {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden bg-white dark:bg-gray-900 md:bg-transparent">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400 dark:bg-blue-600 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-xl opacity-20 dark:opacity-10 animate-blob"></div>
@@ -31,6 +31,7 @@ export default function Hero() {
                   alt="Mohana Moganti"
                   fill
                   className="object-cover rounded-full"
+                  sizes="(max-width: 768px) 192px, (max-width: 1024px) 256px, 320px"
                   priority
                 />
               </div>
@@ -97,8 +98,8 @@ export default function Hero() {
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-500 dark:to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
                 <a
-                  href="/Resume_Latest_103025.pdf"
-                  download="Resume_Latest_103025.pdf"
+                  href="/Resumev1_12082025.pdf"
+                  download="Resumev1_12082025.pdf"
                   className="px-8 py-4 border-2 border-gray-900 dark:border-gray-100 text-gray-900 dark:text-gray-100 rounded-full font-semibold text-lg hover:bg-gray-900 dark:hover:bg-gray-100 hover:text-white dark:hover:text-gray-900 transform hover:scale-105 transition-all duration-300"
                 >
                   Download CV

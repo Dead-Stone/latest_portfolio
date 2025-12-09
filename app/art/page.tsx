@@ -26,8 +26,8 @@ const artPieces: ArtPiece[] = [
   // Animated sequence from c1–c9
   {
     id: 0,
-    title: 'Animated Sketch Sequence',
-    description: 'A captivating sequential animation that brings pencil sketches to life through nine meticulously crafted frames. Each frame captures a moment in time, revealing the fluidity of motion and the delicate interplay between light and shadow. The animation showcases the raw beauty of traditional sketching techniques, where every stroke tells a story and every line carries intention. As the sequence unfolds, viewers witness the transformation from initial concept to refined artwork, celebrating the artistic process itself as much as the final result.',
+    title: 'Jim Carrey',
+    description: 'Jim Carrey as The Mask is pure chaos in the best way possible. That green face, those wild expressions, the way he could stretch reality itself with just a look. But honestly, what really got me was The Truman Show. That movie hit me in a way I still can\'t fully explain. Watching Truman discover his entire life was a lie, seeing him break free from that perfect little world, it made me think about my own reality in ways no other movie has. The way Carrey played both characters, the over-the-top energy of The Mask and the quiet desperation of Truman, showed his incredible range. I loved The Truman Show till date, and I think about it whenever I question what\'s real and what\'s just part of the show.',
     image: '/art/c1.png',
     category: 'Animation',
     year: '2024',
@@ -48,52 +48,41 @@ const artPieces: ArtPiece[] = [
   },
   {
     id: 1,
-    title: 'Artwork 1',
-    description: 'This piece explores the duality of perception through the transformative power of negative space. The artwork begins as an inverted image, challenging viewers to see beyond initial impressions and discover hidden narratives within the reversed tones. As the image transitions from negative to positive, it reveals intricate details and emotional depth that were initially concealed. The composition masterfully balances contrast and harmony, creating a visual metaphor for the way perspective can completely alter our understanding of reality. Each element is carefully positioned to guide the eye through a journey of discovery, where shadows become light and darkness reveals truth.',
+    title: 'Jack Nicholson',
+    description: 'There\'s something magnetic about the Joker that keeps drawing me back. Jack Nicholson\'s version was the first I saw, that manic laugh and theatrical chaos that made him both terrifying and oddly charming. Then Heath Ledger came along and completely redefined what the character could be. His performance was so raw and unsettling that it earned him that well-deserved Oscar, and honestly, it changed how I think about villainy in cinema. But Joaquin Phoenix\'s take hit different. Watching Arthur Fleck\'s descent into madness felt uncomfortably real, like we were witnessing a person break rather than just a villain being born. Each actor brought something unique: Nicholson\'s theatricality, Ledger\'s anarchic intensity, Phoenix\'s heartbreaking vulnerability. That\'s why I\'m such a big fan; the Joker isn\'t just one character, it\'s a canvas that three incredible actors painted in completely different ways, and each one is a masterpiece.',
     image: '/art/negative-1.png',
     negativeImage: '/art/negative-1.png',
-    category: 'Digital Art',
+    category: 'Portrait',
     year: '2024',
     aspectRatio: 'portrait',
     hasNegative: true
   },
   {
     id: 2,
-    title: 'Artwork 2',
-    description: 'A striking illustration that plays with the boundaries between form and void, this piece demonstrates the profound impact of negative transformation. The artwork invites viewers to experience the same subject through two distinct visual languages—one inverted, one true—each revealing different aspects of the composition\'s essence. The negative version strips away familiar color associations, forcing us to focus on structure, form, and the fundamental relationships between elements. When revealed in its natural state, the piece blossoms with rich textures and nuanced details that create a complete narrative. This dual presentation celebrates the complexity of visual perception and the beauty found in both the expected and the unexpected.',
+    title: 'Heath Ledger',
+    description: 'There\'s something magnetic about the Joker that keeps drawing me back. Jack Nicholson\'s version was the first I saw, that manic laugh and theatrical chaos that made him both terrifying and oddly charming. Then Heath Ledger came along and completely redefined what the character could be. His performance was so raw and unsettling that it earned him that well-deserved Oscar, and honestly, it changed how I think about villainy in cinema. But Joaquin Phoenix\'s take hit different. Watching Arthur Fleck\'s descent into madness felt uncomfortably real, like we were witnessing a person break rather than just a villain being born. Each actor brought something unique: Nicholson\'s theatricality, Ledger\'s anarchic intensity, Phoenix\'s heartbreaking vulnerability. That\'s why I\'m such a big fan; the Joker isn\'t just one character, it\'s a canvas that three incredible actors painted in completely different ways, and each one is a masterpiece.',
     image: '/art/negative-2.png',
     negativeImage: '/art/negative-2.png',
-    category: 'Illustration',
+    category: 'Portrait',
     year: '2024',
     aspectRatio: 'portrait',
     hasNegative: true
   },
   {
     id: 3,
-    title: 'Artwork 3',
-    description: 'This digital masterpiece explores the concept of visual metamorphosis through the lens of negative inversion. The artwork challenges conventional viewing experiences by presenting the same composition in two dramatically different states. In its negative form, the piece becomes an abstract exploration of tonal relationships, where the familiar becomes mysterious and the ordinary transforms into something otherworldly. The transition to the positive image is a revelation, unveiling the true character of the work with all its intended colors, textures, and emotional resonance. This interactive experience serves as a meditation on how our perception shapes reality, reminding us that beauty exists in multiple forms and that sometimes we must see things differently to truly understand them.',
+    title: 'Joaquin Phoenix',
+    description: 'There\'s something magnetic about the Joker that keeps drawing me back. Jack Nicholson\'s version was the first I saw, that manic laugh and theatrical chaos that made him both terrifying and oddly charming. Then Heath Ledger came along and completely redefined what the character could be. His performance was so raw and unsettling that it earned him that well-deserved Oscar, and honestly, it changed how I think about villainy in cinema. But Joaquin Phoenix\'s take hit different. Watching Arthur Fleck\'s descent into madness felt uncomfortably real, like we were witnessing a person break rather than just a villain being born. Each actor brought something unique: Nicholson\'s theatricality, Ledger\'s anarchic intensity, Phoenix\'s heartbreaking vulnerability. That\'s why I\'m such a big fan; the Joker isn\'t just one character, it\'s a canvas that three incredible actors painted in completely different ways, and each one is a masterpiece.',
     image: '/art/negative-3.png',
     negativeImage: '/art/negative-3.png',
-    category: 'Digital Art',
-    year: '2024',
-    aspectRatio: 'portrait',
-    hasNegative: true
-  },
-  {
-    id: 4,
-    title: 'Artwork 4',
-    description: 'A contemplative piece that uses the negative-to-positive transformation as a narrative device, this illustration tells a story of revelation and discovery. The inverted state creates an ethereal, dreamlike quality that draws viewers into a world where normal rules of perception are suspended. As the image gradually reveals its true nature, layers of meaning unfold, showing how the same visual information can evoke completely different emotional responses depending on how it\'s presented. The composition demonstrates masterful control of contrast, balance, and visual flow, creating a piece that is both technically impressive and emotionally resonant. This work celebrates the power of perspective and the endless possibilities that emerge when we view the world through different lenses.',
-    image: '/art/negative-4.png',
-    negativeImage: '/art/negative-4.png',
-    category: 'Illustration',
+    category: 'Portrait',
     year: '2024',
     aspectRatio: 'portrait',
     hasNegative: true
   },
   {
     id: 5,
-    title: 'Anime Illustration 1',
-    description: 'This vibrant anime-style portrait captures the essence of expressive character design through masterful use of bold color blocking and dynamic lighting. The piece showcases a sophisticated understanding of anime aesthetics, where every color choice serves both aesthetic and narrative purposes. The lighting creates depth and dimension, highlighting key features while maintaining the distinctive flat-shaded style characteristic of the genre. The composition balances energy and elegance, with carefully placed highlights that bring the character to life. This work demonstrates how strategic color placement and lighting can convey emotion and personality, creating a character that feels both stylized and authentic.',
+    title: 'Hisoka',
+    description: 'Hisoka from Hunter x Hunter is one of those characters that just gets under your skin in the best way. There\'s something about his twisted charisma, that unsettling smile, and the way he treats every fight like a game that makes him impossible to look away from. He\'s dangerous, unpredictable, and completely unapologetic about who he is. The way he sees potential in people, especially Gon and Killua, and waits for them to grow stronger just so he can have a better fight, it\'s messed up but also weirdly fascinating. His Nen abilities with Bungee Gum and Texture Surprise are creative and deadly, but it\'s his personality that really makes him stand out. He\'s not trying to be evil or good, he just follows his own twisted desires, and that honesty about his nature is what makes him so compelling. He\'s the kind of character you know you shouldn\'t like, but you can\'t help being drawn to his chaotic energy.',
     image: '/art/anime-1.png',
     category: 'Anime',
     year: '2024',
@@ -101,8 +90,8 @@ const artPieces: ArtPiece[] = [
   },
   {
     id: 6,
-    title: 'Anime Illustration 2',
-    description: 'A dynamic anime composition that masterfully captures motion and energy through the strategic use of high-contrast shadows and dramatic lighting. The piece creates a sense of movement and action, with shadows that not only define form but also suggest direction and momentum. The high contrast approach amplifies the emotional impact, creating a visual intensity that draws viewers into the scene. Every shadow is carefully placed to enhance the composition\'s rhythm, guiding the eye through the artwork while maintaining focus on key elements. This illustration exemplifies how contrast can be used as a powerful storytelling tool, transforming a static image into a moment frozen in time that feels alive with potential energy.',
+    title: 'Roronoa Zoro',
+    description: 'Zoro from One Piece is the definition of loyalty and determination. This guy will literally die before he breaks a promise, and that\'s not even an exaggeration. Watching him train with those insane weights, pushing himself beyond human limits, it\'s inspiring in a way that makes you want to work harder at whatever you\'re doing. His three-sword style is iconic, but it\'s his unwavering commitment to becoming the world\'s greatest swordsman that really gets me. He\'s got this quiet intensity, never backing down from a challenge, and when he says he\'ll do something, you know he means it. The way he trusts Luffy completely, even when the captain\'s plans are absolutely insane, shows the kind of loyalty that\'s rare. Plus, his sense of direction is hilariously terrible, which adds this perfect comedic balance to his otherwise serious character. Zoro is the kind of friend everyone needs, someone who\'ll stand by you no matter what and push you to be better.',
     image: '/art/anime-2.png',
     category: 'Anime',
     year: '2024',
@@ -110,8 +99,8 @@ const artPieces: ArtPiece[] = [
   },
   {
     id: 7,
-    title: 'Anime Illustration 3',
-    description: 'This cinematic frame draws inspiration from the art of storyboarding and key animation, capturing a moment that feels both complete and part of a larger narrative. The composition demonstrates a deep understanding of visual storytelling, where every element is positioned to convey emotion and advance the story. The piece has the quality of a carefully chosen keyframe—a moment of significance that encapsulates the essence of a scene. The lighting and composition work together to create depth and atmosphere, making viewers feel as though they\'re witnessing a pivotal moment in an animated sequence. This artwork celebrates the craft of animation, showing how a single frame can carry the weight of an entire narrative and evoke powerful emotional responses.',
+    title: 'God Usopp',
+    description: 'Usopp is the most relatable character in One Piece, and I mean that in the best way possible. He\'s scared, he lies constantly, he runs away from fights, but when it really matters, he always finds the courage to stand up. That\'s what makes him so special. He\'s not naturally brave like Zoro or Luffy, he has to work for it, and that struggle makes his moments of bravery hit so much harder. His lies becoming reality, like when he became God Usopp, is one of the most satisfying character arcs in the series. He starts as this scared kid telling tall tales, and through sheer will and determination, he becomes someone who can actually back up his words. His inventions are creative, his sniping skills are incredible, and his loyalty to the crew is absolute. Usopp shows us that you don\'t have to be born a hero to become one, you just have to keep pushing forward even when you\'re terrified. That\'s why he\'s God Usopp, because he earned it.',
     image: '/art/anime-3.png',
     category: 'Anime',
     year: '2024',
@@ -119,28 +108,19 @@ const artPieces: ArtPiece[] = [
   },
   {
     id: 8,
-    title: 'Concept Image 1',
-    description: 'A high-resolution painted piece that demonstrates exceptional mastery of atmosphere and depth. The artwork creates a rich, immersive environment where every brushstroke contributes to the overall mood and narrative. The depth is achieved through careful layering of values and colors, creating a sense of space that extends far beyond the canvas. Atmospheric perspective is skillfully employed, with distant elements fading into the background while foreground details remain crisp and defined. This piece showcases how technical precision and artistic vision can combine to create worlds that feel tangible and alive, inviting viewers to step into the scene and explore its mysteries.',
+    title: 'Sheldon Cooper',
+    description: 'Sheldon Cooper reimagined in Van Gogh\'s style is such a perfect combination. You take this character who\'s all about logic, order, and scientific precision, and you paint him with those swirling, emotional brushstrokes that Van Gogh was famous for. It\'s this beautiful contrast between Sheldon\'s rigid worldview and the expressive, almost chaotic energy of Van Gogh\'s technique. The bold colors, the thick impasto strokes, the way every brush mark feels alive and moving, it captures something about Sheldon that goes beyond his surface personality. Maybe it\'s showing the passion underneath all that logic, or maybe it\'s just hilarious to see someone so particular about everything rendered in such an expressive, free-flowing style. Either way, it works. Van Gogh would probably appreciate the irony of painting someone who\'d definitely have opinions about the scientific properties of paint pigments.',
     image: '/art/image-1.png',
-    category: 'Images',
-    year: '2024',
-    aspectRatio: 'portrait' // Update to 'landscape' or 'square' if image is wider or square
-  },
-  {
-    id: 9,
-    title: 'Concept Image 2',
-    description: 'A delicate lighting study that showcases the artist\'s expertise in handling soft illumination and subtle color transitions. The piece demonstrates masterful edge control, where hard and soft edges are strategically placed to guide the viewer\'s attention and create visual hierarchy. The subtle gradients create smooth transitions between light and shadow, producing a sense of volume and form that feels natural and organic. This work is a testament to the importance of understanding light behavior, showing how gentle illumination can reveal form and texture in ways that harsh lighting cannot. The careful attention to detail in the gradient work creates a piece that feels both refined and effortless.',
-    image: '/art/image-2.png',
-    category: 'Images',
+    category: 'Portrait',
     year: '2024',
     aspectRatio: 'portrait' // Update to 'landscape' or 'square' if image is wider or square
   },
   {
     id: 10,
-    title: 'Concept Image 3',
-    description: 'A beautifully framed composition that achieves perfect harmony between character silhouette and background elements. The piece demonstrates sophisticated compositional skills, where the character\'s silhouette is carefully designed to create a strong visual anchor while the background complements rather than competes. The relationship between foreground and background is masterfully balanced, with each element supporting the overall narrative. The silhouette work is particularly strong, using shape and form to convey character and emotion even without detailed features. This artwork showcases how effective composition can create powerful visual impact, proving that sometimes the most compelling images are those that understand the importance of negative space and the relationship between all elements within the frame.',
+    title: 'Phoebe Buffay',
+    description: 'Phoebe Buffay and her Smelly Cat song is one of those things that just sticks with you. It\'s ridiculous, it\'s hilarious, and somehow it\'s also kind of touching. The way she performs it with complete sincerity, like it\'s this deep, meaningful song about a cat that smells, it\'s pure Phoebe energy. She\'s the weirdest friend in the group, but also the most genuine. While everyone else is trying to figure out their careers and relationships, Phoebe is just being herself, writing songs about smelly cats and not caring what anyone thinks. That\'s what makes her so special. She\'s unapologetically herself, and Smelly Cat became this iconic moment because it perfectly captures her quirky, authentic spirit. Plus, the fact that it became a real thing later, with Lisa Kudrow actually recording it, just makes it even better. Phoebe reminds us that sometimes the best things in life are the weird, unexpected ones that make you laugh and feel something at the same time.',
     image: '/art/image-3.png',
-    category: 'Images',
+    category: 'Portrait',
     year: '2024',
     aspectRatio: 'portrait' // Update to 'landscape' or 'square' if image is wider or square
   },
@@ -148,6 +128,14 @@ const artPieces: ArtPiece[] = [
 
 export default function ArtPage() {
   const [selectedArt, setSelectedArt] = useState<ArtPiece | null>(null)
+  const [firstImageSliderPosition, setFirstImageSliderPosition] = useState(0)
+
+  // Ensure scroll is enabled when art page loads (especially on mobile)
+  useEffect(() => {
+    document.body.style.overflow = ''
+    document.documentElement.style.overflow = ''
+    // Don't force scroll position - allow natural scrolling
+  }, [])
 
   // Split negative-series pieces (with scroll slider) from others
   const negativePieces = artPieces.filter(art => art.hasNegative)
@@ -182,6 +170,7 @@ export default function ArtPage() {
     }
   }
 
+
   useEffect(() => {
     if (!selectedArt) return
 
@@ -210,7 +199,7 @@ export default function ArtPage() {
   }, [selectedArt])
 
   return (
-    <div className="h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-y-scroll snap-y snap-mandatory" style={{ scrollBehavior: 'smooth' }}>
+    <div className="art-page min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-y-auto" style={{ scrollBehavior: 'smooth' }}>
       {/* Animated Background Blobs */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <motion.div
@@ -254,14 +243,18 @@ export default function ArtPage() {
       </motion.header>
 
       {/* Main Content */}
-      <main className="pt-0 pb-0 px-4 sm:px-6 lg:px-8 relative z-10">
+      <main className="pt-24 md:pt-12 pb-0 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Featured negative artwork with carousel list below */}
           {activeNegative && (
-            <section className="min-h-screen flex flex-col items-center gap-10 pb-16 snap-start snap-always">
-              {/* Big featured negative card with scroll-locked slider and text */}
+            <section className="min-h-screen flex flex-col items-center gap-10 pb-16 md:snap-start md:snap-always">
+              {/* Big featured negative card with manual slider and text */}
               <div className="w-full">
-                <ArtCard art={activeNegative} index={0} onClick={() => {}} />
+                <FirstNegativeCard 
+                  art={activeNegative} 
+                  sliderPosition={firstImageSliderPosition}
+                  setSliderPosition={setFirstImageSliderPosition}
+                />
               </div>
 
               {/* Carousel of all negative pieces placed AFTER the featured card & its text */}
@@ -317,8 +310,33 @@ export default function ArtPage() {
               />
             ))}
           </div>
+
         </div>
       </main>
+
+      {/* Instagram Handle */}
+      <footer className="w-full py-6 md:py-8 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col items-center gap-3"
+        >
+          <p className="text-sm md:text-base text-gray-500 dark:text-gray-400 font-medium tracking-wide uppercase">
+            View More Art
+          </p>
+          <a
+            href="https://instagram.com/_dead_stone_"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-900 dark:text-gray-100 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200 text-xl md:text-2xl font-semibold tracking-tight"
+          >
+            @_dead_stone_
+          </a>
+          <div className="w-24 h-px bg-gradient-to-r from-transparent via-gray-400 dark:via-gray-500 to-transparent mt-2"></div>
+        </motion.div>
+      </footer>
 
       {/* Enhanced Lightbox Modal */}
       <AnimatePresence>
@@ -415,7 +433,7 @@ export default function ArtPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="text-gray-600 dark:text-gray-400 mb-8 text-lg leading-relaxed"
+                    className="text-gray-600 dark:text-gray-400 mb-8 text-xl leading-relaxed font-[family-name:var(--font-caveat)] font-semibold"
                   >
                     {selectedArt.description}
                   </motion.p>
@@ -467,6 +485,8 @@ function ArtCard({ art, index, onClick }: { art: ArtPiece; index: number; onClic
     if (!art.hasNegative || !cardElement) return
 
     const handleScroll = () => {
+      if (!cardElement) return
+      
       const rect = cardElement.getBoundingClientRect()
       const windowHeight = window.innerHeight
       const cardTop = rect.top
@@ -474,14 +494,34 @@ function ArtCard({ art, index, onClick }: { art: ArtPiece; index: number; onClic
       
       // Only update if not locked
       if (!scrollLockRef.current.isLocked) {
-        const scrollProgress = Math.max(0, Math.min(100, ((windowHeight - cardTop) / (windowHeight + cardHeight)) * 100))
-        currentProgressRef.current = scrollProgress
-        setSliderPosition(scrollProgress)
+        // For mobile, use touch-based scroll progress
+        if (window.innerWidth < 768) {
+          // Calculate progress based on how much of the card is visible
+          const visibleTop = Math.max(0, windowHeight - cardTop)
+          const visibleBottom = Math.min(cardHeight, windowHeight - (cardTop - windowHeight))
+          const visibleHeight = Math.max(0, visibleBottom - visibleTop)
+          const scrollProgress = Math.max(0, Math.min(100, (visibleHeight / cardHeight) * 100))
+          currentProgressRef.current = scrollProgress
+          setSliderPosition(scrollProgress)
+        } else {
+          // Desktop: original calculation
+          const scrollProgress = Math.max(0, Math.min(100, ((windowHeight - cardTop) / (windowHeight + cardHeight)) * 100))
+          currentProgressRef.current = scrollProgress
+          setSliderPosition(scrollProgress)
+        }
       }
     }
 
     const preventScroll = (e: WheelEvent) => {
-      if (!art.hasNegative || !cardElement) return
+      // Don't prevent scroll if we're at the very top of the page - allow normal scrolling
+      if (window.scrollY < 50) {
+        scrollLockRef.current.isLocked = false
+        return
+      }
+      
+      // Only prevent scroll on desktop (not mobile touch)
+      if (window.innerWidth < 768) return
+      if (!art.hasNegative || !cardElement || !cardElement.getBoundingClientRect) return
       
       const rect = cardElement.getBoundingClientRect()
       const windowHeight = window.innerHeight
@@ -491,7 +531,7 @@ function ArtCard({ art, index, onClick }: { art: ArtPiece; index: number; onClic
       // Check if image is centered in viewport (snapped)
       const isCentered = Math.abs(cardTop + cardHeight / 2 - windowHeight / 2) < windowHeight * 0.2
       const isInViewport = cardTop < windowHeight && cardTop + cardHeight > 0
-      
+
       if (isCentered && isInViewport && currentProgressRef.current < 100) {
         // Scrolling down - advance the slider instead
         if (e.deltaY > 0) {
@@ -507,10 +547,11 @@ function ArtCard({ art, index, onClick }: { art: ArtPiece; index: number; onClic
             scrollLockRef.current.isLocked = false
             // Allow scroll to next item after transition completes
             setTimeout(() => {
+              if (!cardElement) return
               const container = cardElement.closest('div[class*="space-y"]')?.parentElement
-              if (container) {
-                const nextCard = cardElement.parentElement?.nextElementSibling as HTMLElement
-                if (nextCard) {
+              if (container && cardElement.parentElement) {
+                const nextCard = cardElement.parentElement.nextElementSibling as HTMLElement
+                if (nextCard && nextCard.scrollIntoView) {
                   nextCard.scrollIntoView({ behavior: 'smooth', block: 'start' })
                 }
               }
@@ -530,25 +571,82 @@ function ArtCard({ art, index, onClick }: { art: ArtPiece; index: number; onClic
             scrollLockRef.current.isLocked = false
           }
         }
-      } else if (isInViewport && !isCentered && currentProgressRef.current < 100) {
-        // If in viewport but not centered, snap to center first
-        if (e.deltaY > 0) {
-          e.preventDefault()
-          e.stopPropagation()
-          cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
-        }
       } else {
         scrollLockRef.current.isLocked = false
+        // Only prevent scroll if we're actively transitioning (not at top of page)
+        if (window.scrollY > 100 && isInViewport && !isCentered && currentProgressRef.current < 100) {
+          // If in viewport but not centered, snap to center first (only if not at top)
+          if (e.deltaY > 0 && cardElement && cardElement.scrollIntoView) {
+            e.preventDefault()
+            e.stopPropagation()
+            cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          }
+        }
       }
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     window.addEventListener('wheel', preventScroll, { passive: false })
+    
+    // Add touch handlers for mobile slider
+    let touchStartY = 0
+    let touchStartProgress = 0
+    
+    const handleTouchStart = (e: TouchEvent) => {
+      // Don't lock scroll if we're at the top of the page
+      if (window.scrollY < 50) {
+        scrollLockRef.current.isLocked = false
+        return
+      }
+      
+      if (window.innerWidth >= 768) return
+      if (!art.hasNegative || !cardElement) return
+      
+      const rect = cardElement.getBoundingClientRect()
+      const isInViewport = rect.top < window.innerHeight && rect.bottom > 0
+      
+      if (isInViewport) {
+        touchStartY = e.touches[0].clientY
+        touchStartProgress = currentProgressRef.current
+        scrollLockRef.current.isLocked = true
+      }
+    }
+    
+    const handleTouchMove = (e: TouchEvent) => {
+      if (window.innerWidth >= 768) return
+      if (!art.hasNegative || !cardElement || !scrollLockRef.current.isLocked) return
+      
+      const rect = cardElement.getBoundingClientRect()
+      const isInViewport = rect.top < window.innerHeight && rect.bottom > 0
+      
+      if (isInViewport) {
+        const touchCurrentY = e.touches[0].clientY
+        const deltaY = touchStartY - touchCurrentY
+        const progressDelta = (deltaY / rect.height) * 100
+        const newProgress = Math.max(0, Math.min(100, touchStartProgress + progressDelta))
+        
+        currentProgressRef.current = newProgress
+        setSliderPosition(newProgress)
+      }
+    }
+    
+    const handleTouchEnd = () => {
+      if (window.innerWidth >= 768) return
+      scrollLockRef.current.isLocked = false
+    }
+    
+    window.addEventListener('touchstart', handleTouchStart, { passive: true })
+    window.addEventListener('touchmove', handleTouchMove, { passive: true })
+    window.addEventListener('touchend', handleTouchEnd, { passive: true })
+    
     handleScroll() // Initial calculation
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('wheel', preventScroll)
+      window.removeEventListener('touchstart', handleTouchStart)
+      window.removeEventListener('touchmove', handleTouchMove)
+      window.removeEventListener('touchend', handleTouchEnd)
     }
   }, [art.hasNegative, art.id, cardElement])
 
@@ -575,8 +673,7 @@ function ArtCard({ art, index, onClick }: { art: ArtPiece; index: number; onClic
         delay: index * 0.1,
         ease: [0.25, 0.46, 0.45, 0.94]
       }}
-      className="group flex flex-col md:flex-row gap-6 md:gap-8 items-center justify-center min-h-screen snap-start snap-always"
-      style={{ scrollSnapAlign: 'start', scrollSnapStop: 'always' }}
+      className="group flex flex-col md:flex-row gap-6 md:gap-8 items-center justify-center min-h-screen pb-20 md:pb-0"
     >
       {/* Image Section with Scroll-Based Filter */}
       <div 
@@ -779,7 +876,254 @@ function ArtCard({ art, index, onClick }: { art: ArtPiece; index: number; onClic
             x: art.hasNegative ? (sliderPosition < 30 ? -30 : 0) : 0
           }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
-          className="text-gray-700 dark:text-gray-300 text-base md:text-lg leading-relaxed"
+          className="text-gray-700 dark:text-gray-300 text-lg md:text-xl leading-relaxed font-[family-name:var(--font-caveat)] font-semibold"
+        >
+          {art.description}
+        </motion.p>
+      </div>
+    </motion.div>
+  )
+}
+
+// Special component for first negative image with manual slider
+function FirstNegativeCard({ 
+  art, 
+  sliderPosition, 
+  setSliderPosition 
+}: { 
+  art: ArtPiece
+  sliderPosition: number
+  setSliderPosition: (value: number) => void
+}) {
+  const cardElement = useRef<HTMLDivElement>(null)
+  const [sequenceIndex, setSequenceIndex] = useState(0)
+
+  // Auto-play sequence like a GIF when art.sequence is provided
+  useEffect(() => {
+    if (!art.sequence || art.sequence.length === 0) return
+
+    const interval = setInterval(() => {
+      setSequenceIndex((prev) => (prev + 1) % art.sequence!.length)
+    }, art.sequenceIntervalMs ?? 250)
+
+    return () => clearInterval(interval)
+  }, [art.sequence, art.sequenceIntervalMs])
+
+  // Determine aspect ratio based on art piece type
+  const getAspectRatio = () => {
+    switch (art.aspectRatio) {
+      case 'landscape':
+        return '4/3'
+      case 'square':
+        return '1/1'
+      case 'portrait':
+      default:
+        return '3/4'
+    }
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ 
+        duration: 0.6, 
+        ease: [0.25, 0.46, 0.45, 0.94]
+      }}
+      className="group flex flex-col md:flex-row gap-6 md:gap-8 items-center justify-center min-h-screen pb-20 md:pb-0"
+    >
+      {/* Image Section */}
+      <div className="flex flex-col items-center gap-6 md:w-1/3 w-full px-2">
+        <div 
+          ref={cardElement}
+          id={`art-card-${art.id}`}
+          className="relative w-full max-w-[90vw] md:max-w-none flex-shrink-0 select-none"
+          style={{ aspectRatio: getAspectRatio() }}
+        >
+        {/* Proper Wooden Frame with 3D Structure - Same as ArtCard */}
+        <div className="w-full h-full relative">
+          <div className="absolute inset-0" style={{ 
+            boxShadow: '0 25px 70px rgba(0, 0, 0, 0.5)'
+          }}>
+            <div 
+              className="w-full h-full relative"
+              style={{
+                padding: '16px',
+                background: 'linear-gradient(135deg, #6B4423 0%, #8B4513 20%, #A0522D 40%, #8B4513 60%, #6B4423 80%, #8B4513 100%)',
+                backgroundSize: '400% 400%',
+                borderRadius: '4px',
+                boxShadow: `
+                  inset 0 4px 12px rgba(0, 0, 0, 0.7),
+                  inset 0 -4px 12px rgba(0, 0, 0, 0.5),
+                  0 4px 8px rgba(0, 0, 0, 0.4),
+                  0 0 0 1px rgba(107, 68, 35, 0.8)
+                `
+              }}
+            >
+              <div 
+                className="absolute inset-0 opacity-50"
+                style={{
+                  background: `
+                    repeating-linear-gradient(
+                      90deg,
+                      transparent,
+                      transparent 4px,
+                      rgba(107, 68, 35, 0.5) 4px,
+                      rgba(107, 68, 35, 0.5) 5px,
+                      transparent 5px,
+                      transparent 9px
+                    )
+                  `,
+                  borderRadius: '4px'
+                }}
+              />
+              <div 
+                className="absolute inset-0 opacity-40"
+                style={{
+                  background: `
+                    repeating-linear-gradient(
+                      0deg,
+                      transparent,
+                      transparent 3px,
+                      rgba(139, 69, 19, 0.4) 3px,
+                      rgba(139, 69, 19, 0.4) 4px
+                    )
+                  `,
+                  borderRadius: '4px'
+                }}
+              />
+              <div 
+                className="w-full h-full relative"
+                style={{
+                  padding: '12px',
+                  background: 'linear-gradient(135deg, #5C3A21 0%, #6B4423 50%, #5C3A21 100%)',
+                  borderRadius: '2px',
+                  boxShadow: `
+                    inset 0 2px 6px rgba(0, 0, 0, 0.8),
+                    inset 0 -2px 6px rgba(0, 0, 0, 0.6)
+                  `
+                }}
+              >
+                <div 
+                  className="w-full h-full relative"
+                  style={{
+                    padding: '8px',
+                    background: 'linear-gradient(135deg, #F5F5DC 0%, #FAF0E6 50%, #F5F5DC 100%)',
+                    borderRadius: '2px',
+                    boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.1)'
+                  }}
+                >
+                  <div className="w-full h-full relative overflow-hidden rounded-sm">
+                    {art.sequence && art.sequence.length > 0 ? (
+                      <div className="relative w-full h-full" style={{ aspectRatio: '3/4' }}>
+                        <Image
+                          src={art.sequence[sequenceIndex]}
+                          alt={art.title}
+                          fill
+                          className="object-contain"
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                        />
+                      </div>
+                    ) : art.image ? (
+                      <>
+                        {art.hasNegative && art.negativeImage ? (
+                          <div className="absolute inset-0 flex items-center justify-center p-2">
+                            <div className="relative w-full h-full">
+                              <Image
+                                src={art.negativeImage}
+                                alt={`${art.title} - Inverted`}
+                                fill
+                                className="object-contain"
+                                style={{ filter: 'invert(1)' }}
+                                sizes="(max-width: 768px) 100vw, 33vw"
+                              />
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="absolute inset-0 flex items-center justify-center p-2">
+                            <div className="relative w-full h-full">
+                              <Image
+                                src={art.image}
+                                alt={art.title}
+                                fill
+                                className="object-contain"
+                                sizes="(max-width: 768px) 100vw, 33vw"
+                              />
+                            </div>
+                          </div>
+                        )}
+                        {art.hasNegative && art.negativeImage && (
+                          <div 
+                            className="absolute inset-0 flex items-center justify-center p-2"
+                            style={{
+                              clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
+                            }}
+                          >
+                            <div className="relative w-full h-full">
+                              <Image
+                                src={art.negativeImage}
+                                alt={`${art.title} - Actual`}
+                                fill
+                                className="object-contain"
+                                sizes="(max-width: 768px) 100vw, 33vw"
+                              />
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <span className="text-gray-400 dark:text-gray-600 text-lg">
+                          Add your image here
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Manual Slider Control - Only for negative images, below image on desktop */}
+      {art.hasNegative && (
+        <div className="w-full max-w-[90vw] md:max-w-md px-2 md:px-0">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 md:p-4 shadow-lg border border-gray-200 dark:border-gray-700">
+            <label className="block text-lg md:text-sm font-medium text-gray-700 dark:text-gray-300 mb-4 md:mb-3 text-center">
+              Compare Negative & Art
+            </label>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={sliderPosition}
+              onChange={(e) => setSliderPosition(Number(e.target.value))}
+              className="w-full h-4 md:h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
+              style={{
+                background: `linear-gradient(to right, #9333ea 0%, #9333ea ${sliderPosition}%, #e5e7eb ${sliderPosition}%, #e5e7eb 100%)`
+              }}
+            />
+            <div className="flex justify-between text-base md:text-xs text-gray-500 dark:text-gray-400 mt-3 md:mt-2">
+              <span>Art</span>
+              <span>Negative</span>
+            </div>
+          </div>
+        </div>
+      )}
+      </div>
+
+      {/* Text Section - Always visible, on the right on desktop */}
+      <div className="flex-1 flex flex-col justify-center min-h-[200px] w-full md:w-1/3 max-w-md mt-6 md:mt-0">
+        <motion.p
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ 
+            opacity: 1,
+            x: 0
+          }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="text-gray-700 dark:text-gray-300 text-lg md:text-xl leading-relaxed font-[family-name:var(--font-caveat)] font-semibold"
         >
           {art.description}
         </motion.p>

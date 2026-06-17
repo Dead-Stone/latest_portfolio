@@ -1,77 +1,11 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { FaGithub, FaArrowRight } from 'react-icons/fa'
-
-interface Project {
-  title: string
-  description: string
-  technologies: string[]
-  period: string
-  organization: string
-  github?: string
-  demo?: string
-  highlight?: boolean
-}
-
-const projects: Project[] = [
-  {
-    title: 'ScorePAL: Agentic Evaluation Platform',
-    organization: 'SJSU',
-    period: 'Dec 2024 – May 2025',
-    highlight: true,
-    description:
-      'Multi-agent evaluation system using CrewAI where agents autonomously decompose rubrics, retrieve context via Weaviate vector search, and score submissions using Gemini on GCP. Multimodal RAG over text and image inputs reduced manual grading effort by 60%.',
-    technologies: ['Python', 'CrewAI', 'Weaviate', 'Gemini', 'GCP', 'PostgreSQL', 'Multimodal RAG'],
-    github: 'https://github.com/Dead-Stone/ScorePAL',
-  },
-  {
-    title: 'AI Suspect Sketch Generator',
-    organization: 'Personal',
-    period: '2024',
-    highlight: true,
-    description:
-      'Text-to-image sketch generation using Stable Diffusion + ControlNet for shape and style consistency. End-to-end full-stack with async job handling and serverless image processing on AWS. 45% latency reduction via embedding caching and request batching.',
-    technologies: ['React', 'FastAPI', 'Stable Diffusion', 'ControlNet', 'AWS Lambda', 'S3', 'Python'],
-    github: 'https://github.com/Dead-Stone/AI-Suspect-Sketch-Generator',
-  },
-  {
-    title: 'Multimodal RAG System',
-    organization: 'Astranetix',
-    period: 'Sep – Nov 2024',
-    description:
-      'Production RAG combining text and document embeddings. Weaviate + GraphQL retrieval, tuned HNSW parameters. Scalable inference on AWS Lambda and S3.',
-    technologies: ['Python', 'Weaviate', 'GraphQL', 'AWS Lambda', 'OpenAI', 'GCP'],
-    github: 'https://github.com/Dead-Stone',
-  },
-  {
-    title: 'LangChain + Neo4j Knowledge Graph',
-    organization: 'Personal',
-    period: '2024',
-    description:
-      'Knowledge graph-powered RAG using LangChain and Neo4j. Hybrid search combining vector similarity and graph traversal for richer LLM responses.',
-    technologies: ['LangChain', 'Neo4j', 'Python', 'RAG', 'Vector Search'],
-    github: 'https://github.com/Dead-Stone/langchain_neo4j_app',
-  },
-  {
-    title: 'Movie Ticket Booking System',
-    organization: 'SJSU',
-    period: 'Aug – Nov 2023',
-    description:
-      'Full-stack booking platform with React, Node.js, and GraphQL for real-time seat selection. Microservice backend with MongoDB, containerized via Docker, deployed with CI/CD.',
-    technologies: ['React', 'Node.js', 'GraphQL', 'MongoDB', 'Docker'],
-    github: 'https://github.com/Dead-Stone',
-  },
-  {
-    title: 'Expira: ID Expiry Tracker',
-    organization: 'Personal',
-    period: '2023',
-    description:
-      'Flutter mobile app scanning ID documents and tracking expiry dates. OCR-based extraction, push notifications, offline-first, cross-platform iOS & Android.',
-    technologies: ['Flutter', 'Dart', 'OCR', 'Firebase'],
-    github: 'https://github.com/Dead-Stone',
-  },
-]
+import { useEffect, useCallback, useState } from 'react'
+import Image from 'next/image'
+import { motion, AnimatePresence } from 'framer-motion'
+import { FaGithub, FaArrowRight, FaExternalLinkAlt, FaTimes } from 'react-icons/fa'
+import { projects, getProjectLogo, GITHUB_AVATAR_LOGO, GITHUB_BADGE_LIGHT, type Project } from '@/data/projects'
+import { useReducedMotion } from '@/lib/motion'
 
 function TechTag({ label }: { label: string }) {
   return (
@@ -89,21 +23,335 @@ function TechTagLight({ label }: { label: string }) {
   )
 }
 
+function ProjectLinks({
+  project,
+  className = '',
+  onLinkClick,
+}: {
+  project: Project
+  className?: string
+  onLinkClick?: (e: React.MouseEvent) => void
+}) {
+  if (!project.github && !project.demo) return null
+
+  return (
+    <div className={`flex flex-wrap items-center gap-3 ${className}`}>
+      {project.github ? (
+        <a
+          href={project.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={onLinkClick}
+          className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-600 transition-colors hover:text-violet-600 dark:text-zinc-400 dark:hover:text-violet-400"
+        >
+          <FaGithub size={13} />
+          GitHub
+        </a>
+      ) : null}
+      {project.demo ? (
+        <a
+          href={project.demo}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={onLinkClick}
+          className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-600 transition-colors hover:text-violet-600 dark:text-zinc-400 dark:hover:text-violet-400"
+        >
+          <FaExternalLinkAlt size={11} />
+          Live {project.previewUrl ? 'Demo' : '/ Install'}
+        </a>
+      ) : null}
+    </div>
+  )
+}
+
+function ProjectLogo({ project, size = 48 }: { project: Project; size?: number }) {
+  const src = getProjectLogo(project)
+  if (!src) return null
+
+  return (
+    <div className="relative flex-shrink-0" style={{ width: size, height: size }}>
+      <div className="relative h-full w-full overflow-hidden rounded-xl bg-white p-1.5 dark:bg-zinc-900">
+        <Image src={src} alt="" fill className="object-contain p-1" sizes={`${size}px`} />
+      </div>
+    </div>
+  )
+}
+
+function PeriodTag({ period, className = '' }: { period: string; className?: string }) {
+  return (
+    <span className={`text-[10px] font-mono text-zinc-500 dark:text-zinc-500 ${className}`}>
+      {period}
+    </span>
+  )
+}
+
+function ProjectLivePreview({
+  url,
+  image,
+  onLinkClick,
+}: {
+  url: string
+  image?: string
+  onLinkClick: (e: React.MouseEvent) => void
+}) {
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={onLinkClick}
+      className="group/preview block overflow-hidden rounded-xl border border-zinc-200/70 bg-zinc-100 transition-colors duration-300 hover:border-violet-400/50 dark:border-zinc-700/70 dark:bg-zinc-900/80 dark:hover:border-violet-600/45"
+    >
+      <div className="flex items-center gap-1.5 border-b border-zinc-200/80 bg-zinc-50 px-2 py-1.5 shadow-[inset_0_-1px_0_rgba(15,23,42,0.06)] dark:border-zinc-700/80 dark:bg-zinc-800/80 dark:shadow-[inset_0_-1px_0_rgba(0,0,0,0.35)]">
+        <span className="h-1.5 w-1.5 rounded-full bg-red-400/90" />
+        <span className="h-1.5 w-1.5 rounded-full bg-amber-400/90" />
+        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400/90" />
+        <span className="ml-0.5 min-w-0 flex-1 truncate text-center text-[9px] font-mono text-zinc-500 dark:text-zinc-400">
+          score-pal.vercel.app
+        </span>
+      </div>
+      <div className="relative w-full overflow-hidden bg-zinc-200/40 shadow-[inset_0_3px_10px_rgba(15,23,42,0.14),inset_0_1px_2px_rgba(15,23,42,0.08),inset_0_0_0_1px_rgba(15,23,42,0.05)] dark:bg-zinc-950 dark:shadow-[inset_0_4px_14px_rgba(0,0,0,0.5),inset_0_1px_3px_rgba(0,0,0,0.35),inset_0_0_0_1px_rgba(0,0,0,0.45)]">
+        {image ? (
+          <Image
+            src={image}
+            alt="ScorePAL homepage preview"
+            width={1024}
+            height={475}
+            className="block w-full h-auto"
+            sizes="(max-width: 1024px) 100vw, 560px"
+            priority
+          />
+        ) : (
+          <div className="relative aspect-[1024/475] w-full">
+            <iframe
+              src={url}
+              title="ScorePAL live preview"
+              className="pointer-events-none absolute left-0 top-0 h-[200%] w-[200%] origin-top-left scale-50 border-0"
+              loading="lazy"
+              tabIndex={-1}
+            />
+          </div>
+        )}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 shadow-[inset_0_0_28px_rgba(15,23,42,0.1),inset_0_8px_16px_rgba(15,23,42,0.06)] dark:shadow-[inset_0_0_36px_rgba(0,0,0,0.4),inset_0_10px_20px_rgba(0,0,0,0.25)]"
+        />
+        <div className="absolute inset-0 flex items-end justify-center bg-gradient-to-t from-black/25 via-transparent to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover/preview:opacity-100">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-mono text-zinc-800 shadow-sm dark:bg-zinc-900/95 dark:text-zinc-100">
+            Open live site
+            <FaExternalLinkAlt size={10} />
+          </span>
+        </div>
+      </div>
+    </a>
+  )
+}
+
+function ProjectCardHeader({
+  project,
+  titleClassName,
+  logoSize = 40,
+  topLeft,
+  titleId,
+  description,
+  descriptionLines,
+  hideLogo,
+}: {
+  project: Project
+  titleClassName: string
+  logoSize?: number
+  topLeft?: React.ReactNode
+  titleId?: string
+  description?: string
+  descriptionLines?: number
+  hideLogo?: boolean
+}) {
+  return (
+    <div>
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <div className="min-w-0">{topLeft}</div>
+        <PeriodTag period={project.period} className="flex-shrink-0 text-right" />
+      </div>
+      <div className="flex items-start gap-3">
+        {!hideLogo ? <ProjectLogo project={project} size={logoSize} /> : null}
+        <h3 id={titleId} className={`min-w-0 flex-1 ${titleClassName}`}>
+          {project.title}
+        </h3>
+      </div>
+      {description ? (
+        <p
+          className={`mt-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-400${
+            descriptionLines === 4 ? ' line-clamp-4' : descriptionLines === 3 ? ' line-clamp-3' : ''
+          }`}
+        >
+          {description}
+        </p>
+      ) : null}
+    </div>
+  )
+}
+
+function ProjectDetailModal({
+  project,
+  onClose,
+  reducedMotion,
+}: {
+  project: Project
+  onClose: () => void
+  reducedMotion: boolean
+}) {
+  const logo = getProjectLogo(project)
+
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    },
+    [onClose],
+  )
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = ''
+    }
+  }, [handleKeyDown])
+
+  return (
+    <motion.div
+      initial={reducedMotion ? false : { opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={reducedMotion ? undefined : { opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-[100] flex items-end justify-center bg-black/50 p-3 backdrop-blur-md sm:items-center sm:p-6"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="project-modal-title"
+    >
+      <motion.div
+        initial={reducedMotion ? false : { opacity: 0, y: 24, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={reducedMotion ? undefined : { opacity: 0, y: 16, scale: 0.98 }}
+        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+        onClick={e => e.stopPropagation()}
+        className="relative max-h-[90vh] w-full max-w-2xl overflow-hidden overflow-y-auto rounded-2xl border border-zinc-200/80 bg-white shadow-2xl dark:border-zinc-700/60 dark:bg-zinc-900"
+      >
+        {logo ? (
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            <div className="absolute right-6 top-1/2 -translate-y-1/2 sm:right-8">
+              <div className="flex flex-col items-end opacity-[0.14] dark:opacity-[0.2]">
+                <div className="relative h-48 w-48 sm:h-56 sm:w-56">
+                  <Image src={logo} alt="" fill className="object-contain object-right" sizes="224px" />
+                  {logo === GITHUB_AVATAR_LOGO ? (
+                    <>
+                      <span
+                        className="absolute -bottom-1 -right-1 block h-10 w-10 sm:h-11 sm:w-11 dark:hidden"
+                        aria-hidden
+                      >
+                        <Image
+                          src={GITHUB_BADGE_LIGHT}
+                          alt=""
+                          width={44}
+                          height={44}
+                          className="h-full w-full object-contain"
+                        />
+                      </span>
+                      <span
+                        className="absolute -bottom-1 -right-1 hidden h-10 w-10 items-center justify-center rounded-full bg-zinc-500 text-white sm:h-11 sm:w-11 dark:flex"
+                        aria-hidden
+                      >
+                        <FaGithub size={18} />
+                      </span>
+                    </>
+                  ) : null}
+                </div>
+                {project.modalWatermarkLines ? (
+                  <div className="mt-3 w-48 text-right sm:w-56" aria-hidden>
+                    <p className="text-lg font-bold leading-tight text-zinc-900 dark:text-white sm:text-xl">
+                      {project.modalWatermarkLines[0]}
+                    </p>
+                    {project.modalWatermarkLines[1] ? (
+                      <p className="mt-0.5 text-sm font-semibold text-zinc-600 dark:text-zinc-400 sm:text-base">
+                        {project.modalWatermarkLines[1]}
+                      </p>
+                    ) : null}
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          </div>
+        ) : null}
+
+        <div className="relative p-6 sm:p-8">
+          <button
+            type="button"
+            onClick={onClose}
+            className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+            aria-label="Close project details"
+          >
+            <FaTimes size={14} />
+          </button>
+
+          <div className="mb-6 pr-10">
+            <ProjectCardHeader
+              project={project}
+              logoSize={48}
+              hideLogo
+              titleId="project-modal-title"
+              titleClassName="text-xl font-bold leading-tight text-zinc-900 dark:text-white sm:text-2xl"
+              topLeft={
+                project.featured ? (
+                  <span className="inline-block rounded-full bg-violet-100 px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider text-violet-700 dark:bg-violet-950/50 dark:text-violet-300">
+                    Featured
+                  </span>
+                ) : null
+              }
+            />
+          </div>
+
+          <p className="mb-6 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{project.description}</p>
+
+          <div className="mb-6">
+            <p className="mb-3 text-[10px] font-mono uppercase tracking-widest text-zinc-500">Technologies</p>
+            <div className="flex flex-wrap gap-2">
+              {project.technologies.map((t, i) => (
+                <TechTag key={i} label={t} />
+              ))}
+            </div>
+          </div>
+
+          {project.github || project.demo ? (
+            <ProjectLinks project={project} />
+          ) : (
+            <p className="text-xs font-mono uppercase tracking-wider text-zinc-500">Private prototype — no public repository</p>
+          )}
+        </div>
+      </motion.div>
+    </motion.div>
+  )
+}
+
 export default function Projects() {
-  const [p1, p2, ...rest] = projects
+  const reducedMotion = useReducedMotion()
+  const [selected, setSelected] = useState<Project | null>(null)
+  const featured = projects.find(p => p.featured) ?? projects[0]
+  const secondary = projects.filter(p => p.featured && p !== featured)
+  const rest = projects.filter(p => !p.featured)
+
+  const stopLink = (e: React.MouseEvent) => e.stopPropagation()
+
+  const enter = (delay = 0) =>
+    reducedMotion
+      ? { initial: false }
+      : { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true }, transition: { duration: 0.5, delay } }
 
   return (
     <section id="projects" className="py-28 px-6 sm:px-10 lg:px-16 bg-gradient-to-b from-zinc-50 to-white dark:bg-zinc-950 dark:bg-none border-t border-zinc-100 dark:border-zinc-800 overflow-hidden">
       <div className="max-w-5xl mx-auto">
-
-        {/* Watermark + label */}
         <div className="relative mb-12 h-28 select-none">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="absolute top-0 -left-1 font-caveat text-violet-600 dark:text-violet-400 text-2xl z-10 pointer-events-none"
-          >
+          <motion.p {...enter()} className="absolute top-0 -left-1 font-caveat text-violet-600 dark:text-violet-400 text-2xl z-10 pointer-events-none">
             things I&apos;ve built
           </motion.p>
           <span className="absolute top-[0.5rem] left-0 text-[7rem] font-black text-zinc-200 dark:text-zinc-800/60 leading-none tracking-tighter pointer-events-none">
@@ -111,124 +359,161 @@ export default function Projects() {
           </span>
         </div>
 
-        {/* ── Hero featured project ── */}
-        <motion.a
-          href={p1.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="group relative block rounded-2xl overflow-hidden mb-4 bg-white/40 dark:bg-white/[0.03] backdrop-blur-sm border border-zinc-200/60 dark:border-zinc-700/50 hover:border-violet-400 dark:hover:border-violet-600 shadow-sm dark:shadow-none transition-all duration-300"
+        <motion.article
+          {...enter()}
+          role="button"
+          tabIndex={0}
+          onClick={() => setSelected(featured)}
+          onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), setSelected(featured))}
+          className="group relative mb-4 cursor-pointer overflow-hidden rounded-2xl border border-zinc-200/60 bg-white/40 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-violet-400 dark:border-zinc-700/50 dark:bg-white/[0.03] dark:shadow-none dark:hover:border-violet-600"
         >
-          {/* Background glow */}
-          <div className="absolute inset-0 bg-gradient-to-br from-violet-50/80 via-white to-white dark:from-violet-950/60 dark:via-zinc-900 dark:to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <div className="absolute top-0 right-0 w-80 h-80 bg-violet-400/5 dark:bg-violet-600/5 rounded-full blur-3xl group-hover:bg-violet-400/10 dark:group-hover:bg-violet-600/15 transition-all duration-500" />
+          <div className="absolute inset-0 bg-gradient-to-br from-violet-50/80 via-white to-white opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-violet-950/60 dark:via-zinc-900 dark:to-zinc-900" />
+          <div className="absolute top-0 right-0 h-80 w-80 rounded-full bg-violet-400/5 blur-3xl transition-all duration-500 group-hover:bg-violet-400/10 dark:bg-violet-600/5 dark:group-hover:bg-violet-600/15" />
 
-          <div className="relative p-8 sm:p-10 grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 lg:gap-16">
-            {/* Left */}
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <span className="text-[10px] font-mono text-violet-600 dark:text-violet-400 tracking-[0.2em] uppercase">Featured</span>
-                <div className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800" />
-                <span className="text-[10px] font-mono text-zinc-600 dark:text-zinc-600">{p1.period}</span>
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white leading-tight mb-3 group-hover:text-violet-700 dark:group-hover:text-violet-200 transition-colors duration-300">
-                {p1.title}
-              </h3>
-              <p className="mb-6 text-xs font-mono text-zinc-600 dark:text-zinc-500">{p1.organization}</p>
-              <div className="flex items-center gap-2 text-zinc-600 transition-colors duration-200 group-hover:text-violet-700 dark:text-zinc-400 dark:group-hover:text-violet-400">
-                <FaGithub size={14} />
-                <span className="text-xs font-mono">View on GitHub</span>
-                <FaArrowRight size={10} className="group-hover:translate-x-1 transition-transform duration-200" />
-              </div>
-            </div>
-            {/* Right */}
-            <div className="flex flex-col justify-between">
-              <p className="mb-6 text-sm leading-relaxed text-zinc-700 dark:text-zinc-400">{p1.description}</p>
-              <div className="flex flex-wrap gap-2">
-                {p1.technologies.map((t, i) => <TechTag key={i} label={t} />)}
-              </div>
-            </div>
+          <div className="relative grid grid-cols-1 gap-5 p-5 sm:p-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
+            {featured.previewUrl ? (
+              <>
+                <div className="order-2 lg:order-1">
+                  <ProjectLivePreview
+                    url={featured.previewUrl}
+                    image={featured.previewImage}
+                    onLinkClick={stopLink}
+                  />
+                </div>
+                <div className="order-1 flex flex-col lg:order-2">
+                  <div className="mb-5">
+                    <ProjectCardHeader
+                      project={featured}
+                      logoSize={56}
+                      description={featured.description}
+                      descriptionLines={4}
+                      titleClassName="text-2xl font-bold leading-tight text-zinc-900 transition-colors duration-300 group-hover:text-violet-700 dark:text-white dark:group-hover:text-violet-200 sm:text-3xl"
+                      topLeft={
+                        <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-violet-600 dark:text-violet-400">
+                          Featured
+                        </span>
+                      }
+                    />
+                  </div>
+                  <ProjectLinks project={featured} onLinkClick={stopLink} className="mb-5" />
+                  <div className="mt-auto flex flex-wrap gap-2">
+                    {featured.technologies.map((t, i) => (
+                      <TechTag key={i} label={t} />
+                    ))}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div>
+                  <div className="mb-6">
+                    <ProjectCardHeader
+                      project={featured}
+                      logoSize={56}
+                      titleClassName="text-2xl font-bold leading-tight text-zinc-900 transition-colors duration-300 group-hover:text-violet-700 dark:text-white dark:group-hover:text-violet-200 sm:text-3xl"
+                      topLeft={
+                        <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-violet-600 dark:text-violet-400">
+                          Featured
+                        </span>
+                      }
+                    />
+                  </div>
+                  <ProjectLinks project={featured} onLinkClick={stopLink} />
+                </div>
+                <div className="flex flex-col justify-between">
+                  <p className="mb-6 line-clamp-4 text-sm leading-relaxed text-zinc-700 dark:text-zinc-400">{featured.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {featured.technologies.map((t, i) => (
+                      <TechTag key={i} label={t} />
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
           </div>
-        </motion.a>
+        </motion.article>
 
-        {/* ── Two medium cards ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-          {[p2, rest[0]].map((project, i) => (
-            <motion.a
-              key={i}
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group relative block rounded-xl overflow-hidden bg-white/40 dark:bg-white/[0.03] backdrop-blur-sm border border-zinc-200/60 dark:border-zinc-800/50 hover:border-violet-400 dark:hover:border-violet-700 shadow-sm dark:shadow-none transition-all duration-300 hover:-translate-y-0.5"
+        <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {secondary.map((project, i) => (
+            <motion.article
+              key={project.title}
+              {...enter(i * 0.08)}
+              role="button"
+              tabIndex={0}
+              onClick={() => setSelected(project)}
+              onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), setSelected(project))}
+              className="group relative cursor-pointer overflow-hidden rounded-xl border border-zinc-200/60 bg-white/40 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-violet-400 dark:border-zinc-800/50 dark:bg-white/[0.03] dark:shadow-none dark:hover:border-violet-700"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-white dark:from-violet-950/40 dark:via-zinc-900 dark:to-zinc-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-violet-950/40 dark:via-zinc-900 dark:to-zinc-900" />
               <div className="relative p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-600 dark:text-zinc-500">{project.organization}</span>
-                  <FaGithub className="text-zinc-600 transition-colors duration-200 group-hover:text-violet-600 dark:text-zinc-600 dark:group-hover:text-violet-400" size={14} />
+                <ProjectCardHeader
+                  project={project}
+                  logoSize={40}
+                  titleClassName="text-lg font-bold leading-snug text-zinc-800 transition-colors duration-200 group-hover:text-violet-700 dark:text-zinc-100 dark:group-hover:text-violet-200"
+                />
+                <p className="mb-5 mt-3 line-clamp-3 text-xs leading-relaxed text-zinc-700 dark:text-zinc-500">{project.description}</p>
+                <div className="mb-4 flex flex-wrap gap-1.5">
+                  {project.technologies.map((t, j) => (
+                    <TechTag key={j} label={t} />
+                  ))}
                 </div>
-                <h3 className="text-base font-bold text-zinc-800 dark:text-zinc-100 mb-3 leading-snug group-hover:text-violet-700 dark:group-hover:text-violet-200 transition-colors duration-200">
-                  {project.title}
-                </h3>
-                <p className="mb-5 line-clamp-3 text-xs leading-relaxed text-zinc-700 dark:text-zinc-500">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {project.technologies.map((t, j) => <TechTag key={j} label={t} />)}
-                </div>
+                <ProjectLinks project={project} onLinkClick={stopLink} />
               </div>
-            </motion.a>
+            </motion.article>
           ))}
         </div>
 
-        {/* ── Three compact cards ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {rest.slice(1).map((project, i) => (
-            <motion.a
-              key={i}
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="group flex flex-col p-5 rounded-xl border border-zinc-100/60 dark:border-zinc-800/50 hover:border-violet-200 dark:hover:border-violet-800 bg-white/40 dark:bg-white/[0.03] backdrop-blur-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5"
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {rest.map((project, i) => (
+            <motion.article
+              key={project.title}
+              {...enter(i * 0.06)}
+              role="button"
+              tabIndex={0}
+              onClick={() => setSelected(project)}
+              onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), setSelected(project))}
+              className="group flex cursor-pointer flex-col rounded-xl border border-zinc-100/60 bg-white/40 p-5 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-200 hover:shadow-md dark:border-zinc-800/50 dark:bg-white/[0.03] dark:hover:border-violet-800"
             >
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-mono uppercase tracking-wide text-zinc-600 dark:text-zinc-600">
-                  {project.organization}
-                </span>
-                <FaGithub className="text-zinc-600 transition-colors duration-200 group-hover:text-violet-600 dark:text-zinc-700 dark:group-hover:text-violet-400" size={13} />
-              </div>
-              <h3 className="text-sm font-semibold text-zinc-800 dark:text-zinc-100 mb-2 leading-snug group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors duration-200">
-                {project.title}
-              </h3>
-              <p className="mb-4 line-clamp-3 flex-1 text-xs leading-relaxed text-zinc-700 dark:text-zinc-500">
-                {project.description}
-              </p>
-              <div className="flex flex-wrap gap-1.5">
+              <ProjectCardHeader
+                project={project}
+                logoSize={32}
+                titleClassName="text-sm font-semibold leading-snug text-zinc-800 transition-colors duration-200 group-hover:text-violet-600 dark:text-zinc-100 dark:group-hover:text-violet-400"
+              />
+              <p className="mb-4 mt-3 line-clamp-3 flex-1 text-xs leading-relaxed text-zinc-700 dark:text-zinc-500">{project.description}</p>
+              <div className="mb-3 flex flex-wrap gap-1.5">
                 {project.technologies.slice(0, 3).map((t, j) => (
                   <TechTagLight key={j} label={t} />
                 ))}
-                {project.technologies.length > 3 && (
-                  <span className="px-2 py-0.5 text-[11px] text-zinc-600 dark:text-zinc-600">
-                    +{project.technologies.length - 3}
-                  </span>
-                )}
+                {project.technologies.length > 3 ? (
+                  <span className="px-2 py-0.5 text-[11px] text-zinc-600 dark:text-zinc-600">+{project.technologies.length - 3}</span>
+                ) : null}
               </div>
-            </motion.a>
+              {project.github || project.demo ? (
+                <ProjectLinks project={project} onLinkClick={stopLink} />
+              ) : (
+                <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500">Private prototype</span>
+              )}
+            </motion.article>
           ))}
         </div>
 
+        <motion.a
+          href="https://github.com/Dead-Stone"
+          target="_blank"
+          rel="noopener noreferrer"
+          {...enter()}
+          className="mt-10 inline-flex items-center gap-2 text-sm font-mono text-zinc-600 transition-colors hover:text-violet-600 dark:text-zinc-500 dark:hover:text-violet-400"
+        >
+          View all repositories on GitHub
+          <FaArrowRight size={10} />
+        </motion.a>
       </div>
+
+      <AnimatePresence>
+        {selected ? (
+          <ProjectDetailModal project={selected} onClose={() => setSelected(null)} reducedMotion={reducedMotion} />
+        ) : null}
+      </AnimatePresence>
     </section>
   )
 }

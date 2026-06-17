@@ -23,9 +23,44 @@ const shadowsIntoLightTwo = Shadows_Into_Light_Two({
   variable: '--font-shadows',
 })
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mohanamoganti.vercel.app'
+
 export const metadata: Metadata = {
-  title: 'Mohana Moganti - Software Engineer & AI Engineer',
-  description: 'Software Engineer and AI Engineer based in San Jose, CA. Specializing in Full-Stack Development, AI/ML Systems, and Cloud Infrastructure.',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'Mohana Moganti — Software Engineer & AI Engineer',
+    template: '%s · Mohana Moganti',
+  },
+  description:
+    'Software Engineer and AI Engineer in San Jose, CA. Building LLM-driven systems, agentic AI, RAG pipelines, and full-stack products. MS Software Engineering @ SJSU.',
+  keywords: [
+    'Mohana Moganti',
+    'Software Engineer',
+    'AI Engineer',
+    'Full-Stack Developer',
+    'RAG',
+    'LLM',
+    'San Jose',
+    'Portfolio',
+  ],
+  authors: [{ name: 'Mohana Moganti', url: siteUrl }],
+  creator: 'Mohana Moganti',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: siteUrl,
+    siteName: 'Mohana Moganti',
+    title: 'Mohana Moganti — Software Engineer & AI Engineer',
+    description:
+      'LLM systems, agentic AI, and full-stack engineering. ScorePAL, LM Link for Android, and production RAG work.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mohana Moganti — Software Engineer & AI Engineer',
+    description: 'LLM systems, agentic AI, and full-stack engineering portfolio.',
+  },
+  robots: { index: true, follow: true },
+  alternates: { canonical: siteUrl },
 }
 
 export default function RootLayout({
@@ -50,4 +85,3 @@ export default function RootLayout({
     </html>
   )
 }
-

@@ -4,18 +4,21 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { FaLinkedin, FaGithub } from 'react-icons/fa'
 import { useState, useEffect } from 'react'
+import { useReducedMotion } from '@/lib/motion'
 
 const roles = ['Software Engineer', 'AI Engineer', 'Full-Stack Developer', 'Founding Engineer']
 
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0)
+  const reducedMotion = useReducedMotion()
 
   useEffect(() => {
+    if (reducedMotion) return
     const interval = setInterval(() => {
       setRoleIndex((i) => (i + 1) % roles.length)
     }, 2800)
     return () => clearInterval(interval)
-  }, [])
+  }, [reducedMotion])
 
   return (
     <section
@@ -64,7 +67,7 @@ export default function Hero() {
               transition={{ delay: 0.3, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
               className="mb-3"
             >
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-extrabold tracking-tight whitespace-nowrap text-zinc-900 dark:text-white leading-tight">
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-extrabold tracking-tight text-zinc-900 dark:text-white leading-tight">
                 Mohana Moganti
               </h1>
             </motion.div>
@@ -106,8 +109,8 @@ export default function Hero() {
                 Get in Touch
               </a>
               <a
-                href="/Resumev1_12082025.pdf"
-                download
+                href="/Resume_Latest_103025.pdf"
+                download="Mohana_Moganti_Resume.pdf"
                 className="px-6 py-2.5 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 rounded-full text-sm font-semibold hover:border-zinc-400 dark:hover:border-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-all duration-200"
               >
                 Download CV
@@ -151,8 +154,8 @@ export default function Hero() {
           >
             {/* Float wrapper */}
             <motion.div
-              animate={{ y: [0, -12, 0] }}
-              transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
+              animate={reducedMotion ? undefined : { y: [0, -12, 0] }}
+              transition={reducedMotion ? undefined : { duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
               className="relative"
             >
               {/* Outer glow */}
@@ -162,8 +165,8 @@ export default function Hero() {
               <div className="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-[300px] lg:h-[300px]">
                 {/* Spinning conic gradient ring */}
                 <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+                  animate={reducedMotion ? undefined : { rotate: 360 }}
+                  transition={reducedMotion ? undefined : { duration: 10, repeat: Infinity, ease: 'linear' }}
                   className="absolute inset-0 rounded-full p-[3px]"
                   style={{
                     background:
@@ -205,8 +208,8 @@ export default function Hero() {
       >
         <motion.a
           href="#about"
-          animate={{ y: [0, 7, 0] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+          animate={reducedMotion ? undefined : { y: [0, 7, 0] }}
+          transition={reducedMotion ? undefined : { duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
           className="flex flex-col items-center gap-1.5 text-zinc-500 transition-colors hover:text-zinc-800 dark:text-zinc-700 dark:hover:text-zinc-400"
         >
           <span className="text-[10px] tracking-widest uppercase">scroll</span>

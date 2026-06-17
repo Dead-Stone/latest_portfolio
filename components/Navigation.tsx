@@ -23,6 +23,7 @@ const navItems: NavItem[] = [
   { id: 'projects', label: 'Projects' },
   { id: 'skills', label: 'Skills' },
   { id: 'experience', label: 'Experience' },
+  { id: 'publications', label: 'Research' },
   { id: 'contact', label: 'Contact' },
 ]
 
@@ -80,7 +81,7 @@ export default function Navigation({ activeSection }: NavigationProps) {
           </button>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-5">
             {navItems.map((item) => (
               <button
                 key={item.id}

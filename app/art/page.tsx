@@ -11,12 +11,11 @@ import FilmReel from '@/components/FilmReel'
 import { usePageTransition } from '@/contexts/PageTransitionContext'
 import Lottie from 'lottie-react'
 import commissionIllustration from '../../public/Illustrator Animation.json'
+import { CONTACT_EMAIL, buildMailtoUrl, sendContactMessage } from '@/lib/contact'
 
 function isWidePolaroid(art: ArtPiece) {
   return art.imgW / art.imgH > 1.85
 }
-
-const ART_REQUEST_EMAIL = 'mohanmoganti2023@gmail.com'
 
 const ART_REQUEST_TYPES: { value: string; label: string }[] = [
   { value: 'portrait', label: 'Portrait / likeness' },
@@ -377,27 +376,32 @@ function ArtRequestSection() {
   const [kind, setKind] = useState('fan-art')
   const [quoteBasis, setQuoteBasis] = useState('mixed')
   const [message, setMessage] = useState('')
-  const [hint, setHint] = useState(false)
+  const [submitState, setSubmitState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault()
     const em = email.trim()
     const msg = message.trim()
     if (!em || msg.length < 8) return
+
     const typeLabel = ART_REQUEST_TYPES.find(t => t.value === kind)?.label ?? kind
     const basis = QUOTE_BASIS.find(b => b.id === quoteBasis) ?? QUOTE_BASIS[2]
-    const subject = encodeURIComponent(`Commission brief · ${typeLabel}`)
-    const body = encodeURIComponent(
-      `Name: ${name.trim() || '(not provided)'}\n` +
-        `Reply email: ${em}\n` +
-        `Type: ${typeLabel}\n` +
-        `Quote basis: ${basis.label}\n` +
-        `(${basis.blurb})\n\n` +
-        `--- Brief ---\n\n` +
-        `${msg}\n`,
-    )
-    window.location.href = `mailto:${ART_REQUEST_EMAIL}?subject=${subject}&body=${body}`
-    setHint(true)
+
+    setSubmitState('sending')
+    try {
+      await sendContactMessage({
+        name: name.trim(),
+        email: em,
+        subject: `Commission brief · ${typeLabel}`,
+        message: msg,
+        typeLabel,
+        quoteBasis: basis.label,
+        quoteBlurb: basis.blurb,
+      })
+      setSubmitState('sent')
+    } catch {
+      setSubmitState('error')
+    }
   }
 
   const inputClass =
@@ -434,7 +438,7 @@ function ArtRequestSection() {
               <div className="inline-flex rotate-[-2deg] flex-col border border-dashed border-zinc-600/80 bg-zinc-900/60 px-5 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
                 <span className="text-zinc-400">signedbyMMS</span>
                 <span className="mt-1 text-[9px] normal-case tracking-normal text-zinc-600">
-                  Open mail to send · nothing stored on this site
+                  Sent from this form · nothing stored on this site
                 </span>
               </div>
             </motion.div>
@@ -560,20 +564,26 @@ function ArtRequestSection() {
               <div className="flex flex-col gap-2 pt-0.5 sm:flex-row sm:items-center sm:justify-between">
                 <button
                   type="submit"
-                  className="inline-flex w-full items-center justify-center rounded-full bg-violet-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-violet-500 sm:w-auto"
+                  disabled={submitState === 'sending'}
+                  className="inline-flex w-full items-center justify-center rounded-full bg-violet-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-violet-500 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
                 >
-                  Send brief →
+                  {submitState === 'sending' ? 'Sending…' : 'Send brief →'}
                 </button>
                 <a
-                  href={`mailto:${ART_REQUEST_EMAIL}?subject=${encodeURIComponent('Commission question')}`}
+                  href={buildMailtoUrl({ subject: 'Commission question' })}
                   className="text-center text-[10px] font-mono text-zinc-600 transition-colors hover:text-violet-400 sm:text-left"
                 >
-                  {ART_REQUEST_EMAIL}
+                  {CONTACT_EMAIL}
                 </a>
               </div>
-              {hint ? (
+              {submitState === 'sent' ? (
+                <p className="text-[11px] leading-relaxed text-emerald-300/90">
+                  Brief sent — I&apos;ll reply to {email.trim()}.
+                </p>
+              ) : null}
+              {submitState === 'error' ? (
                 <p className="text-[11px] leading-relaxed text-amber-200/80">
-                  Mail didn’t open? Send manually to {ART_REQUEST_EMAIL}.
+                  Couldn&apos;t send right now. Email {CONTACT_EMAIL} directly.
                 </p>
               ) : null}
               <p

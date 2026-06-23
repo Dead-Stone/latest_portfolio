@@ -9,16 +9,29 @@ export interface Experience {
 
 export const experiences: Experience[] = [
   {
+    company: 'NextPhase AI LLC',
+    role: 'AI Engineer',
+    location: 'San Jose, CA',
+    period: 'Feb 2026 – Present',
+    logo: '/exp/nextphase-ai.png',
+    description: [
+      'Design and ship production generative AI systems — LLM orchestration, agentic workflows, and retrieval-augmented pipelines that turn unstructured data into reliable, user-facing intelligence.',
+      'Build multimodal RAG stacks with embedding-based retrieval, hybrid search, and context assembly to ground model outputs and cut hallucinations in real workflows.',
+      'Evaluate and integrate foundation models (OpenAI, Gemini, open-weight) with offline benchmarks for relevance, latency, and cost — selecting configurations that scale in production.',
+      'Develop Python/FastAPI services on AWS and GCP with vector stores, observability, and CI/CD so Gen AI features deploy safely and iterate quickly.',
+    ],
+  },
+  {
     company: 'Gembizz LLC',
     role: 'Founding Engineer',
     location: 'San Jose, CA',
-    period: 'Aug 2025 – Present',
+    period: 'Aug 2025 – Apr 2026',
     logo: '/exp/Gemizz Brand identity-18.png',
     description: [
       'Built LLM-driven workflows that convert raw user input into structured business profiles and narrative-style stories, powering personalized discovery and community engagement for 1,000+ active users.',
-      'Developed recommendation workflows leveraging user interaction signals and embedding-based similarity to customize content and profile ranking.',
-      'Designed service APIs using Python (FastAPI) and TypeScript, integrated with MongoDB Atlas and AWS to support inference, context assembly, and response orchestration.',
-      'Operated containerized services with production-grade observability, telemetry, and cost-aware scaling through CI/CD pipelines supporting frequent deployments.',
+      'Developed recommendation pipelines leveraging user interaction signals and embedding-based similarity to customize content and profile ranking.',
+      'Designed service APIs in Python (FastAPI) and TypeScript, integrated with MongoDB Atlas and AWS for inference, context assembly, and response orchestration.',
+      'Operated containerized services with production observability, telemetry, and cost-aware scaling through CI/CD supporting frequent deployments.',
     ],
   },
   {
@@ -80,6 +93,17 @@ export const experiences: Experience[] = [
       'Implemented JVM-based backend services in Scala supporting data-centric workflows for EdTech and media streaming applications.',
       'Created RESTful interfaces enabling analytics ingestion, personalization logic, and multi-client content delivery.',
       'Improved AWS DynamoDB performance through optimized key design and query patterns, reducing API response times by roughly 30%.',
+    ],
+  },
+  {
+    company: 'CDAC (Centre for Development of Advanced Computing)',
+    role: 'Summer Intern',
+    location: 'Hyderabad, India',
+    period: 'Jun 2019 – Jul 2019',
+    logo: '/exp/Logo_for_the_Centre_for_Development_of_Advanced_Computing.svg',
+    description: [
+      'Completed a summer internship focused on cybersecurity fundamentals and Linux system administration at India’s national R&D institution for advanced computing.',
+      'Gained hands-on experience with Kali Linux, core Linux commands, and security best practices in lab environments.',
     ],
   },
 ]

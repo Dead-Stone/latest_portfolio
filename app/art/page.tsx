@@ -437,9 +437,6 @@ function ArtRequestSection() {
             >
               <div className="inline-flex rotate-[-2deg] flex-col border border-dashed border-zinc-600/80 bg-zinc-900/60 px-5 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
                 <span className="text-zinc-400">signedbyMMS</span>
-                <span className="mt-1 text-[9px] normal-case tracking-normal text-zinc-600">
-                  Sent from this form · nothing stored on this site
-                </span>
               </div>
             </motion.div>
           </motion.div>

@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import SectionHeader from '@/components/SectionHeader'
 
 const stats = [
   { value: '4+', label: 'yrs exp' },
@@ -10,34 +11,22 @@ const stats = [
 
 export default function About() {
   return (
-    <section id="about" className="py-28 px-6 sm:px-10 lg:px-16 bg-gradient-to-br from-slate-50 via-violet-50/40 to-slate-50 dark:bg-zinc-900 dark:bg-none border-t border-violet-100 dark:border-zinc-800 overflow-hidden">
+    <section id="about" className="py-20 sm:py-28 px-4 sm:px-10 lg:px-16 bg-gradient-to-br from-slate-50 via-violet-50/40 to-slate-50 dark:bg-zinc-900 dark:bg-none border-t border-violet-100 dark:border-zinc-800 overflow-hidden">
       <div className="max-w-5xl mx-auto">
 
         {/* Watermark + label */}
-        <div className="relative mb-10 h-24 select-none">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="absolute top-0 left-0 font-caveat text-violet-600 dark:text-violet-400 text-2xl z-10 pointer-events-none leading-tight"
-          >
-            who I am
-          </motion.p>
-          <span className="absolute top-[0.5rem] left-0 text-[7rem] font-black text-zinc-200 dark:text-zinc-800/60 leading-none tracking-tighter pointer-events-none">
-            ABOUT
-          </span>
-        </div>
+        <SectionHeader label="who I am" watermark="ABOUT" animate />
 
         {/* Stats row */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex items-center divide-x divide-zinc-200 dark:divide-zinc-800 mb-12 relative z-10"
+          className="flex items-center divide-x divide-zinc-200 dark:divide-zinc-800 mb-10 sm:mb-12 relative z-10"
         >
           {stats.map((s, i) => (
-            <div key={i} className="flex-1 px-8 first:pl-0">
-              <p className="text-4xl font-black text-zinc-900 dark:text-zinc-50 tracking-tighter leading-none">{s.value}</p>
+            <div key={i} className="flex-1 px-4 first:pl-0 sm:px-8">
+              <p className="text-3xl sm:text-4xl font-black text-zinc-900 dark:text-zinc-50 tracking-tighter leading-none">{s.value}</p>
               <p className="mt-1.5 text-[10px] font-mono uppercase tracking-widest text-zinc-600 dark:text-zinc-500">{s.label}</p>
             </div>
           ))}
@@ -56,7 +45,7 @@ export default function About() {
             transition={{ duration: 0.5 }}
           >
             <p className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-50 leading-snug mb-6 tracking-tight">
-              Founding Engineer building{' '}
+              AI Engineer and builder of{' '}
               <span className="text-violet-600 dark:text-violet-400">LLM-driven systems</span>{' '}
               that work for real users.
             </p>

@@ -21,6 +21,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
 }
 
 .dark body {
@@ -31,6 +37,26 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .section-watermark {
+    @apply text-[clamp(2.25rem,9vw,5.75rem)] font-black leading-[0.88] tracking-tighter -mt-1;
+  }
+
+  .section-label {
+    @apply font-caveat text-xl sm:text-2xl leading-tight mb-0;
+  }
+
+  .section-header {
+    @apply relative mb-10 sm:mb-14 select-none;
+  }
+
+  .safe-bottom {
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+  }
+
+  .safe-top {
+    padding-top: max(0px, env(safe-area-inset-top));
   }
 }
 

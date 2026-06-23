@@ -3,9 +3,10 @@
 import { useEffect, useCallback, useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaGithub, FaArrowRight, FaExternalLinkAlt, FaTimes } from 'react-icons/fa'
+import { FaGithub, FaChevronRight, FaChevronDown, FaChevronUp, FaExternalLinkAlt, FaTimes } from 'react-icons/fa'
 import { projects, getProjectLogo, GITHUB_AVATAR_LOGO, GITHUB_BADGE_LIGHT, type Project } from '@/data/projects'
 import { useReducedMotion } from '@/lib/motion'
+import SectionHeader from '@/components/SectionHeader'
 
 function TechTag({ label }: { label: string }) {
   return (
@@ -70,7 +71,7 @@ function ProjectLogo({ project, size = 48 }: { project: Project; size?: number }
 
   return (
     <div className="relative flex-shrink-0" style={{ width: size, height: size }}>
-      <div className="relative h-full w-full overflow-hidden rounded-xl bg-white p-1.5 dark:bg-zinc-900">
+      <div className="relative h-full w-full overflow-hidden rounded-xl bg-white p-1.5 ring-1 ring-zinc-200/70 dark:rounded-2xl dark:bg-white dark:p-2 dark:ring-zinc-700/40">
         <Image src={src} alt="" fill className="object-contain p-1" sizes={`${size}px`} />
       </div>
     </div>
@@ -174,7 +175,7 @@ function ProjectCardHeader({
       </div>
       <div className="flex items-start gap-3">
         {!hideLogo ? <ProjectLogo project={project} size={logoSize} /> : null}
-        <h3 id={titleId} className={`min-w-0 flex-1 ${titleClassName}`}>
+        <h3 id={titleId} className={`min-w-0 flex-1 break-words ${titleClassName}`}>
           {project.title}
         </h3>
       </div>
@@ -236,13 +237,13 @@ function ProjectDetailModal({
         exit={reducedMotion ? undefined : { opacity: 0, y: 16, scale: 0.98 }}
         transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
         onClick={e => e.stopPropagation()}
-        className="relative max-h-[90vh] w-full max-w-2xl overflow-hidden overflow-y-auto rounded-2xl border border-zinc-200/80 bg-white shadow-2xl dark:border-zinc-700/60 dark:bg-zinc-900"
+        className="relative max-h-[92dvh] w-full max-w-2xl overflow-hidden overflow-y-auto rounded-t-2xl sm:rounded-2xl border border-zinc-200/80 bg-white shadow-2xl dark:border-zinc-700/60 dark:bg-zinc-900"
       >
         {logo ? (
-          <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            <div className="absolute right-6 top-1/2 -translate-y-1/2 sm:right-8">
+          <div className="pointer-events-none absolute inset-0 overflow-hidden hidden sm:block">
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 sm:right-8">
               <div className="flex flex-col items-end opacity-[0.14] dark:opacity-[0.2]">
-                <div className="relative h-48 w-48 sm:h-56 sm:w-56">
+                <div className="relative h-36 w-36 sm:h-56 sm:w-56">
                   <Image src={logo} alt="" fill className="object-contain object-right" sizes="224px" />
                   {logo === GITHUB_AVATAR_LOGO ? (
                     <>
@@ -284,23 +285,23 @@ function ProjectDetailModal({
           </div>
         ) : null}
 
-        <div className="relative p-6 sm:p-8">
+        <div className="relative p-5 sm:p-8">
           <button
             type="button"
             onClick={onClose}
-            className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+            className="absolute right-3 top-3 sm:right-4 sm:top-4 flex h-10 w-10 items-center justify-center rounded-full text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
             aria-label="Close project details"
           >
             <FaTimes size={14} />
           </button>
 
-          <div className="mb-6 pr-10">
+          <div className="mb-5 sm:mb-6 pr-10">
             <ProjectCardHeader
               project={project}
               logoSize={48}
               hideLogo
               titleId="project-modal-title"
-              titleClassName="text-xl font-bold leading-tight text-zinc-900 dark:text-white sm:text-2xl"
+              titleClassName="text-lg font-bold leading-tight text-zinc-900 dark:text-white sm:text-2xl"
               topLeft={
                 project.featured ? (
                   <span className="inline-block rounded-full bg-violet-100 px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider text-violet-700 dark:bg-violet-950/50 dark:text-violet-300">
@@ -336,9 +337,11 @@ function ProjectDetailModal({
 export default function Projects() {
   const reducedMotion = useReducedMotion()
   const [selected, setSelected] = useState<Project | null>(null)
+  const [showAll, setShowAll] = useState(false)
   const featured = projects.find(p => p.featured) ?? projects[0]
   const secondary = projects.filter(p => p.featured && p !== featured)
   const rest = projects.filter(p => !p.featured)
+  const hiddenCount = secondary.length + rest.length
 
   const stopLink = (e: React.MouseEvent) => e.stopPropagation()
 
@@ -348,16 +351,9 @@ export default function Projects() {
       : { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true }, transition: { duration: 0.5, delay } }
 
   return (
-    <section id="projects" className="py-28 px-6 sm:px-10 lg:px-16 bg-gradient-to-b from-zinc-50 to-white dark:bg-zinc-950 dark:bg-none border-t border-zinc-100 dark:border-zinc-800 overflow-hidden">
+    <section id="projects" className="py-20 sm:py-28 px-4 sm:px-10 lg:px-16 bg-gradient-to-b from-zinc-50 to-white dark:bg-zinc-950 dark:bg-none border-t border-zinc-100 dark:border-zinc-800 overflow-hidden">
       <div className="max-w-5xl mx-auto">
-        <div className="relative mb-12 h-28 select-none">
-          <motion.p {...enter()} className="absolute top-0 -left-1 font-caveat text-violet-600 dark:text-violet-400 text-2xl z-10 pointer-events-none">
-            things I&apos;ve built
-          </motion.p>
-          <span className="absolute top-[0.5rem] left-0 text-[7rem] font-black text-zinc-200 dark:text-zinc-800/60 leading-none tracking-tighter pointer-events-none">
-            PROJECTS
-          </span>
-        </div>
+        <SectionHeader label="things I've built" watermark="PROJECTS" animate={!reducedMotion} />
 
         <motion.article
           {...enter()}
@@ -370,7 +366,7 @@ export default function Projects() {
           <div className="absolute inset-0 bg-gradient-to-br from-violet-50/80 via-white to-white opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-violet-950/60 dark:via-zinc-900 dark:to-zinc-900" />
           <div className="absolute top-0 right-0 h-80 w-80 rounded-full bg-violet-400/5 blur-3xl transition-all duration-500 group-hover:bg-violet-400/10 dark:bg-violet-600/5 dark:group-hover:bg-violet-600/15" />
 
-          <div className="relative grid grid-cols-1 gap-5 p-5 sm:p-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
+          <div className="relative grid grid-cols-1 gap-5 p-4 sm:p-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
             {featured.previewUrl ? (
               <>
                 <div className="order-2 lg:order-1">
@@ -387,7 +383,7 @@ export default function Projects() {
                       logoSize={56}
                       description={featured.description}
                       descriptionLines={4}
-                      titleClassName="text-2xl font-bold leading-tight text-zinc-900 transition-colors duration-300 group-hover:text-violet-700 dark:text-white dark:group-hover:text-violet-200 sm:text-3xl"
+                      titleClassName="text-xl font-bold leading-tight text-zinc-900 transition-colors duration-300 group-hover:text-violet-700 dark:text-white dark:group-hover:text-violet-200 sm:text-3xl"
                       topLeft={
                         <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-violet-600 dark:text-violet-400">
                           Featured
@@ -410,7 +406,7 @@ export default function Projects() {
                     <ProjectCardHeader
                       project={featured}
                       logoSize={56}
-                      titleClassName="text-2xl font-bold leading-tight text-zinc-900 transition-colors duration-300 group-hover:text-violet-700 dark:text-white dark:group-hover:text-violet-200 sm:text-3xl"
+                      titleClassName="text-xl font-bold leading-tight text-zinc-900 transition-colors duration-300 group-hover:text-violet-700 dark:text-white dark:group-hover:text-violet-200 sm:text-3xl"
                       topLeft={
                         <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-violet-600 dark:text-violet-400">
                           Featured
@@ -433,6 +429,28 @@ export default function Projects() {
           </div>
         </motion.article>
 
+        {!showAll && hiddenCount > 0 ? (
+          <motion.button
+            type="button"
+            {...enter(0.05)}
+            onClick={() => setShowAll(true)}
+            className="mb-4 flex w-full min-h-[48px] items-center justify-end gap-2 px-5 py-4 font-caveat text-lg text-violet-600 transition-colors hover:text-violet-700 dark:text-violet-400 dark:hover:text-violet-300"
+          >
+            See more
+            <FaChevronDown size={12} />
+          </motion.button>
+        ) : null}
+
+        <AnimatePresence initial={false}>
+          {showAll ? (
+            <motion.div
+              key="more-projects"
+              initial={reducedMotion ? false : { opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={reducedMotion ? undefined : { opacity: 0, height: 0 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="overflow-hidden"
+            >
         <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {secondary.map((project, i) => (
             <motion.article
@@ -442,10 +460,10 @@ export default function Projects() {
               tabIndex={0}
               onClick={() => setSelected(project)}
               onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), setSelected(project))}
-              className="group relative cursor-pointer overflow-hidden rounded-xl border border-zinc-200/60 bg-white/40 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-violet-400 dark:border-zinc-800/50 dark:bg-white/[0.03] dark:shadow-none dark:hover:border-violet-700"
+              className="group relative cursor-pointer overflow-hidden rounded-xl border border-zinc-200/60 bg-white/40 shadow-sm backdrop-blur-sm transition-all duration-300 sm:hover:-translate-y-0.5 hover:border-violet-400 dark:border-zinc-800/50 dark:bg-white/[0.03] dark:shadow-none dark:hover:border-violet-700"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-violet-50/60 via-white to-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-violet-950/40 dark:via-zinc-900 dark:to-zinc-900" />
-              <div className="relative p-6">
+              <div className="relative p-4 sm:p-6">
                 <ProjectCardHeader
                   project={project}
                   logoSize={40}
@@ -472,7 +490,7 @@ export default function Projects() {
               tabIndex={0}
               onClick={() => setSelected(project)}
               onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), setSelected(project))}
-              className="group flex cursor-pointer flex-col rounded-xl border border-zinc-100/60 bg-white/40 p-5 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-200 hover:shadow-md dark:border-zinc-800/50 dark:bg-white/[0.03] dark:hover:border-violet-800"
+              className="group flex cursor-pointer flex-col rounded-xl border border-zinc-100/60 bg-white/40 p-4 sm:p-5 backdrop-blur-sm transition-all duration-200 sm:hover:-translate-y-0.5 hover:border-violet-200 hover:shadow-md dark:border-zinc-800/50 dark:bg-white/[0.03] dark:hover:border-violet-800"
             >
               <ProjectCardHeader
                 project={project}
@@ -497,16 +515,28 @@ export default function Projects() {
           ))}
         </div>
 
-        <motion.a
-          href="https://github.com/Dead-Stone"
-          target="_blank"
-          rel="noopener noreferrer"
-          {...enter()}
-          className="mt-10 inline-flex items-center gap-2 text-sm font-mono text-zinc-600 transition-colors hover:text-violet-600 dark:text-zinc-500 dark:hover:text-violet-400"
-        >
-          View all repositories on GitHub
-          <FaArrowRight size={10} />
-        </motion.a>
+              <div className="mb-6 flex w-full flex-wrap items-center justify-between gap-x-6 gap-y-3 px-5 py-2">
+                <a
+                  href="https://github.com/Dead-Stone"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-mono text-zinc-900 transition-colors hover:text-violet-600 dark:text-zinc-100 dark:hover:text-violet-400"
+                >
+                  View all repositories on GitHub
+                  <FaChevronRight size={10} />
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setShowAll(false)}
+                  className="inline-flex items-center gap-2 font-caveat text-lg text-violet-600 transition-colors hover:text-violet-700 dark:text-violet-400 dark:hover:text-violet-300"
+                >
+                  See less
+                  <FaChevronUp size={12} />
+                </button>
+              </div>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
       </div>
 
       <AnimatePresence>

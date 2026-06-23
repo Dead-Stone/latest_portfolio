@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import SectionHeader from '@/components/SectionHeader'
 
 const skillCategories = [
   {
@@ -31,7 +32,7 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative py-28 px-6 sm:px-10 lg:px-16 bg-zinc-100 dark:bg-zinc-950 overflow-hidden border-t border-zinc-200 dark:border-zinc-800">
+    <section id="skills" className="relative py-20 sm:py-28 px-4 sm:px-10 lg:px-16 bg-zinc-100 dark:bg-zinc-950 overflow-hidden border-t border-zinc-200 dark:border-zinc-800">
 
       {/* Dot grid */}
       <div
@@ -49,19 +50,13 @@ export default function Skills() {
       <div className="max-w-5xl mx-auto relative z-10">
 
         {/* Watermark + label */}
-        <div className="relative mb-14 h-28 select-none">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="absolute top-0 -left-1 font-caveat text-violet-400 text-2xl z-10 pointer-events-none"
-          >
-            what I work with
-          </motion.p>
-          <span className="absolute top-[0.5rem] left-0 text-[7rem] font-black text-zinc-300 dark:text-zinc-800/80 leading-none tracking-tighter pointer-events-none">
-            SKILLS
-          </span>
-        </div>
+        <SectionHeader
+          label="what I work with"
+          watermark="SKILLS"
+          labelClassName="text-violet-400"
+          watermarkClassName="text-zinc-300 dark:text-zinc-800/80"
+          animate
+        />
 
         {/* Skills as flowing prose blocks */}
         <div className="space-y-10">
@@ -72,7 +67,7 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-30px' }}
               transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="grid grid-cols-[100px_1fr] sm:grid-cols-[140px_1fr] gap-6 items-start"
+              className="grid grid-cols-1 gap-2 sm:grid-cols-[140px_1fr] sm:gap-6 items-start"
             >
               <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-violet-600/80 dark:text-violet-500/70 pt-1">
                 {cat.title}

@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { FaExternalLinkAlt } from 'react-icons/fa'
+import SectionHeader from '@/components/SectionHeader'
 
 const publications = [
   {
@@ -10,13 +11,13 @@ const publications = [
     year: '2020',
     abstract: 'Proposed a machine learning approach for sentiment classification of Hindi-language text using a Naive Bayes classifier, addressing the unique morphological and syntactic challenges of Hindi NLP.',
     tags: ['NLP', 'Sentiment Analysis', 'Naive Bayes', 'Hindi NLP', 'Machine Learning'],
-    url: undefined as string | undefined,
+    url: 'https://d1wqtxts1xzle7.cloudfront.net/64236629/1597854990_Volume_7__Issue_8-libre.pdf?1598007025=&response-content-disposition=inline%3B+filename%3DIJIERT_LEARNING_BASED_APPROACH_FOR_HINDI.pdf&Expires=1782251390&Signature=G5jZABs8RyicpBb6TIDMZ0jORmHayV31-y00N4m9FEtwUg6hoXfBqpjaARxcmUCA2T5e59i0LGrIU3D-o8-AbDHM0Pg2QGIsNApkS-1eAewNHxcurYl4k~7WkI-UoAEGxgg40snb3M2WmpTRRKdwIf-RbP5u0jo53iWU4GPWPdIKBvzTrKrZ9sdbLqeoR3zUQKERUGRxD-fbfW5Ad6CAoSW9nbGI7OyMDA5mpBEkt66x-~X7A1DtS4m7VBFDOaBRGmRIwGDrRwQlY59GdVoNCOI0ewwwgQKLJqKvBEWgARvQglkO8L1y0yk~LxopokWWojhAOJNYVACi9Am6d8QW7g__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA',
   },
 ]
 
 export default function Publications() {
   return (
-    <section id="publications" className="relative py-28 px-6 sm:px-10 lg:px-16 overflow-hidden">
+    <section id="publications" className="relative py-20 sm:py-28 px-4 sm:px-10 lg:px-16 overflow-hidden">
 
       {/* Violet-tinted background */}
       <div className="absolute inset-0 bg-violet-50 dark:bg-[#0d0b14]" />
@@ -39,19 +40,13 @@ export default function Publications() {
       <div className="max-w-4xl mx-auto relative z-10">
 
         {/* Watermark + label */}
-        <div className="relative mb-14 h-28 select-none">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="absolute top-0 -left-1 font-caveat text-violet-600 dark:text-violet-400 text-2xl z-10 pointer-events-none"
-          >
-            research
-          </motion.p>
-          <span className="absolute top-[0.5rem] left-0 text-[7rem] font-black text-violet-200 dark:text-violet-950 leading-none tracking-tighter pointer-events-none">
-            PUBLICATION
-          </span>
-        </div>
+        <SectionHeader
+          label="research"
+          watermark="PUBLICATION"
+          labelClassName="text-violet-600 dark:text-violet-400"
+          watermarkClassName="text-violet-200 dark:text-violet-950"
+          animate
+        />
 
         <div>
           {publications.map((pub, i) => (
@@ -63,12 +58,23 @@ export default function Publications() {
               transition={{ duration: 0.6 }}
             >
               <div className="h-px bg-violet-200 dark:bg-violet-900/60" />
-              <div className="py-10 grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-6 sm:gap-12">
+              <div className="py-8 sm:py-10 grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-4 sm:gap-12">
                 <span className="hidden sm:block text-xs font-mono text-violet-300 dark:text-violet-800 pt-1 w-6 text-right select-none">01</span>
                 <div>
                   <div className="flex items-start justify-between gap-4 mb-2">
-                    <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-50 leading-snug">
-                      {pub.title}
+                    <h3 className="text-base font-bold leading-snug">
+                      {pub.url ? (
+                        <a
+                          href={pub.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-zinc-900 dark:text-zinc-50 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
+                        >
+                          {pub.title}
+                        </a>
+                      ) : (
+                        <span className="text-zinc-900 dark:text-zinc-50">{pub.title}</span>
+                      )}
                     </h3>
                     {pub.url && (
                       <a href={pub.url} target="_blank" rel="noopener noreferrer"

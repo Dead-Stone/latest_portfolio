@@ -57,12 +57,12 @@ export default function Navigation({ activeSection }: NavigationProps) {
           : 'bg-white/70 dark:bg-zinc-950/60 backdrop-blur-md md:bg-transparent md:backdrop-blur-0'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-10 lg:px-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-10 lg:px-16 safe-top">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <button
             onClick={() => scrollToSection('home')}
-            className="flex items-center hover:opacity-70 transition-opacity"
+            className="flex shrink-0 items-center hover:opacity-70 transition-opacity"
           >
             <motion.div
               initial={{ clipPath: 'inset(0 100% 0 0)' }}
@@ -117,7 +117,7 @@ export default function Navigation({ activeSection }: NavigationProps) {
           </div>
 
           {/* Mobile: theme + menu */}
-          <div className="flex items-center gap-3 md:hidden">
+          <div className="flex items-center gap-2 lg:hidden">
             <ThemeToggle />
             <MobileMenu navItems={navItems} scrollToSection={scrollToSection} goToArt={goToArt} />
           </div>
@@ -154,21 +154,21 @@ function MobileMenu({
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="absolute top-16 left-0 right-0 bg-white dark:bg-zinc-950 border-b border-zinc-100 dark:border-zinc-900 shadow-lg"
+        className="absolute top-14 left-0 right-0 max-h-[calc(100dvh-3.5rem)] overflow-y-auto bg-white dark:bg-zinc-950 border-b border-zinc-100 dark:border-zinc-900 shadow-lg sm:top-16"
         >
           <div className="px-6 py-4 space-y-1">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => { scrollToSection(item.id); setIsOpen(false) }}
-                className="block w-full text-left px-3 py-2.5 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-900 rounded-lg transition-colors"
+                className="block w-full text-left px-3 py-3 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-900 rounded-lg transition-colors"
               >
                 {item.label}
               </button>
             ))}
             <button
               onClick={() => { goToArt(); setIsOpen(false) }}
-              className="flex items-center gap-2 w-full text-left px-3 py-2.5 text-sm text-violet-600 dark:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-950/40 rounded-lg transition-colors font-medium mt-1 border-t border-zinc-100 dark:border-zinc-900 pt-3"
+              className="flex items-center gap-2 w-full text-left px-3 py-3 text-sm text-violet-600 dark:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-950/40 rounded-lg transition-colors font-medium mt-1 border-t border-zinc-100 dark:border-zinc-900 pt-3"
             >
               <MdPalette size={15} /> Art World
             </button>

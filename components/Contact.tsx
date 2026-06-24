@@ -93,7 +93,7 @@ export default function Contact() {
           <motion.div {...enter}>
             <a href={buildMailtoUrl()} className="group inline-block max-w-full">
               <p className="text-xs font-mono uppercase tracking-[0.2em] text-zinc-600 mb-3">get in touch</p>
-              <h2 className="text-[clamp(1.35rem,4.5vw,3rem)] leading-tight font-black text-zinc-100 tracking-tight whitespace-nowrap transition-colors duration-300 group-hover:text-violet-400">
+              <h2 className="text-[clamp(1.15rem,4.2vw,3rem)] leading-tight font-black text-zinc-100 tracking-tight break-all sm:break-normal sm:whitespace-nowrap transition-colors duration-300 group-hover:text-violet-400">
                 {CONTACT_EMAIL.split('@')[0]}@
                 <GmailDomain />
               </h2>
@@ -118,7 +118,7 @@ export default function Contact() {
           </motion.div>
 
           <motion.form {...enter} onSubmit={submit} className="lg:mt-20">
-            <div className="mt-8 grid grid-cols-1 gap-3 sm:mt-10 sm:grid-cols-2">
+            <div className="mt-6 grid grid-cols-1 gap-3 sm:mt-10 sm:grid-cols-2">
               <input
                 type="text"
                 autoComplete="name"

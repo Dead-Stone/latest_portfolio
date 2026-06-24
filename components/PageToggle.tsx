@@ -34,19 +34,20 @@ export default function PageToggle() {
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 0.5 }}
-      className={`fixed z-50 flex items-center gap-2 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 dark:focus:ring-offset-zinc-950 overflow-hidden transition-all duration-300 right-4 sm:right-6 min-h-[48px] ${
+      className={`fixed z-50 flex items-center justify-center rounded-full shadow-md backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 dark:focus:ring-offset-zinc-950 overflow-hidden transition-all duration-300 right-4 sm:right-6 sm:min-h-[48px] sm:shadow-lg h-10 w-10 sm:h-auto sm:w-auto ${
         isArtPage
-          ? 'bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900'
-          : 'bg-violet-600 dark:bg-violet-500 text-white'
+          ? 'bg-zinc-900/95 dark:bg-zinc-50/95 text-zinc-50 dark:text-zinc-900'
+          : 'bg-violet-600/95 dark:bg-violet-500/95 text-white'
       }`}
       style={{ bottom: 'max(1rem, env(safe-area-inset-bottom))', touchAction: 'manipulation' }}
       aria-label={isArtPage ? 'Go to Portfolio' : 'Go to Art World'}
     >
-      <motion.div className="flex items-center gap-2 px-4 py-3">
-        {isArtPage ? <MdCode size={18} /> : <MdPalette size={18} />}
-        <span className="text-sm font-medium whitespace-nowrap sm:hidden">
-          {isArtPage ? 'Portfolio' : 'Art'}
-        </span>
+      <motion.div className="flex items-center justify-center gap-2 sm:px-4 sm:py-3">
+        {isArtPage ? (
+          <MdCode className="h-[15px] w-[15px] sm:h-[18px] sm:w-[18px]" />
+        ) : (
+          <MdPalette className="h-[15px] w-[15px] sm:h-[18px] sm:w-[18px]" />
+        )}
         <AnimatePresence>
           {hovered && (
             <motion.span

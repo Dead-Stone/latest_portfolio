@@ -58,11 +58,11 @@ export default function Publications() {
               transition={{ duration: 0.6 }}
             >
               <div className="h-px bg-violet-200 dark:bg-violet-900/60" />
-              <div className="py-8 sm:py-10 grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-4 sm:gap-12">
+              <div className="py-6 sm:py-10 grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-3 sm:gap-12">
                 <span className="hidden sm:block text-xs font-mono text-violet-300 dark:text-violet-800 pt-1 w-6 text-right select-none">01</span>
                 <div>
                   <div className="flex items-start justify-between gap-4 mb-2">
-                    <h3 className="text-base font-bold leading-snug">
+                    <h3 className="text-sm sm:text-base font-bold leading-snug">
                       {pub.url ? (
                         <a
                           href={pub.url}
@@ -86,7 +86,7 @@ export default function Publications() {
                   <p className="text-xs font-mono text-violet-500/70 dark:text-violet-600 mb-4">
                     {pub.journal} · {pub.year}
                   </p>
-                  <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-5 max-w-2xl">
+                  <p className="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4 sm:mb-5 max-w-2xl">
                     {pub.abstract}
                   </p>
                   <div className="flex flex-wrap gap-2">

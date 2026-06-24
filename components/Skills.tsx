@@ -59,7 +59,7 @@ export default function Skills() {
         />
 
         {/* Skills as flowing prose blocks */}
-        <div className="space-y-10">
+        <div className="space-y-8 sm:space-y-10">
           {skillCategories.map((cat, i) => (
             <motion.div
               key={i}
@@ -80,7 +80,7 @@ export default function Skills() {
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.04 + j * 0.02 }}
-                    className="cursor-default rounded-full border border-zinc-300/80 px-3 py-1 text-xs text-zinc-700 transition-all duration-150 hover:border-violet-400/55 hover:bg-violet-500/10 hover:text-violet-900 dark:border-zinc-800 dark:text-zinc-400 dark:hover:bg-violet-950/40 dark:hover:text-violet-300"
+                    className="cursor-default rounded-full border border-zinc-300/80 px-2.5 py-0.5 text-[11px] sm:px-3 sm:py-1 sm:text-xs text-zinc-700 transition-all duration-150 hover:border-violet-400/55 hover:bg-violet-500/10 hover:text-violet-900 dark:border-zinc-800 dark:text-zinc-400 dark:hover:bg-violet-950/40 dark:hover:text-violet-300"
                   >
                     {skill}
                   </motion.span>

@@ -329,17 +329,17 @@ function SectionHeader({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-      className={`relative mb-10 select-none sm:mb-14 ${align === 'right' ? 'text-right' : ''}`}
+      className={`relative mb-8 select-none sm:mb-14 ${align === 'right' ? 'text-right' : ''}`}
     >
       {hasLabel ? (
-        <p className="relative z-10 font-sans text-xl font-bold tracking-tight text-violet-700/80 dark:text-violet-400/70 sm:text-[1.35rem]">
+        <p className="relative z-10 font-sans text-base font-bold tracking-tight text-violet-700/80 dark:text-violet-400/70 sm:text-[1.35rem]">
           {label}
         </p>
       ) : null}
       <span
         className={`relative z-0 block max-w-full font-sans font-black leading-[0.9] tracking-tighter break-words text-zinc-950/[0.055] dark:text-white/[0.04] ${hasLabel ? 'mt-6' : 'mt-0'}`}
         style={{
-          fontSize: 'clamp(2rem, 6vw, 5.25rem)',
+          fontSize: 'clamp(1.5rem, 5vw, 5.25rem)',
         }}
         aria-hidden
       >
@@ -348,7 +348,7 @@ function SectionHeader({
       {title ? (
         <h2
           className={`relative z-10 mt-6 font-sans text-zinc-900 dark:text-zinc-100 leading-tight tracking-tight ${titleClassName}`}
-          style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
+          style={{ fontSize: 'clamp(1.35rem, 3.5vw, 3rem)' }}
         >
           {title}
         </h2>
@@ -367,6 +367,60 @@ function CommissionIllustration() {
         style={{ height: 280, width: '100%', maxWidth: 400 }}
       />
     </div>
+  )
+}
+
+function ArtInstagramFooter({ className = '' }: { className?: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: 0.1 }}
+      className={`flex flex-row items-start justify-between gap-4 ${className}`}
+    >
+      <div className="min-w-0 flex-1">
+        <p className="mb-2 text-[10px] font-mono uppercase tracking-widest text-zinc-600">more on instagram</p>
+        <a
+          href="https://instagram.com/_dead_stone_"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block text-sm font-bold leading-snug tracking-tight text-zinc-300 transition-colors duration-300 hover:text-violet-400 sm:text-lg"
+        >
+          @_dead_stone_ ↗
+        </a>
+      </div>
+      <div className="shrink-0 select-none">
+        <div className="relative -rotate-[30deg]">
+          <div
+            className="flex w-fit flex-col items-center opacity-95"
+            style={{ filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.35))' }}
+          >
+            <p className="font-shadows text-base leading-none tracking-[0.02em] text-zinc-200 sm:text-[1.65rem]">
+              MMS
+            </p>
+            <svg
+              viewBox="0 0 200 28"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="-mt-1 block h-auto w-[70px] sm:w-[90px]"
+              aria-hidden
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <path
+                d="M12 12 C 60 3, 140 3, 188 12"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                className="text-zinc-100"
+              />
+              <circle cx="78" cy="21" r="2.4" className="fill-zinc-100" />
+              <circle cx="122" cy="21" r="2.4" className="fill-zinc-100" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </motion.div>
   )
 }
 
@@ -405,7 +459,7 @@ function ArtRequestSection() {
   }
 
   const inputClass =
-    'w-full rounded-md border border-zinc-700/50 bg-zinc-900/20 px-3 py-2 text-sm text-zinc-100 placeholder:text-zinc-600 outline-none transition-[border-color,box-shadow] focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/25'
+    'w-full rounded-md border border-zinc-700/50 bg-zinc-900/20 px-2.5 py-1.5 text-xs text-zinc-100 placeholder:text-zinc-600 outline-none transition-[border-color,box-shadow] focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/25 sm:px-3 sm:py-2 sm:text-sm'
 
   return (
     <section id="request-art" className="relative overflow-hidden bg-zinc-950 text-zinc-100">
@@ -420,64 +474,16 @@ function ArtRequestSection() {
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             className="min-w-0"
           >
-            <p className="font-sans text-base font-bold text-violet-400/85 sm:text-lg">Commissions</p>
-            <h2 className="mt-0.5 font-sans text-2xl font-bold leading-tight tracking-tight text-white sm:text-3xl">
+            <p className="font-sans text-sm font-bold text-violet-400/85 sm:text-lg">Commissions</p>
+            <h2 className="mt-0.5 font-sans text-xl font-bold leading-tight tracking-tight text-white sm:text-3xl">
               Want something drawn?
             </h2>
-            <p className="mt-2 max-w-md text-[13px] leading-relaxed text-zinc-500">
+            <p className="mt-2 max-w-md text-[11px] leading-relaxed text-zinc-500 sm:text-[13px]">
               Email brief · custom quote from your refs and/or idea. Subject, medium, timing: whatever helps.
             </p>
             <CommissionIllustration />
-            <div className="mt-6 max-w-[min(100%,400px)] border-t border-zinc-800/70 pt-6">
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="flex flex-row items-start justify-between gap-4"
-            >
-              <div className="min-w-0 flex-1">
-                <p className="mb-2 text-[10px] font-mono uppercase tracking-widest text-zinc-600">more on instagram</p>
-                <a
-                  href="https://instagram.com/_dead_stone_"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-base font-bold leading-snug tracking-tight text-zinc-300 transition-colors duration-300 hover:text-violet-400 sm:text-lg"
-                >
-                  @_dead_stone_ ↗
-                </a>
-              </div>
-              <div className="shrink-0 select-none">
-                <div className="relative -rotate-[30deg]">
-                  <div
-                    className="flex w-fit flex-col items-center opacity-95"
-                    style={{ filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.35))' }}
-                  >
-                    <p className="font-shadows text-[1.15rem] leading-none tracking-[0.02em] text-zinc-200 sm:text-[1.65rem]">
-                      MMS
-                    </p>
-                    <svg
-                      viewBox="0 0 200 28"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="-mt-1 block h-auto w-[70px] sm:w-[90px]"
-                      aria-hidden
-                      preserveAspectRatio="xMidYMid meet"
-                    >
-                      <path
-                        d="M12 12 C 60 3, 140 3, 188 12"
-                        stroke="currentColor"
-                        strokeWidth="2.4"
-                        strokeLinecap="round"
-                        className="text-zinc-100"
-                      />
-                      <circle cx="78" cy="21" r="2.4" className="fill-zinc-100" />
-                      <circle cx="122" cy="21" r="2.4" className="fill-zinc-100" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+            <div className="mt-6 hidden max-w-[min(100%,400px)] border-t border-zinc-800/70 pt-6 md:block">
+              <ArtInstagramFooter />
             </div>
           </motion.div>
 
@@ -529,7 +535,7 @@ function ArtRequestSection() {
                     return (
                       <label
                         key={t.value}
-                        className={`cursor-pointer rounded-full border px-2.5 py-1 text-[11px] font-medium transition-colors duration-200 ${
+                        className={`cursor-pointer rounded-full border px-2 py-0.5 text-[10px] font-medium transition-colors duration-200 sm:px-2.5 sm:py-1 sm:text-[11px] ${
                           on
                             ? 'border-violet-500/40 bg-violet-500/10 text-violet-200'
                             : 'border-zinc-700/80 bg-transparent text-zinc-500 hover:border-zinc-600 hover:text-zinc-300'
@@ -561,7 +567,7 @@ function ArtRequestSection() {
                       <label
                         key={b.id}
                         title={b.blurb}
-                        className={`cursor-pointer rounded-full border px-2.5 py-1 text-[11px] font-medium transition-colors duration-200 ${
+                        className={`cursor-pointer rounded-full border px-2 py-0.5 text-[10px] font-medium transition-colors duration-200 sm:px-2.5 sm:py-1 sm:text-[11px] ${
                           on
                             ? 'border-violet-500/40 bg-violet-500/10 text-violet-200'
                             : 'border-zinc-700/80 bg-transparent text-zinc-500 hover:border-zinc-600 hover:text-zinc-300'
@@ -594,7 +600,7 @@ function ArtRequestSection() {
                     rows={3}
                     value={message}
                     onChange={e => setMessage(e.target.value)}
-                    className={`${inputClass} min-h-[88px] resize-y pb-14 pr-14 text-[13px] leading-relaxed`}
+                    className={`${inputClass} min-h-[80px] resize-y pb-14 pr-14 text-[11px] leading-relaxed sm:min-h-[88px] sm:text-[13px]`}
                     placeholder="Idea, links, size, B&amp;W vs color, deadline."
                   />
                   <button
@@ -617,12 +623,12 @@ function ArtRequestSection() {
                 </a>
               </div>
               {submitState === 'sent' ? (
-                <p className="text-[11px] leading-relaxed text-emerald-300/90">
+                <p className="text-[10px] leading-relaxed text-emerald-300/90 sm:text-[11px]">
                   Brief sent — I&apos;ll reply to {email.trim()}.
                 </p>
               ) : null}
               {submitState === 'error' ? (
-                <p className="text-[11px] leading-relaxed text-amber-200/80">
+                <p className="text-[10px] leading-relaxed text-amber-200/80 sm:text-[11px]">
                   Couldn&apos;t send right now. Email {CONTACT_EMAIL} directly.
                 </p>
               ) : null}
@@ -630,7 +636,7 @@ function ArtRequestSection() {
               <div className="relative mt-8 min-h-[clamp(3.5rem,12vw,5.5rem)]">
                 <p
                   className="pointer-events-none absolute bottom-0 right-0 select-none font-black uppercase leading-[0.85] tracking-tighter text-white/[0.045]"
-                  style={{ fontSize: 'clamp(2.5rem, 14vw, 7rem)' }}
+                  style={{ fontSize: 'clamp(2rem, 12vw, 7rem)' }}
                   aria-hidden
                 >
                   STUDIO
@@ -638,6 +644,10 @@ function ArtRequestSection() {
               </div>
             </form>
           </motion.div>
+        </div>
+
+        <div className="mt-8 border-t border-zinc-800/70 pt-6 pb-2 md:hidden">
+          <ArtInstagramFooter />
         </div>
       </div>
     </section>
@@ -763,7 +773,7 @@ export default function ArtPage() {
             <div className="flex items-center gap-3 sm:gap-4">
               <button
                 onClick={goToPortfolio}
-                className="flex items-center gap-1.5 rounded-full px-2 py-1 text-[13px] font-medium transition-colors text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/[0.06] dark:hover:text-zinc-200 sm:px-0 sm:py-0 sm:text-sm sm:hover:bg-transparent dark:sm:hover:bg-transparent"
+                className="flex items-center gap-1.5 rounded-full px-2 py-1 text-xs font-medium transition-colors text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/[0.06] dark:hover:text-zinc-200 sm:px-0 sm:py-0 sm:text-sm sm:hover:bg-transparent dark:sm:hover:bg-transparent"
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
@@ -779,7 +789,7 @@ export default function ArtPage() {
       <main className="relative z-[2] pb-20 max-[767px]:pb-24">
 
         {/* ── Hero ── */}
-        <section className="relative px-6 sm:px-10 lg:px-16 pt-28 pb-16 overflow-hidden sm:pb-20">
+        <section className="relative px-6 sm:px-10 lg:px-16 pt-24 pb-12 overflow-hidden sm:pt-28 sm:pb-20">
           {/* Ambient glow */}
           <div
             className="absolute top-0 left-1/4 w-[600px] h-[300px] pointer-events-none"
@@ -793,13 +803,13 @@ export default function ArtPage() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="space-y-0"
           >
-            <h1 className="relative z-10 font-caveat text-sm font-normal italic text-violet-700/85 dark:text-violet-400/70 sm:text-base">
+            <h1 className="relative z-10 font-caveat text-xs font-normal italic text-violet-700/85 dark:text-violet-400/70 sm:text-base">
               a lil collection of -
             </h1>
             <span
-              className="relative z-0 mt-4 block font-caveat font-black pointer-events-none select-none leading-[0.9] text-zinc-950/[0.055] dark:text-white/[0.03] sm:mt-10"
+              className="relative z-0 mt-3 block font-caveat font-black pointer-events-none select-none leading-[0.9] text-zinc-950/[0.055] dark:text-white/[0.03] sm:mt-10"
               style={{
-                fontSize: 'clamp(3rem, 10vw, 7.5rem)',
+                fontSize: 'clamp(2.25rem, 9vw, 7.5rem)',
                 letterSpacing: '-0.03em',
               }}
               aria-hidden
@@ -811,9 +821,9 @@ export default function ArtPage() {
 
         {/* ── Negative art: invert to positive (hover / hold) ── */}
         {negativePieces.length > 0 && (
-          <section className="bg-zinc-100 px-6 py-14 sm:px-10 sm:py-16 lg:px-16 dark:bg-[#050505]">
+          <section className="bg-zinc-100 px-6 py-10 sm:px-10 sm:py-16 lg:px-16 dark:bg-[#050505]">
             <SectionHeader ghost="THE JOKER SERIES" />
-            <div className="mt-4 flex flex-col gap-16 sm:mt-6">
+            <div className="mt-3 flex flex-col gap-10 sm:mt-6 sm:gap-16">
               {negativePieces.map((piece, i) => (
                 <JokerCard key={piece.id} piece={piece} index={i} total={negativePieces.length} />
               ))}
@@ -823,7 +833,7 @@ export default function ArtPage() {
 
         {/* -- Jim Carrey: film reel feature -- */}
         {animationPiece && (
-          <section className="px-6 sm:px-10 lg:px-16 py-14 sm:py-16">
+          <section className="px-6 sm:px-10 lg:px-16 py-10 sm:py-16">
             <div className="mx-auto max-w-6xl">
               <SectionHeader ghost="JIM CARREY" />
 
@@ -881,14 +891,14 @@ export default function ArtPage() {
                   transition={{ delay: 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   className="relative z-10 min-w-0 w-full flex-1 max-w-2xl sm:pt-1 lg:max-w-none lg:pl-4"
                 >
-                  <p className="mb-5 font-sans text-2xl font-bold text-violet-700/90 dark:text-violet-400/85">✎ my note</p>
-                  <p className="font-sans text-xl font-bold leading-relaxed tracking-wide text-zinc-800 sm:text-2xl sm:leading-relaxed md:text-[1.5rem] md:leading-relaxed dark:text-zinc-300/95 [text-wrap:pretty]">
+                  <p className="mb-3 font-sans text-lg font-bold text-violet-700/90 dark:text-violet-400/85 sm:mb-5 sm:text-2xl">✎ my note</p>
+                  <p className="font-sans text-sm font-bold leading-snug tracking-wide text-zinc-800 sm:text-2xl sm:leading-relaxed md:text-[1.5rem] md:leading-relaxed dark:text-zinc-300/95 [text-wrap:pretty]">
                     {animationPiece.description.slice(0, 220)}…
                   </p>
                   <button
                     type="button"
                     onClick={() => setSequenceCollageOpen(true)}
-                    className="mt-8 flex items-center gap-2 text-left font-sans text-xl font-bold text-violet-700 transition-colors hover:text-violet-900 sm:text-2xl dark:text-violet-400 dark:hover:text-violet-300 group"
+                    className="mt-5 flex items-center gap-2 text-left font-sans text-sm font-bold text-violet-700 transition-colors hover:text-violet-900 sm:mt-8 sm:text-2xl dark:text-violet-400 dark:hover:text-violet-300 group"
                   >
                     all 9 frames: collage
                     <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -905,16 +915,16 @@ export default function ArtPage() {
         {/* ── Gallery (after reel): image grid, tap to zoom ── */}
         {galleryPieces.length > 0 && (
           <section className="relative border-t border-zinc-200/90 bg-gradient-to-b from-zinc-100/95 via-zinc-50 to-zinc-50 dark:border-white/[0.06] dark:from-zinc-900/90 dark:via-[#090909] dark:to-[#090909]">
-            <div className="mx-auto max-w-6xl px-6 pb-14 pt-10 sm:px-10 sm:pb-16 sm:pt-12 lg:px-16">
+            <div className="mx-auto max-w-6xl px-6 pb-10 pt-8 sm:px-10 sm:pb-16 sm:pt-12 lg:px-16">
               <SectionHeader ghost="GALLERY" />
-              <p className="relative z-10 mt-5 max-w-xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-500">
+              <p className="relative z-10 mt-4 max-w-xl text-xs leading-relaxed text-zinc-600 dark:text-zinc-500 sm:mt-5 sm:text-sm">
                 Tap any image to view it full size.
               </p>
               <div className="relative z-10 mt-6 flex flex-wrap items-center gap-2">
                 <button
                   type="button"
                   onClick={() => setGalleryFilter('featured')}
-                  className={`rounded-full border px-3 py-1 text-[11px] font-mono uppercase tracking-widest transition-colors ${
+                  className={`rounded-full border px-2.5 py-0.5 text-[10px] font-mono uppercase tracking-widest transition-colors sm:px-3 sm:py-1 sm:text-[11px] ${
                     galleryFilter === 'featured'
                       ? 'border-violet-500/50 bg-violet-500/10 text-violet-700 dark:text-violet-300'
                       : 'border-zinc-300/70 bg-white/40 text-zinc-700 hover:bg-white/70 dark:border-white/[0.08] dark:bg-white/[0.02] dark:text-zinc-400 dark:hover:bg-white/[0.05]'
@@ -925,7 +935,7 @@ export default function ArtPage() {
                 <button
                   type="button"
                   onClick={() => setGalleryFilter('all')}
-                  className={`rounded-full border px-3 py-1 text-[11px] font-mono uppercase tracking-widest transition-colors ${
+                  className={`rounded-full border px-2.5 py-0.5 text-[10px] font-mono uppercase tracking-widest transition-colors sm:px-3 sm:py-1 sm:text-[11px] ${
                     galleryFilter === 'all'
                       ? 'border-violet-500/50 bg-violet-500/10 text-violet-700 dark:text-violet-300'
                       : 'border-zinc-300/70 bg-white/40 text-zinc-700 hover:bg-white/70 dark:border-white/[0.08] dark:bg-white/[0.02] dark:text-zinc-400 dark:hover:bg-white/[0.05]'
@@ -936,7 +946,7 @@ export default function ArtPage() {
                 <button
                   type="button"
                   onClick={() => setGalleryFilter('negative')}
-                  className={`rounded-full border px-3 py-1 text-[11px] font-mono uppercase tracking-widest transition-colors ${
+                  className={`rounded-full border px-2.5 py-0.5 text-[10px] font-mono uppercase tracking-widest transition-colors sm:px-3 sm:py-1 sm:text-[11px] ${
                     galleryFilter === 'negative'
                       ? 'border-violet-500/50 bg-violet-500/10 text-violet-700 dark:text-violet-300'
                       : 'border-zinc-300/70 bg-white/40 text-zinc-700 hover:bg-white/70 dark:border-white/[0.08] dark:bg-white/[0.02] dark:text-zinc-400 dark:hover:bg-white/[0.05]'
@@ -949,7 +959,7 @@ export default function ArtPage() {
                     key={cat}
                     type="button"
                     onClick={() => setGalleryFilter(cat)}
-                    className={`rounded-full border px-3 py-1 text-[11px] font-mono uppercase tracking-widest transition-colors ${
+                    className={`rounded-full border px-2.5 py-0.5 text-[10px] font-mono uppercase tracking-widest transition-colors sm:px-3 sm:py-1 sm:text-[11px] ${
                       galleryFilter === cat
                         ? 'border-violet-500/50 bg-violet-500/10 text-violet-700 dark:text-violet-300'
                         : 'border-zinc-300/70 bg-white/40 text-zinc-700 hover:bg-white/70 dark:border-white/[0.08] dark:bg-white/[0.02] dark:text-zinc-400 dark:hover:bg-white/[0.05]'
@@ -1147,8 +1157,8 @@ export default function ArtPage() {
                 <FaTimes size={12} className="text-zinc-600 dark:text-zinc-400" />
               </button>
               <div className="border-b border-zinc-200 px-5 pb-4 pt-6 dark:border-white/[0.06] sm:px-8 sm:pt-8">
-                <p className="font-sans text-lg font-bold text-violet-700/85 dark:text-violet-400/70">frame by frame:</p>
-                <h2 className="mt-1 font-sans text-2xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-3xl">
+                <p className="font-sans text-base font-bold text-violet-700/85 dark:text-violet-400/70 sm:text-lg">frame by frame:</p>
+                <h2 className="mt-1 font-sans text-xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-3xl">
                   {animationPiece.title}
                 </h2>
                 <p className="mt-2 text-[10px] font-mono uppercase tracking-widest text-zinc-600 dark:text-zinc-600">
@@ -1201,7 +1211,7 @@ function JokerCard({ piece, index, total }: { piece: ArtPiece; index: number; to
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-      className={`flex flex-col items-center sm:items-start gap-10 sm:gap-14 lg:gap-20 w-full ${!imgLeft ? 'sm:flex-row-reverse' : ''} sm:flex-row`}
+      className={`flex flex-col items-center sm:items-start gap-6 sm:gap-14 lg:gap-20 w-full ${!imgLeft ? 'sm:flex-row-reverse' : ''} sm:flex-row`}
     >
       {/* ── Polaroid ── */}
       <motion.div
@@ -1283,7 +1293,7 @@ function JokerCard({ piece, index, total }: { piece: ArtPiece; index: number; to
 
         {/* Polaroid caption strip */}
         <div className="px-1 pb-0 pt-1.5 text-center leading-none">
-          <p className="font-sans text-base font-bold leading-tight tracking-tight text-zinc-200">{piece.title}</p>
+          <p className="font-sans text-sm font-bold leading-tight tracking-tight text-zinc-200 sm:text-base">{piece.title}</p>
           {piece.movie && (
             <p className="mt-0.5 text-[9px] font-mono uppercase tracking-widest text-violet-400/60">{piece.movie}</p>
           )}
@@ -1329,10 +1339,10 @@ function JokerCard({ piece, index, total }: { piece: ArtPiece; index: number; to
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.55, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-        className={`flex min-w-0 flex-1 flex-col w-full max-w-full px-5 sm:px-8 md:px-12 ${!imgLeft ? 'sm:text-right sm:items-end' : ''}`}
+        className={`flex min-w-0 flex-1 flex-col w-full max-w-full px-3 sm:px-8 md:px-12 ${!imgLeft ? 'sm:text-right sm:items-end' : ''}`}
       >
         <div
-          className={`flex items-center gap-2 mb-5 w-full ${!imgLeft ? 'sm:justify-end' : 'justify-start'}`}
+          className={`flex items-center gap-2 mb-3 w-full sm:mb-5 ${!imgLeft ? 'sm:justify-end' : 'justify-start'}`}
         >
           <span className="font-mono text-[0.6rem] tracking-[0.16em] text-violet-700/70 dark:text-violet-400/50">
             {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
@@ -1340,7 +1350,7 @@ function JokerCard({ piece, index, total }: { piece: ArtPiece; index: number; to
           <div className="h-px w-8 bg-violet-600/40 dark:bg-violet-800/50" />
         </div>
 
-        <p className="w-full text-left font-sans text-xl font-normal leading-relaxed tracking-wide text-zinc-800 sm:text-right sm:text-2xl md:text-[1.75rem] dark:text-zinc-400/95 [text-wrap:pretty]">
+        <p className="w-full text-left font-sans text-sm font-normal leading-snug tracking-wide text-zinc-800 sm:text-right sm:text-2xl sm:leading-relaxed md:text-[1.75rem] dark:text-zinc-400/95 [text-wrap:pretty]">
           {piece.description}
         </p>
       </motion.div>

@@ -26,11 +26,11 @@ export default function About() {
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex items-center divide-x divide-zinc-200 dark:divide-zinc-800 mb-10 sm:mb-12 relative z-10"
+          className="flex items-center divide-x divide-zinc-200 dark:divide-zinc-800 mb-8 sm:mb-12 relative z-10"
         >
           {stats.map((s, i) => (
-            <div key={i} className="flex-1 px-4 first:pl-0 sm:px-8">
-              <p className="text-3xl sm:text-4xl font-black text-zinc-900 dark:text-zinc-50 tracking-tighter leading-none">{s.value}</p>
+            <div key={i} className="flex-1 px-2 first:pl-0 sm:px-8">
+              <p className="text-2xl sm:text-4xl font-black text-zinc-900 dark:text-zinc-50 tracking-tighter leading-none">{s.value}</p>
               <p className="mt-1.5 text-[10px] font-mono uppercase tracking-widest text-zinc-600 dark:text-zinc-500">{s.label}</p>
             </div>
           ))}
@@ -39,7 +39,7 @@ export default function About() {
         <div className="h-px bg-zinc-200 dark:bg-zinc-800 mb-12 relative z-10" />
 
         {/* Bio + Education */}
-        <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12 lg:gap-20 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 sm:gap-12 lg:gap-20 relative z-10">
 
           {/* Left: bio */}
           <motion.div
@@ -48,12 +48,12 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <p className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-50 leading-snug mb-6 tracking-tight">
+            <p className="text-lg sm:text-2xl font-bold text-zinc-900 dark:text-zinc-50 leading-snug mb-5 sm:mb-6 tracking-tight">
               AI Engineer and builder of{' '}
               <span className="text-violet-600 dark:text-violet-400">LLM-driven systems</span>{' '}
               that work for real users.
             </p>
-            <div className="space-y-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-400">
+            <div className="space-y-3 text-[13px] sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-400">
               <p>
                 Based in San Jose, CA. I&apos;ve spent the last {yearsExp} years building production systems across fintech, EdTech, and AI — from compliance platforms at Deloitte to founding-engineer work at Gembizz and Gen AI systems at NextPhase AI.
               </p>

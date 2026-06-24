@@ -16,6 +16,34 @@ export function useReducedMotion() {
   return reduced
 }
 
+export function useCoarsePointer() {
+  const [coarse, setCoarse] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(hover: none), (pointer: coarse)')
+    const update = () => setCoarse(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
+
+  return coarse
+}
+
+export function useIsMobile(breakpoint = 640) {
+  const [mobile, setMobile] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpoint - 1}px)`)
+    const update = () => setMobile(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [breakpoint])
+
+  return mobile
+}
+
 /** Framer Motion props that respect prefers-reduced-motion */
 export function motionSafe(
   reduced: boolean,

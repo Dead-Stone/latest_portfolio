@@ -40,19 +40,19 @@ html {
   }
 
   .section-watermark {
-    @apply text-[clamp(2.25rem,9vw,5.75rem)] font-black leading-[0.88] tracking-tighter -mt-1;
+    @apply text-[clamp(1.85rem,8vw,5.75rem)] font-black leading-[0.88] tracking-tighter -mt-1;
   }
 
   .section-label {
-    @apply font-caveat text-xl sm:text-2xl leading-tight mb-0;
+    @apply font-caveat text-lg sm:text-2xl leading-tight mb-0;
   }
 
   .section-header {
-    @apply relative mb-10 sm:mb-14 select-none;
+    @apply relative mb-8 sm:mb-14 select-none;
   }
 
   .section-shell {
-    @apply relative overflow-hidden py-20 sm:py-28 px-4 sm:px-10 lg:px-16;
+    @apply relative overflow-hidden py-14 sm:py-20 lg:py-28 px-4 sm:px-10 lg:px-16;
   }
 
   .section-inner {

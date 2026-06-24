@@ -467,7 +467,7 @@ export default function Projects() {
                 <ProjectCardHeader
                   project={project}
                   logoSize={40}
-                  titleClassName="text-lg font-bold leading-snug text-zinc-800 transition-colors duration-200 group-hover:text-violet-700 dark:text-zinc-100 dark:group-hover:text-violet-200"
+                  titleClassName="text-base font-bold leading-snug text-zinc-800 transition-colors duration-200 group-hover:text-violet-700 dark:text-zinc-100 dark:group-hover:text-violet-200 sm:text-lg"
                 />
                 <p className="mb-5 mt-3 line-clamp-3 text-xs leading-relaxed text-zinc-700 dark:text-zinc-500">{project.description}</p>
                 <div className="mb-4 flex flex-wrap gap-1.5">

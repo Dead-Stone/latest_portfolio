@@ -70,7 +70,7 @@ export default function Experience() {
                   onMouseEnter={() => !collapsible && setHoveredIndex(index)}
                   onMouseLeave={() => !collapsible && setHoveredIndex(null)}
                 >
-                  <div className="relative pr-0.5 sm:py-3 sm:pr-12 sm:pb-5 [--exp-timeline:2rem] sm:[--exp-timeline:5rem]">
+                  <div className="relative max-sm:py-1.5 max-sm:pr-1 sm:py-3 sm:pr-12 sm:pb-5 [--exp-timeline:2rem] sm:[--exp-timeline:5rem]">
                     <motion.div
                       className="absolute -left-8 top-0 z-0 overflow-hidden border-0 bg-white/20 backdrop-blur-3xl dark:bg-white/[0.1] sm:-left-20"
                       initial={false}
@@ -136,7 +136,7 @@ export default function Experience() {
                     </motion.div>
 
                     <div className="pointer-events-none absolute -left-8 top-0 z-10 h-8 w-8 sm:-left-20 sm:h-12 sm:w-12">
-                      <div className="absolute inset-[2px] flex items-center justify-center overflow-hidden rounded-full bg-white p-0.5 dark:bg-[#ebe6dc]">
+                      <div className="absolute inset-[3px] flex items-center justify-center overflow-hidden rounded-full bg-white p-1 dark:bg-[#ebe6dc] sm:inset-[2px] sm:p-0.5">
                         {exp.logo ? (
                           <div className="relative h-full w-full">
                             <Image
@@ -156,7 +156,7 @@ export default function Experience() {
                     <div className="relative z-10 sm:transition-transform sm:duration-300 sm:group-hover:translate-x-1">
                       <button
                         type="button"
-                        className={`w-full text-left ${collapsible ? 'cursor-pointer touch-manipulation' : 'cursor-default'}`}
+                        className={`w-full text-left max-sm:pl-1.5 ${collapsible ? 'cursor-pointer touch-manipulation' : 'cursor-default'}`}
                         onClick={() => collapsible && toggleExpanded(index)}
                         aria-expanded={collapsible ? isExpanded : undefined}
                       >

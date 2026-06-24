@@ -17,10 +17,10 @@ const publications = [
 
 export default function Publications() {
   return (
-    <section id="publications" className="relative py-20 sm:py-28 px-4 sm:px-10 lg:px-16 overflow-hidden">
+    <section id="publications" className="section-shell">
 
       {/* Violet-tinted background */}
-      <div className="absolute inset-0 bg-violet-50 dark:bg-[#0d0b14]" />
+      <div className="absolute inset-0 bg-violet-50 dark:bg-zinc-950" />
       {/* Diagonal stripe pattern */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.06]"
@@ -35,9 +35,9 @@ export default function Publications() {
         }}
       />
       {/* Radial fade */}
-      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_80%_70%_at_50%_50%,transparent_30%,#f5f3ff_90%)] dark:bg-[radial-gradient(ellipse_80%_70%_at_50%_50%,transparent_30%,#0d0b14_90%)]" />
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_80%_70%_at_50%_50%,transparent_30%,#f5f3ff_90%)] dark:bg-[radial-gradient(ellipse_80%_70%_at_50%_50%,transparent_30%,#09090b_90%)]" />
 
-      <div className="max-w-4xl mx-auto relative z-10">
+      <div className="section-inner">
 
         {/* Watermark + label */}
         <SectionHeader

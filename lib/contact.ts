@@ -1,4 +1,5 @@
-export const CONTACT_EMAIL = 'mohanmoganti2023@gmail.com' as const
+export const CONTACT_EMAIL =
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || 'mohanmoganti2023@gmail.com'
 
 export type ContactMessagePayload = {
   name?: string

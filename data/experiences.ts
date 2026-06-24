@@ -5,6 +5,10 @@ export interface Experience {
   period: string
   description: string[]
   logo?: string
+  /** Base filename (no extension) under public/exp/office/ */
+  officePhotoKey?: string
+  /** Internships and academic roles — omitted from About stats */
+  excludeFromCareerStats?: boolean
 }
 
 export const experiences: Experience[] = [
@@ -14,6 +18,7 @@ export const experiences: Experience[] = [
     location: 'San Jose, CA',
     period: 'Feb 2026 – Present',
     logo: '/exp/nextphase-ai.png',
+    officePhotoKey: 'nextphase-ai',
     description: [
       'Design and ship production generative AI systems — LLM orchestration, agentic workflows, and retrieval-augmented pipelines that turn unstructured data into reliable, user-facing intelligence.',
       'Build multimodal RAG stacks with embedding-based retrieval, hybrid search, and context assembly to ground model outputs and cut hallucinations in real workflows.',
@@ -27,6 +32,7 @@ export const experiences: Experience[] = [
     location: 'San Jose, CA',
     period: 'Aug 2025 – Apr 2026',
     logo: '/exp/Gemizz Brand identity-18.png',
+    officePhotoKey: 'gembizz',
     description: [
       'Built LLM-driven workflows that convert raw user input into structured business profiles and narrative-style stories, powering personalized discovery and community engagement for 1,000+ active users.',
       'Developed recommendation pipelines leveraging user interaction signals and embedding-based similarity to customize content and profile ranking.',
@@ -40,6 +46,8 @@ export const experiences: Experience[] = [
     location: 'San Jose, CA',
     period: 'Aug 2024 – May 2025',
     logo: '/exp/sjsu.png',
+    officePhotoKey: 'sjsu',
+    excludeFromCareerStats: true,
     description: [
       'Supported courses in Machine Learning, Networking, and Information Security. Mentored students on distributed systems, consistency models, and high-availability design.',
       'Led lab sessions and debugging walkthroughs covering model evaluation, network protocols, and Linux system internals, helping students apply theoretical concepts to practical implementations.',
@@ -51,6 +59,7 @@ export const experiences: Experience[] = [
     location: 'San Jose, CA',
     period: 'Sep 2024 – Nov 2024',
     logo: '/exp/astranetix.png',
+    officePhotoKey: 'astranetix',
     description: [
       'Developed and productionized multimodal Retrieval-Augmented Generation solutions combining text and document embeddings to ground large language model outputs.',
       'Established chunking, embedding, and vector retrieval workflows using Weaviate and GraphQL, tuning HNSW parameters to improve semantic recall and reduce inference latency.',
@@ -63,6 +72,7 @@ export const experiences: Experience[] = [
     location: 'San Jose, CA',
     period: 'Apr 2024 – Aug 2024',
     logo: '/exp/FlatironsAILogo.001-325560603.png',
+    officePhotoKey: 'flatirons-ai',
     description: [
       'Evaluated advanced RAG techniques including GraphRAG and RAPTOR to enhance multi-hop reasoning and contextual grounding over large document corpora.',
       'Adapted embedding models and task-specific language models using domain datasets; constructed offline evaluation workflows to assess relevance, precision, recall, and latency.',
@@ -75,6 +85,7 @@ export const experiences: Experience[] = [
     location: 'Hyderabad, India',
     period: 'Aug 2021 – Jun 2023',
     logo: '/exp/Deloitte-Logo-PNG-Cutout-1845527513.png',
+    officePhotoKey: 'deloitte',
     description: [
       'Contributed to data-intensive, compliance-focused fintech platforms by developing Python-based backend services integrated with Angular frontends.',
       'Implemented REST and GraphQL interfaces in Python to enable analytics, reporting, and integration with downstream data-driven and intelligent systems.',
@@ -89,6 +100,7 @@ export const experiences: Experience[] = [
     location: 'Hyderabad, India',
     period: 'Jan 2020 – Jul 2021',
     logo: '/exp/turito.png',
+    officePhotoKey: 'turito',
     description: [
       'Implemented JVM-based backend services in Scala supporting data-centric workflows for EdTech and media streaming applications.',
       'Created RESTful interfaces enabling analytics ingestion, personalization logic, and multi-client content delivery.',
@@ -101,6 +113,8 @@ export const experiences: Experience[] = [
     location: 'Hyderabad, India',
     period: 'Jun 2019 – Jul 2019',
     logo: '/exp/Logo_for_the_Centre_for_Development_of_Advanced_Computing.svg',
+    officePhotoKey: 'cdac',
+    excludeFromCareerStats: true,
     description: [
       'Completed a summer internship focused on cybersecurity fundamentals and Linux system administration at India’s national R&D institution for advanced computing.',
       'Gained hands-on experience with Kali Linux, core Linux commands, and security best practices in lab environments.',

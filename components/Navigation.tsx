@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation'
 
 interface NavigationProps {
   activeSection: string
+  showGallery?: boolean
 }
 
 interface NavItem {
@@ -17,17 +18,19 @@ interface NavItem {
   label: string
 }
 
-const navItems: NavItem[] = [
+const baseNavItems: NavItem[] = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
   { id: 'projects', label: 'Projects' },
   { id: 'skills', label: 'Skills' },
   { id: 'experience', label: 'Experience' },
   { id: 'publications', label: 'Research' },
+  { id: 'gallery', label: 'Gallery' },
   { id: 'contact', label: 'Contact' },
 ]
 
-export default function Navigation({ activeSection }: NavigationProps) {
+export default function Navigation({ activeSection, showGallery = false }: NavigationProps) {
+  const navItems = showGallery ? baseNavItems : baseNavItems.filter(item => item.id !== 'gallery')
   const [isScrolled, setIsScrolled] = useState(false)
   const { startTransition } = usePageTransition()
   const router = useRouter()

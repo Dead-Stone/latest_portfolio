@@ -32,7 +32,7 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative py-20 sm:py-28 px-4 sm:px-10 lg:px-16 bg-zinc-100 dark:bg-zinc-950 overflow-hidden border-t border-zinc-200 dark:border-zinc-800">
+    <section id="skills" className="section-shell bg-zinc-100 dark:bg-zinc-950">
 
       {/* Dot grid */}
       <div
@@ -47,7 +47,7 @@ export default function Skills() {
       {/* Violet glow top-right */}
       <div className="absolute -top-32 right-0 w-[500px] h-[500px] rounded-full bg-violet-600/10 blur-[100px] pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto relative z-10">
+      <div className="section-inner">
 
         {/* Watermark + label */}
         <SectionHeader

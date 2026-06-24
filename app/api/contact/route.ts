@@ -63,11 +63,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Message is too short' }, { status: 400 })
   }
 
-  const from = process.env.RESEND_FROM || 'Portfolio <onboarding@resend.dev>'
+  const from = process.env.RESEND_FROM?.trim() || 'Portfolio <onboarding@resend.dev>'
+  const to =
+    process.env.RESEND_TO_EMAIL?.trim() ||
+    process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() ||
+    CONTACT_EMAIL
 
   const { error } = await resend.emails.send({
     from,
-    to: [CONTACT_EMAIL],
+    to: [to],
     replyTo: email,
     subject,
     text: buildEmailText({ ...body, email, message }),

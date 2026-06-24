@@ -67,7 +67,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative min-h-[70vh] flex flex-col justify-center py-20 sm:py-28 px-4 sm:px-10 lg:px-16 overflow-hidden bg-zinc-950">
+    <section id="contact" className="section-shell bg-zinc-950">
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.04]"
         style={{
@@ -80,7 +80,7 @@ export default function Contact() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-violet-600/10 blur-[100px] pointer-events-none" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/30 to-transparent" />
 
-      <div className="max-w-5xl mx-auto relative z-10 w-full">
+      <div className="section-inner">
         <SectionHeader
           label="let's talk"
           watermark="CONTACT"

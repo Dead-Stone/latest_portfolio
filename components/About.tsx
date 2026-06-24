@@ -2,17 +2,21 @@
 
 import { motion } from 'framer-motion'
 import SectionHeader from '@/components/SectionHeader'
-
-const stats = [
-  { value: '4+', label: 'yrs exp' },
-  { value: '6+', label: 'companies' },
-  { value: '10+', label: 'shipped' },
-]
+import { getCareerYearsLabel, getCompanyCountLabel } from '@/lib/career-stats'
 
 export default function About() {
+  const yearsExp = getCareerYearsLabel()
+  const companyCount = getCompanyCountLabel()
+
+  const stats = [
+    { value: yearsExp, label: 'yrs exp' },
+    { value: companyCount, label: 'companies' },
+    { value: '10+', label: 'shipped' },
+  ]
+
   return (
-    <section id="about" className="py-20 sm:py-28 px-4 sm:px-10 lg:px-16 bg-gradient-to-br from-slate-50 via-violet-50/40 to-slate-50 dark:bg-zinc-900 dark:bg-none border-t border-violet-100 dark:border-zinc-800 overflow-hidden">
-      <div className="max-w-5xl mx-auto">
+    <section id="about" className="section-shell bg-gradient-to-br from-slate-50 via-violet-50/40 to-slate-50 dark:bg-zinc-950 dark:bg-none">
+      <div className="section-inner">
 
         {/* Watermark + label */}
         <SectionHeader label="who I am" watermark="ABOUT" animate />
@@ -51,7 +55,7 @@ export default function About() {
             </p>
             <div className="space-y-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-400">
               <p>
-                Based in San Jose, CA. I&apos;ve spent the last 4+ years building production systems across fintech, EdTech, and AI: from compliance platforms at Deloitte to multimodal RAG at Astranetix and agentic evaluation pipelines at SJSU.
+                Based in San Jose, CA. I&apos;ve spent the last {yearsExp} years building production systems across fintech, EdTech, and AI — from compliance platforms at Deloitte to founding-engineer work at Gembizz and Gen AI systems at NextPhase AI.
               </p>
               <p>
                 I care deeply about systems that are observable, maintainable, and actually solve real problems, not just impressive demos. My stack is Python-first, cloud-native, and increasingly agent-driven.

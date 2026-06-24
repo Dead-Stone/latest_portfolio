@@ -5,15 +5,24 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { experiences } from '@/data/experiences'
 import SectionHeader from '@/components/SectionHeader'
+import { useTheme } from '@/contexts/ThemeContext'
+
+const LOGO_SURFACE_RGB = {
+  light: '255, 255, 255',
+  dark: '235, 230, 220',
+} as const
+
+const VIOLET_RGB = '124, 58, 237'
 
 export default function Experience() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const { theme } = useTheme()
 
   return (
-    <section id="experience" className="relative py-20 sm:py-28 px-4 sm:px-10 lg:px-16 overflow-hidden bg-gradient-to-br from-white via-violet-50/30 to-white dark:bg-zinc-950 dark:bg-none border-t border-violet-100 dark:border-zinc-800">
+    <section id="experience" className="section-shell bg-gradient-to-br from-white via-violet-50/30 to-white dark:bg-zinc-950 dark:bg-none">
       <div className="absolute bottom-0 left-1/3 w-[500px] h-[500px] rounded-full bg-violet-100/30 dark:bg-violet-900/10 blur-[120px] pointer-events-none" />
 
-      <div className="max-w-4xl mx-auto relative z-10">
+      <div className="section-inner">
 
         {/* Watermark + label */}
         <SectionHeader label="where I've worked" watermark="EXPERIENCE" animate />
@@ -28,6 +37,12 @@ export default function Experience() {
             {experiences.map((exp, index) => {
               const isHovered = hoveredIndex === index
               const fillTransition = { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const }
+              const surface = theme === 'dark' ? LOGO_SURFACE_RGB.dark : LOGO_SURFACE_RGB.light
+              const expandedLogoShadow = `0 0 0 1px rgba(${surface}, 0.55), 0 0 5px 4px rgba(${surface}, 0.5), 0 0 14px 10px rgba(${surface}, 0.38), 0 0 28px 18px rgba(${surface}, 0.24)`
+              const collapsedLogoShadow = `0 2px 10px rgba(${surface}, ${theme === 'dark' ? 0.38 : 0.45})`
+              const expandedCardShadow = `2px 6px 18px -4px rgba(${VIOLET_RGB}, ${theme === 'dark' ? 0.52 : 0.34}), 4px 14px 36px -6px rgba(${VIOLET_RGB}, ${theme === 'dark' ? 0.36 : 0.22})`
+              const collapsedCardShadow = `0 3px 12px -2px rgba(${VIOLET_RGB}, ${theme === 'dark' ? 0.3 : 0.18})`
+              const circleBloom = `radial-gradient(circle 14rem at 1.5rem 1.5rem, transparent 0px, transparent 21px, rgba(${surface}, 0.68) 22px, rgba(${surface}, 0.52) 30px, rgba(${surface}, 0.36) 44px, rgba(${surface}, 0.2) 64px, rgba(${surface}, 0.08) 88px, transparent 100%)`
 
               return (
               <motion.div
@@ -43,47 +58,40 @@ export default function Experience() {
                 <div className="relative py-3 pr-8 pb-4 sm:pr-12 sm:pb-5 [--exp-timeline:4rem] sm:[--exp-timeline:5rem]">
                 {/* Unified circle → card on timeline */}
                 <motion.div
-                  className="absolute -left-16 top-0 z-0 overflow-hidden border-0 bg-white/20 shadow-[0_12px_40px_-10px_rgba(124,58,237,0.28),0_4px_20px_-6px_rgba(0,0,0,0.35)] backdrop-blur-3xl dark:bg-white/[0.1] dark:shadow-[0_12px_48px_-10px_rgba(124,58,237,0.35),0_8px_24px_-8px_rgba(0,0,0,0.55)] sm:-left-20"
+                  className="absolute -left-16 top-0 z-0 overflow-hidden border-0 bg-white/20 backdrop-blur-3xl dark:bg-white/[0.1] sm:-left-20"
                   initial={false}
                   animate={
                     isHovered
-                      ? { width: 'calc(100% + var(--exp-timeline))', height: '100%', borderRadius: 24 }
-                      : { width: 48, height: 48, borderRadius: 24 }
+                      ? {
+                          width: 'calc(100% + var(--exp-timeline))',
+                          height: '100%',
+                          borderRadius: 24,
+                          boxShadow: expandedCardShadow,
+                        }
+                      : {
+                          width: 48,
+                          height: 48,
+                          borderRadius: 24,
+                          boxShadow: collapsedCardShadow,
+                        }
                   }
                   transition={fillTransition}
                 >
-                  {/* White logo circle — always visible */}
+                  {/* Logo circle — always visible */}
                   <motion.div
                     animate={{
-                      boxShadow: isHovered
-                        ? '0 0 10px 3px rgba(255,255,255,0.6), 0 0 18px 6px rgba(255,255,255,0.32), 0 0 26px 9px rgba(255,255,255,0.12)'
-                        : '0 2px 10px rgba(0,0,0,0.08)',
+                      boxShadow: isHovered ? expandedLogoShadow : collapsedLogoShadow,
                     }}
                     transition={fillTransition}
-                    className="absolute left-0 top-0 z-[1] h-12 w-12 rounded-full bg-white"
+                    className="absolute left-0 top-0 z-[1] h-12 w-12 rounded-full bg-white dark:bg-[#ebe6dc]"
                   />
 
-                  {/* White glow ring — radiates outward from circle edge */}
-                  <motion.div
-                    animate={{ opacity: isHovered ? 1 : 0 }}
-                    transition={fillTransition}
-                    className="pointer-events-none absolute inset-0 z-[2]"
-                    style={{
-                      background:
-                        'radial-gradient(circle 4.25rem at 1.5rem 1.5rem, transparent 0px, transparent 22px, rgba(255,255,255,0.65) 24px, rgba(255,255,255,0.38) 30px, rgba(255,255,255,0.16) 38px, transparent 50px)',
-                    }}
-                    aria-hidden
-                  />
-
-                  {/* Shadow bloom from circle into rectangle */}
+                  {/* Shadow bloom — anchored to circle edge */}
                   <motion.div
                     animate={{ opacity: isHovered ? 1 : 0 }}
                     transition={fillTransition}
                     className="pointer-events-none absolute inset-0 z-0"
-                    style={{
-                      background:
-                        'radial-gradient(circle 8rem at 1.5rem 1.5rem, rgba(0,0,0,0.14) 0%, rgba(0,0,0,0.08) 18%, rgba(124,58,237,0.1) 32%, rgba(0,0,0,0.04) 48%, transparent 68%)',
-                    }}
+                    style={{ background: circleBloom }}
                     aria-hidden
                   />
                   <motion.div
@@ -95,13 +103,7 @@ export default function Experience() {
                   <motion.div
                     animate={{ opacity: isHovered ? 1 : 0 }}
                     transition={fillTransition}
-                    className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-tl from-transparent via-transparent to-black/[0.04] dark:to-black/[0.14]"
-                    aria-hidden
-                  />
-                  <motion.div
-                    animate={{ opacity: isHovered ? 1 : 0 }}
-                    transition={fillTransition}
-                    className="pointer-events-none absolute inset-x-0 top-0 z-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent dark:via-white/35"
+                    className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-tl from-transparent via-transparent to-violet-900/[0.06] dark:to-violet-950/25"
                     aria-hidden
                   />
 
@@ -121,9 +123,9 @@ export default function Experience() {
                   )}
                 </motion.div>
 
-                {/* Logo fixed in circle — inset accounts for border */}
+                {/* Logo fixed in circle */}
                 <div className="pointer-events-none absolute -left-16 top-0 z-10 h-12 w-12 sm:-left-20">
-                  <div className="absolute inset-[2px] flex items-center justify-center overflow-hidden rounded-full p-0.5">
+                  <div className="absolute inset-[2px] flex items-center justify-center overflow-hidden rounded-full bg-white p-0.5 dark:bg-[#ebe6dc]">
                     {exp.logo ? (
                       <div className="relative h-full w-full">
                         <Image

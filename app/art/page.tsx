@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { FaChevronLeft, FaChevronRight, FaTimes } from 'react-icons/fa'
+import { FaChevronLeft, FaChevronRight, FaTimes, FaPaperPlane } from 'react-icons/fa'
 import ThemeToggle from '@/components/ThemeToggle'
 import PageToggle from '@/components/PageToggle'
 import FilmReel from '@/components/FilmReel'
@@ -428,17 +428,57 @@ function ArtRequestSection() {
               Email brief · custom quote from your refs and/or idea. Subject, medium, timing: whatever helps.
             </p>
             <CommissionIllustration />
+            <div className="mt-6 max-w-[min(100%,400px)] border-t border-zinc-800/70 pt-6">
             <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4 }}
-              className="mt-4"
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="flex flex-row items-start justify-between gap-4"
             >
-              <div className="inline-flex rotate-[-2deg] flex-col border border-dashed border-zinc-600/80 bg-zinc-900/60 px-5 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500">
-                <span className="text-zinc-400">signedbyMMS</span>
+              <div className="min-w-0 flex-1">
+                <p className="mb-2 text-[10px] font-mono uppercase tracking-widest text-zinc-600">more on instagram</p>
+                <a
+                  href="https://instagram.com/_dead_stone_"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-base font-bold leading-snug tracking-tight text-zinc-300 transition-colors duration-300 hover:text-violet-400 sm:text-lg"
+                >
+                  @_dead_stone_ ↗
+                </a>
+              </div>
+              <div className="shrink-0 select-none">
+                <div className="relative -rotate-[30deg]">
+                  <div
+                    className="flex w-fit flex-col items-center opacity-95"
+                    style={{ filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.35))' }}
+                  >
+                    <p className="font-shadows text-[1.15rem] leading-none tracking-[0.02em] text-zinc-200 sm:text-[1.65rem]">
+                      MMS
+                    </p>
+                    <svg
+                      viewBox="0 0 200 28"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="-mt-1 block h-auto w-[70px] sm:w-[90px]"
+                      aria-hidden
+                      preserveAspectRatio="xMidYMid meet"
+                    >
+                      <path
+                        d="M12 12 C 60 3, 140 3, 188 12"
+                        stroke="currentColor"
+                        strokeWidth="2.4"
+                        strokeLinecap="round"
+                        className="text-zinc-100"
+                      />
+                      <circle cx="78" cy="21" r="2.4" className="fill-zinc-100" />
+                      <circle cx="122" cy="21" r="2.4" className="fill-zinc-100" />
+                    </svg>
+                  </div>
+                </div>
               </div>
             </motion.div>
+            </div>
           </motion.div>
 
           <motion.div
@@ -546,29 +586,32 @@ function ArtRequestSection() {
                 <label htmlFor="art-req-msg" className="mb-1 block text-[10px] font-mono uppercase tracking-widest text-zinc-600">
                   Brief <span className="text-violet-400/90">*</span>
                 </label>
-                <textarea
-                  id="art-req-msg"
-                  required
-                  minLength={8}
-                  rows={3}
-                  value={message}
-                  onChange={e => setMessage(e.target.value)}
-                  className={`${inputClass} min-h-[88px] resize-y text-[13px] leading-relaxed`}
-                  placeholder="Idea, links, size, B&amp;W vs color, deadline."
-                />
+                <div className="relative">
+                  <textarea
+                    id="art-req-msg"
+                    required
+                    minLength={8}
+                    rows={3}
+                    value={message}
+                    onChange={e => setMessage(e.target.value)}
+                    className={`${inputClass} min-h-[88px] resize-y pb-14 pr-14 text-[13px] leading-relaxed`}
+                    placeholder="Idea, links, size, B&amp;W vs color, deadline."
+                  />
+                  <button
+                    type="submit"
+                    disabled={submitState === 'sending'}
+                    aria-label="Send brief"
+                    className="absolute bottom-3 right-3 flex h-10 w-10 items-center justify-center rounded-full bg-violet-600 text-white transition-colors hover:bg-violet-500 disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    <FaPaperPlane size={14} className="translate-x-px -translate-y-px" />
+                  </button>
+                </div>
               </div>
 
-              <div className="flex flex-col gap-2 pt-0.5 sm:flex-row sm:items-center sm:justify-between">
-                <button
-                  type="submit"
-                  disabled={submitState === 'sending'}
-                  className="inline-flex w-full items-center justify-center rounded-full bg-violet-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-violet-500 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
-                >
-                  {submitState === 'sending' ? 'Sending…' : 'Send brief →'}
-                </button>
+              <div className="flex justify-end pt-0.5">
                 <a
                   href={buildMailtoUrl({ subject: 'Commission question' })}
-                  className="text-center text-[10px] font-mono text-zinc-600 transition-colors hover:text-violet-400 sm:text-left"
+                  className="text-center text-[10px] font-mono text-zinc-600 transition-colors hover:text-violet-400 sm:text-right"
                 >
                   {CONTACT_EMAIL}
                 </a>
@@ -583,13 +626,16 @@ function ArtRequestSection() {
                   Couldn&apos;t send right now. Email {CONTACT_EMAIL} directly.
                 </p>
               ) : null}
-              <p
-                className="pointer-events-none mt-2 select-none text-right font-black uppercase leading-[0.85] tracking-tighter text-white/[0.045]"
-                style={{ fontSize: 'clamp(2.5rem, 14vw, 7rem)' }}
-                aria-hidden
-              >
-                STUDIO
-              </p>
+
+              <div className="relative mt-8 min-h-[clamp(3.5rem,12vw,5.5rem)]">
+                <p
+                  className="pointer-events-none absolute bottom-0 right-0 select-none font-black uppercase leading-[0.85] tracking-tighter text-white/[0.045]"
+                  style={{ fontSize: 'clamp(2.5rem, 14vw, 7rem)' }}
+                  aria-hidden
+                >
+                  STUDIO
+                </p>
+              </div>
             </form>
           </motion.div>
         </div>
@@ -992,54 +1038,6 @@ export default function ArtPage() {
         )}
 
         <ArtRequestSection />
-
-        {/* ── Footer ── */}
-        <footer className="border-t border-zinc-200 px-6 py-10 dark:border-white/[0.04] sm:px-10 sm:py-12 lg:px-16">
-          <div className="flex flex-row items-start justify-between gap-4 sm:gap-8">
-            <div className="min-w-0 flex-1 pr-2">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-zinc-600 dark:text-zinc-600 mb-2">more on instagram</p>
-              <a
-                href="https://instagram.com/_dead_stone_"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-lg font-bold leading-snug tracking-tight text-zinc-800 transition-colors duration-300 hover:text-violet-700 sm:text-xl md:text-2xl dark:text-zinc-400 dark:hover:text-violet-400"
-              >
-                @_dead_stone_ ↗
-              </a>
-            </div>
-            <div className="shrink-0 select-none pt-0.5 sm:pt-0">
-              <div className="relative -rotate-[30deg]">
-                <div
-                  className="flex w-fit flex-col items-center opacity-95"
-                  style={{ filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.12))' }}
-                >
-                  <p className="font-shadows text-[1.15rem] leading-none tracking-[0.02em] text-zinc-800 dark:text-zinc-200 sm:text-[1.65rem] md:text-[2rem] lg:text-[2.25rem]">
-                    MMS
-                  </p>
-
-                  <svg
-                    viewBox="0 0 200 28"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="-mt-1 block h-auto sm:w-[70px] md:w-[90px] lg:w-[88px]"
-                    aria-hidden
-                    preserveAspectRatio="xMidYMid meet"
-                  >
-                    <path
-                      d="M12 12 C 60 3, 140 3, 188 12"
-                      stroke="currentColor"
-                      strokeWidth="2.4"
-                      strokeLinecap="round"
-                      className="text-zinc-900 dark:text-zinc-100"
-                    />
-                    <circle cx="78" cy="21" r="2.4" className="fill-zinc-900 dark:fill-zinc-100" />
-                    <circle cx="122" cy="21" r="2.4" className="fill-zinc-900 dark:fill-zinc-100" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
       </main>
 
       {/* ── Lightbox ── */}

@@ -351,8 +351,8 @@ export default function Projects() {
       : { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true }, transition: { duration: 0.5, delay } }
 
   return (
-    <section id="projects" className="py-20 sm:py-28 px-4 sm:px-10 lg:px-16 bg-gradient-to-b from-zinc-50 to-white dark:bg-zinc-950 dark:bg-none border-t border-zinc-100 dark:border-zinc-800 overflow-hidden">
-      <div className="max-w-5xl mx-auto">
+    <section id="projects" className="section-shell bg-gradient-to-b from-zinc-50 to-white dark:bg-zinc-950 dark:bg-none">
+      <div className="section-inner">
         <SectionHeader label="things I've built" watermark="PROJECTS" animate={!reducedMotion} />
 
         <motion.article

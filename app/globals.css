@@ -7,16 +7,9 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: #ffffff;
   font-family: var(--font-jakarta), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -27,6 +20,11 @@ body {
 html {
   overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
+  background: #ffffff;
+}
+
+html.dark {
+  background: #0a0a0a;
 }
 
 .dark body {
@@ -44,7 +42,7 @@ html {
   }
 
   .section-label {
-    @apply font-caveat text-lg sm:text-2xl leading-tight mb-0;
+    @apply font-caveat text-lg sm:text-2xl leading-tight mb-0 tracking-wide;
   }
 
   .section-header {
@@ -107,6 +105,24 @@ html {
   animation: gradient 3s ease infinite;
 }
 
+@keyframes section-label-caret {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.section-label-caret {
+  display: inline-block;
+  margin-left: 1px;
+  font-weight: 400;
+  opacity: 0.85;
+  animation: section-label-caret 0.75s step-end infinite;
+}
+
 .animate-bounce-slow {
   animation: bounce 3s infinite;
 }
@@ -148,6 +164,11 @@ html {
 /* Smooth Scrolling */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
+
+[id] {
+  scroll-margin-top: 4.5rem;
 }
 
 /* Scroll snap removed to allow natural scrolling */

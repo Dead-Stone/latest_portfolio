@@ -13,17 +13,17 @@ export interface Experience {
 
 export const experiences: Experience[] = [
   {
-    company: 'NextPhase AI LLC',
+    company: 'NextPhase.ai',
     role: 'AI Engineer',
     location: 'San Jose, CA',
-    period: 'Feb 2026 – Present',
+    period: 'Apr 2026 – Present',
     logo: '/exp/nextphase-ai.png',
     officePhotoKey: 'nextphase-ai',
     description: [
-      'Design and ship production generative AI systems — LLM orchestration, agentic workflows, and retrieval-augmented pipelines that turn unstructured data into reliable, user-facing intelligence.',
-      'Build multimodal RAG stacks with embedding-based retrieval, hybrid search, and context assembly to ground model outputs and cut hallucinations in real workflows.',
-      'Evaluate and integrate foundation models (OpenAI, Gemini, open-weight) with offline benchmarks for relevance, latency, and cost — selecting configurations that scale in production.',
-      'Develop Python/FastAPI services on AWS and GCP with vector stores, observability, and CI/CD so Gen AI features deploy safely and iterate quickly.',
+      'Delivered a complete enterprise AI package covering infra provisioning, model deployment on AWS EKS with ArgoCD, LLM evaluation with RAGAS, observability via OpenTelemetry and Grafana, and per-client usage and cost analytics.',
+      'Built a production RAG system for secure document interaction using LangChain, Weaviate, and OpenAI, integrating Microsoft Presidio, GLiNER, and Microsoft Purview for PII redaction, NER, and enterprise data governance before content entered the context window.',
+      'Designed agentic workflows with CrewAI and LlamaIndex for multi-step document reasoning, automated report generation, and tool-augmented extraction pipelines across client datasets.',
+      'Built an Ansible Playbook Sandbox, a browser-based IDE for storing, composing, and executing Ansible playbooks with a pre-built YAML block library covering common infra tasks, paired with an AI assistant for on-the-go playbook generation, explanation, and debugging in real time.',
     ],
   },
   {

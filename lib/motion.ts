@@ -44,6 +44,50 @@ export function useIsMobile(breakpoint = 640) {
   return mobile
 }
 
+/** Types text in when `start` becomes true; instant when reduced motion is on. */
+export function useTypewriter(text: string, start: boolean, reduced: boolean) {
+  const [displayed, setDisplayed] = useState(reduced ? text : '')
+  const [done, setDone] = useState(reduced)
+
+  useEffect(() => {
+    if (!start) return
+
+    if (reduced) {
+      setDisplayed(text)
+      setDone(true)
+      return
+    }
+
+    setDisplayed('')
+    setDone(false)
+
+    let index = 0
+    let timeout: ReturnType<typeof setTimeout>
+
+    const tick = () => {
+      index += 1
+      setDisplayed(text.slice(0, index))
+      if (index >= text.length) {
+        setDone(true)
+        return
+      }
+      const char = text[index - 1]
+      const delay =
+        char === ' '
+          ? 30
+          : /[.,'!?—–]/.test(char)
+            ? 130
+            : 38 + Math.round(Math.random() * 32)
+      timeout = setTimeout(tick, delay)
+    }
+
+    timeout = setTimeout(tick, 160)
+    return () => clearTimeout(timeout)
+  }, [text, start, reduced])
+
+  return { displayed, done }
+}
+
 /** Framer Motion props that respect prefers-reduced-motion */
 export function motionSafe(
   reduced: boolean,

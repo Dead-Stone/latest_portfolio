@@ -7,6 +7,7 @@ import { MdPalette } from 'react-icons/md'
 import ThemeToggle from './ThemeToggle'
 import { usePageTransition } from '@/contexts/PageTransitionContext'
 import { useRouter } from 'next/navigation'
+import { scrollToSection } from '@/lib/scroll'
 
 interface NavigationProps {
   activeSection: string
@@ -40,10 +41,6 @@ export default function Navigation({ activeSection, showGallery = false }: Navig
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-
-  const scrollToSection = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
-  }
 
   const goToArt = () => {
     startTransition()

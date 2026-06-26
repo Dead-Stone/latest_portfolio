@@ -34,7 +34,7 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="section-shell bg-gradient-to-br from-white via-violet-50/30 to-white dark:bg-zinc-950 dark:bg-none max-sm:py-10"
+      className="section-shell bg-white dark:bg-zinc-950 max-sm:py-10"
     >
       <div className="absolute bottom-0 left-1/3 w-[500px] h-[500px] rounded-full bg-violet-100/30 dark:bg-violet-900/10 blur-[120px] pointer-events-none" />
 
@@ -51,6 +51,8 @@ export default function Experience() {
               const isHovered = !collapsible && hoveredIndex === index
               const isExpanded = collapsible ? expandedIndex === index : true
               const showDescription = isExpanded
+              const isCardOpen = isHovered || (collapsible && isExpanded)
+              const showDesktopCard = isCardOpen && !isMobile
               const fillTransition = { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const }
               const surface = theme === 'dark' ? LOGO_SURFACE_RGB.dark : LOGO_SURFACE_RGB.light
               const expandedLogoShadow = `0 0 0 1px rgba(${surface}, 0.55), 0 0 5px 4px rgba(${surface}, 0.5), 0 0 14px 10px rgba(${surface}, 0.38), 0 0 28px 18px rgba(${surface}, 0.24)`
@@ -72,10 +74,10 @@ export default function Experience() {
                 >
                   <div className="relative max-sm:py-1.5 max-sm:pr-1 sm:py-3 sm:pr-12 sm:pb-5 [--exp-timeline:2rem] sm:[--exp-timeline:5rem]">
                     <motion.div
-                      className="absolute -left-8 top-0 z-0 overflow-hidden border-0 bg-white/20 backdrop-blur-3xl dark:bg-white/[0.1] sm:-left-20"
+                      className="absolute -left-8 top-0 z-0 overflow-hidden border-0 max-sm:!bg-transparent max-sm:shadow-none sm:bg-white/20 sm:backdrop-blur-3xl dark:sm:bg-white/[0.1] sm:-left-20"
                       initial={false}
                       animate={
-                        isHovered
+                        showDesktopCard
                           ? {
                               width: 'calc(100% + var(--exp-timeline))',
                               height: '100%',
@@ -86,36 +88,40 @@ export default function Experience() {
                               width: isMobile ? LOGO_SIZE_MOBILE : LOGO_SIZE_DESKTOP,
                               height: isMobile ? LOGO_SIZE_MOBILE : LOGO_SIZE_DESKTOP,
                               borderRadius: isMobile ? 16 : 24,
-                              boxShadow: collapsedCardShadow,
+                              boxShadow: isMobile ? 'none' : collapsedCardShadow,
                             }
                       }
                       transition={fillTransition}
                     >
                       <motion.div
                         animate={{
-                          boxShadow: isHovered ? expandedLogoShadow : collapsedLogoShadow,
+                          boxShadow: isMobile
+                            ? 'none'
+                            : isCardOpen
+                              ? expandedLogoShadow
+                              : collapsedLogoShadow,
                         }}
                         transition={fillTransition}
-                        className="absolute left-0 top-0 z-[1] h-8 w-8 rounded-full bg-white dark:bg-[#ebe6dc] sm:h-12 sm:w-12"
+                        className="absolute left-0 top-0 z-[1] hidden h-8 w-8 rounded-full bg-white dark:bg-[#ebe6dc] sm:block sm:h-12 sm:w-12"
                       />
 
                       <motion.div
-                        animate={{ opacity: isHovered ? 1 : 0 }}
+                        animate={{ opacity: showDesktopCard ? 1 : 0 }}
                         transition={fillTransition}
-                        className="pointer-events-none absolute inset-0 z-0"
+                        className="pointer-events-none absolute inset-0 z-0 max-sm:hidden"
                         style={{ background: circleBloom }}
                         aria-hidden
                       />
                       <motion.div
-                        animate={{ opacity: isHovered ? 1 : 0 }}
+                        animate={{ opacity: showDesktopCard ? 1 : 0 }}
                         transition={fillTransition}
-                        className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-br from-violet-100/15 via-transparent to-violet-200/10 dark:from-violet-500/[0.05] dark:to-violet-950/20"
+                        className="pointer-events-none absolute inset-0 z-0 max-sm:hidden bg-gradient-to-br from-violet-100/15 via-transparent to-violet-200/10 dark:from-violet-500/[0.05] dark:to-violet-950/20"
                         aria-hidden
                       />
                       <motion.div
-                        animate={{ opacity: isHovered ? 1 : 0 }}
+                        animate={{ opacity: showDesktopCard ? 1 : 0 }}
                         transition={fillTransition}
-                        className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-tl from-transparent via-transparent to-violet-900/[0.06] dark:to-violet-950/25"
+                        className="pointer-events-none absolute inset-0 z-0 max-sm:hidden bg-gradient-to-tl from-transparent via-transparent to-violet-100/35 dark:to-violet-950/25"
                         aria-hidden
                       />
 
@@ -135,8 +141,28 @@ export default function Experience() {
                       )}
                     </motion.div>
 
-                    <div className="pointer-events-none absolute -left-8 top-0 z-10 h-8 w-8 sm:-left-20 sm:h-12 sm:w-12">
-                      <div className="absolute inset-[3px] flex items-center justify-center overflow-hidden rounded-full bg-white p-1 dark:bg-[#ebe6dc] sm:inset-[2px] sm:p-0.5">
+                    {exp.logo && (
+                      <motion.div
+                        initial={false}
+                        animate={{
+                          x: isExpanded ? 0 : 16,
+                          opacity: isExpanded ? 1 : 0,
+                          scale: isExpanded ? 1 : 0.94,
+                        }}
+                        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                        className="pointer-events-none absolute bottom-1 right-1 z-0 h-[5.25rem] w-[5.25rem] select-none sm:hidden"
+                        aria-hidden
+                      >
+                        <div className="relative h-full w-full opacity-[0.16] dark:opacity-[0.2]">
+                          <div className="absolute inset-0.5">
+                            <Image src={exp.logo} alt="" fill className="object-contain object-[right_bottom]" sizes="84px" />
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    <div className="pointer-events-none absolute -left-8 top-0 z-10 h-8 w-8 max-sm:shadow-none sm:-left-20 sm:h-12 sm:w-12">
+                      <div className="absolute inset-[3px] flex items-center justify-center overflow-hidden rounded-full bg-white p-1 shadow-none dark:bg-[#ebe6dc] sm:inset-[2px] sm:p-0.5 sm:shadow-none">
                         {exp.logo ? (
                           <div className="relative h-full w-full">
                             <Image
@@ -180,8 +206,12 @@ export default function Experience() {
                             <p className="mt-0.5 text-[11px] font-mono leading-tight text-zinc-500 dark:text-zinc-500 sm:text-xs sm:text-zinc-600 dark:sm:text-zinc-400">
                               {exp.period}
                             </p>
-                            {collapsible && !isExpanded && (
-                              <p className="mt-1 text-[10px] font-mono uppercase tracking-wider text-violet-500/75 dark:text-violet-400/65">
+                            {collapsible && (
+                              <p
+                                className={`mt-1 max-sm:min-h-[14px] text-[10px] font-mono uppercase tracking-wider text-violet-500/75 transition-opacity duration-200 dark:text-violet-400/65 ${
+                                  isExpanded ? 'max-sm:invisible max-sm:opacity-0' : ''
+                                }`}
+                              >
                                 Tap for details
                               </p>
                             )}
@@ -198,16 +228,17 @@ export default function Experience() {
                         </div>
                       </button>
 
-                      <AnimatePresence initial={false}>
-                        {showDescription && (
-                          <motion.div
-                            key="description"
-                            initial={collapsible ? { opacity: 0 } : false}
-                            animate={{ opacity: 1 }}
-                            exit={collapsible ? { opacity: 0 } : undefined}
-                            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                            className="max-sm:pt-3 sm:overflow-hidden sm:pt-0"
-                          >
+                      <div className="max-sm:relative">
+                        <AnimatePresence initial={false}>
+                          {showDescription && (
+                            <motion.div
+                              key="description"
+                              initial={collapsible ? { opacity: 0 } : false}
+                              animate={{ opacity: 1 }}
+                              exit={collapsible ? { opacity: 0 } : undefined}
+                              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                              className="max-sm:pt-3 sm:overflow-hidden sm:pt-0"
+                            >
                             <div
                               className={`mb-1 mt-1.5 hidden h-px w-full sm:mb-3 sm:mt-2.5 sm:block ${
                                 isHovered
@@ -235,9 +266,10 @@ export default function Experience() {
                                 </li>
                               ))}
                             </ul>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
                     </div>
                   </div>
                 </motion.div>

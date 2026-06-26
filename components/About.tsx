@@ -15,7 +15,7 @@ export default function About() {
   ]
 
   return (
-    <section id="about" className="section-shell bg-gradient-to-br from-slate-50 via-violet-50/40 to-slate-50 dark:bg-zinc-950 dark:bg-none">
+    <section id="about" className="section-shell bg-white dark:bg-zinc-950">
       <div className="section-inner">
 
         {/* Watermark + label */}
@@ -53,15 +53,19 @@ export default function About() {
               <span className="text-violet-600 dark:text-violet-400">LLM-driven systems</span>{' '}
               that work for real users.
             </p>
-            <div className="space-y-3 text-[13px] sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-400">
+            <div className="space-y-4 text-[13px] sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-400">
               <p>
-                Based in San Jose, CA. I&apos;ve spent the last {yearsExp} years building production systems across fintech, EdTech, and AI — from compliance platforms at Deloitte to founding-engineer work at Gembizz and Gen AI systems at NextPhase AI.
+                I bring {yearsExp} years of experience building production AI systems, RAG pipelines, and
+                cloud-native backends. I&apos;ve shipped software across fintech, EdTech, and generative AI, from
+                compliance platforms at Deloitte to founding-engineer work at Gembizz and LLM-driven products at
+                NextPhase AI, with a focus on scalable architectures, vector search, and agentic workflows on AWS,
+                GCP, and Azure.
               </p>
               <p>
-                I care deeply about systems that are observable, maintainable, and actually solve real problems, not just impressive demos. My stack is Python-first, cloud-native, and increasingly agent-driven.
-              </p>
-              <p>
-                Published research on Hindi NLP. Outside engineering: basketball, sketching, and building things with my hands.
+                I pair strong engineering fundamentals with a product-first approach to delivering practical,
+                observable AI that works for real users. That experience, from regulated enterprise environments to
+                early-stage product builds, helps teams avoid common pitfalls around grounding, latency, and cost while
+                moving confidently from prototype to production.
               </p>
             </div>
           </motion.div>

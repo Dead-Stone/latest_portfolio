@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { FaLinkedin, FaGithub } from 'react-icons/fa'
 import { useState, useEffect } from 'react'
 import { useReducedMotion } from '@/lib/motion'
+import { scrollToSection } from '@/lib/scroll'
 
 const roles = ['Software Engineer', 'AI Engineer', 'Full-Stack Developer', 'Founding Engineer']
 
@@ -114,12 +115,16 @@ export default function Hero() {
             >
               <a
                 href="#contact"
+                onClick={(e) => {
+                  e.preventDefault()
+                  scrollToSection('contact')
+                }}
                 className="group min-h-[44px] px-6 py-2.5 bg-violet-600 hover:bg-violet-700 text-white rounded-full text-sm font-semibold transition-all duration-200 shadow-lg shadow-violet-200 dark:shadow-violet-900/30 hover:shadow-violet-300 dark:hover:shadow-violet-900/50 hover:-translate-y-0.5 inline-flex items-center justify-center"
               >
                 Get in Touch
               </a>
               <a
-                href="/Resume_Latest_103025.pdf"
+                href="/Resume_Latest_06252026.pdf"
                 download="Mohana_Moganti_Resume.pdf"
                 className="min-h-[44px] px-6 py-2.5 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 rounded-full text-sm font-semibold hover:border-zinc-400 dark:hover:border-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-all duration-200 inline-flex items-center justify-center"
               >

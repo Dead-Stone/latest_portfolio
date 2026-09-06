@@ -3,8 +3,9 @@
 import { useState, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
-import { FaChevronLeft, FaChevronRight, FaTimes, FaPaperPlane } from 'react-icons/fa'
+import { FaChevronLeft, FaChevronRight, FaTimes, FaPaperPlane, FaGamepad } from 'react-icons/fa'
 import ThemeToggle from '@/components/ThemeToggle'
 import PageToggle from '@/components/PageToggle'
 import FilmReel from '@/components/FilmReel'
@@ -12,6 +13,13 @@ import { usePageTransition } from '@/contexts/PageTransitionContext'
 import Lottie from 'lottie-react'
 import commissionIllustration from '../../public/Illustrator Animation.json'
 import { CONTACT_EMAIL, buildMailtoUrl, sendContactMessage } from '@/lib/contact'
+import { artPieces, jimCarreyStudies, type ArtPiece } from '@/data/art'
+import GameLoadingSpinner from '@/components/game/GameLoadingSpinner'
+
+const PhaserGameCanvas = dynamic(() => import('@/components/game/PhaserGameCanvas'), {
+  ssr: false,
+  loading: () => <GameLoadingSpinner />,
+})
 
 function isWidePolaroid(art: ArtPiece) {
   return art.imgW / art.imgH > 1.85
@@ -41,245 +49,6 @@ const QUOTE_BASIS: { id: string; label: string; blurb: string }[] = [
     id: 'mixed',
     label: 'Images + idea',
     blurb: 'Rough refs plus direction in words. Final quote once we lock what the piece should feel like.',
-  },
-]
-
-interface ArtPiece {
-  id: number
-  title: string
-  description: string
-  image: string
-  negativeImage?: string
-  category: string
-  year: string
-  imgW: number
-  imgH: number
-  hasNegative?: boolean
-  movie?: string
-  sequence?: string[]
-  sequenceIntervalMs?: number
-}
-
-const artPieces: ArtPiece[] = [
-  {
-    id: 0,
-    title: 'Jim Carrey',
-    description: 'Jim Carrey as The Mask is pure chaos in the best way possible. That green face, those wild expressions, the way he could stretch reality itself with just a look. But honestly, what really got me was The Truman Show. That movie hit me in a way I still can\'t fully explain. Watching Truman discover his entire life was a lie, seeing him break free from that perfect little world, it made me think about my own reality in ways no other movie has.',
-    image: '/art/c1.png',
-    category: 'Animation',
-    year: '2024',
-    imgW: 280, imgH: 280,
-    hasNegative: false,
-    sequence: ['/art/c1.png','/art/c2.png','/art/c3.png','/art/c4.png','/art/c5.png','/art/c6.png','/art/c7.png','/art/c8.png','/art/c9.png'],
-    sequenceIntervalMs: 250,
-  },
-  {
-    id: 1,
-    title: 'Jack Nicholson',
-    description: 'Nicholson\'s Joker was the first I saw: that manic laugh and theatrical chaos made him both terrifying and oddly charming. There\'s a theatricality to him that feels almost Shakespearean. He owns every room he walks into, and the way he delivers chaos with a grin is unlike anything else in the franchise. He set the tone for every Joker that followed.',
-    image: '/art/negative-1.png',
-    negativeImage: '/art/negative-1.png',
-    category: 'Portrait',
-    year: '2024',
-    imgW: 537, imgH: 816,
-    hasNegative: true,
-    movie: 'Batman (1989)',
-  },
-  {
-    id: 2,
-    title: 'Heath Ledger',
-    description: 'Heath Ledger completely redefined what the character could be. His performance was so raw and unsettling that it earned him a well-deserved Oscar, and honestly, it changed how I think about villainy in cinema. The way he made chaos feel like a philosophy rather than just evil: that\'s something no one else has pulled off.',
-    image: '/art/negative-2.png',
-    negativeImage: '/art/negative-2.png',
-    category: 'Portrait',
-    year: '2024',
-    imgW: 502, imgH: 748,
-    hasNegative: true,
-    movie: 'The Dark Knight (2008)',
-  },
-  {
-    id: 3,
-    title: 'Joaquin Phoenix',
-    description: 'Joaquin Phoenix\'s take hit different. Watching Arthur Fleck\'s descent into madness felt uncomfortably real, like we were witnessing a person break rather than just a villain being born. His heartbreaking vulnerability is what sets him apart: you almost feel sorry for him, which is the most terrifying thing of all.',
-    image: '/art/negative-3.png',
-    negativeImage: '/art/negative-3.png',
-    category: 'Portrait',
-    year: '2024',
-    imgW: 516, imgH: 740,
-    hasNegative: true,
-    movie: 'Joker (2019)',
-  },
-  {
-    id: 5,
-    title: 'Hisoka',
-    description: 'Hisoka from Hunter x Hunter is one of those characters that just gets under your skin in the best way. His twisted charisma, that unsettling smile, the way he treats every fight like a game: he\'s dangerous, unpredictable, and completely unapologetic about who he is.',
-    image: '/art/anime-1.png',
-    category: 'Anime',
-    year: '2024',
-    imgW: 475, imgH: 790,
-  },
-  {
-    id: 6,
-    title: 'Roronoa Zoro',
-    description: 'Zoro from One Piece is the definition of loyalty and determination. This guy will literally die before he breaks a promise. His three-sword style is iconic, but it\'s his unwavering commitment to becoming the world\'s greatest swordsman that really gets me.',
-    image: '/art/anime-2.png',
-    category: 'Anime',
-    year: '2024',
-    imgW: 682, imgH: 777,
-  },
-  {
-    id: 7,
-    title: 'God Usopp',
-    description: 'Usopp is the most relatable character in One Piece. He\'s scared, he lies constantly, he runs away from fights, but when it really matters, he always finds the courage to stand up. His lies becoming reality: that\'s one of the most satisfying arcs in the series.',
-    image: '/art/anime-3.png',
-    category: 'Anime',
-    year: '2024',
-    imgW: 553, imgH: 682,
-  },
-  {
-    id: 8,
-    title: 'Sheldon Cooper',
-    description:
-      'Sheldon Cooper dropped into Edvard Munch’s The Scream: graphite portrait on the iconic bridge-and-sky composition, Flash tee and all. Sitcom precision meets expressionist panic.',
-    image: '/art/image-1.png',
-    category: 'TV · parody',
-    year: '2024',
-    imgW: 677, imgH: 847,
-  },
-  {
-    id: 10,
-    title: 'Phoebe Buffay',
-    description: 'Phoebe Buffay with her guitar: soft smile, fringe coat, Smelly Cat energy without saying a word. Charcoal and texture on a quiet ground.',
-    image: '/art/image-3.png',
-    category: 'TV',
-    year: '2024',
-    imgW: 512, imgH: 773,
-    movie: 'Friends',
-  },
-  {
-    id: 11,
-    title: 'Giannis Antetokounmpo',
-    description:
-      '2021 Finals: #34, the Larry O’Brien and Finals MVP trophies, Champions cap, full grin. Pencil study of one of the most electric celebrations in the league.',
-    image: '/art/bb-1.png',
-    category: 'Sports',
-    year: '2024',
-    imgW: 640, imgH: 820,
-  },
-  {
-    id: 12,
-    title: 'Air Jordan 1',
-    description:
-      'Side-profile study of the high-top that defined sneaker culture: Swoosh, wings logo, perforations, and sole shadow grounded on the page. Graphite shading and contrast.',
-    image: '/art/image-2.png',
-    category: 'Still life',
-    year: '2024',
-    imgW: 880, imgH: 600,
-  },
-  {
-    id: 13,
-    title: 'Joey Tribbiani',
-    description:
-      'That wide-eyed, mouth-open Friends reaction: charcoal portrait with heavy shadows and sitcom energy frozen in graphite.',
-    image: '/art/image-5.png',
-    category: 'TV',
-    year: '2024',
-    imgW: 560, imgH: 700,
-    movie: 'Friends',
-  },
-  {
-    id: 14,
-    title: 'Sanji: wanted poster',
-    description:
-      'One Piece “ONLY ALIVE” bounty sheet: lovestruck expression, Beli bounty block, and Marine stamp in ink-wash greyscale.',
-    image: '/art/anime-4.png',
-    category: 'Anime',
-    year: '2024',
-    imgW: 720, imgH: 960,
-  },
-  {
-    id: 15,
-    title: 'Naruto: four chapters',
-    description:
-      'Four panels across one life: the swing, the village together, the wedding, and the Seventh Hokage cloak walking into the distance.',
-    image: '/art/anime-5.png',
-    category: 'Anime',
-    year: '2024',
-    imgW: 2000, imgH: 560,
-  },
-  {
-    id: 16,
-    title: 'Itachi Uchiha',
-    description:
-      'Akatsuki cloak, straw kasa, and Sharingan picked out in red on charcoal: hand reaching forward, high-contrast Naruto fan piece.',
-    image: '/art/anime-6.png',
-    category: 'Anime',
-    year: '2024',
-    imgW: 640, imgH: 880,
-  },
-  {
-    id: 17,
-    title: 'Kakashi’s team',
-    description:
-      'Team 7 plus Sai, Yamato, and a tiny Pakkun: a crowded “family photo” pencil piece with Kakashi center and arms crossed.',
-    image: '/art/anime-7.png',
-    category: 'Anime',
-    year: '2024',
-    imgW: 900, imgH: 700,
-  },
-  {
-    id: 18,
-    title: 'Team 7, then & now',
-    description:
-      'Stacked panels: grown Team 7 laughing with Kakashi above, then kid Sasuke, Sakura, and Naruto below the same dynamic.',
-    image: '/art/anime-8.png',
-    category: 'Anime',
-    year: '2024',
-    imgW: 720, imgH: 980,
-  },
-  {
-    id: 19,
-    title: 'Harley Quinn',
-    description:
-      'Suicide Squad energy: pigtails, “PUDDIN” choker, bat on the shoulder, piece held together with graphite grit and attitude.',
-    image: '/art/image-4.png',
-    category: 'Film',
-    year: '2024',
-    imgW: 700, imgH: 880,
-    movie: 'Suicide Squad',
-  },
-  {
-    id: 20,
-    title: 'Matthew Perry',
-    description:
-      'Big laugh, 90s hair, soft sweatshirt folds: charcoal portrait with the pencil still in frame like the drawing just happened.',
-    image: '/art/image-6.png',
-    category: 'TV',
-    year: '2024',
-    imgW: 640, imgH: 820,
-    movie: 'Friends',
-  },
-  {
-    id: 21,
-    title: 'Irrfan Khan',
-    description:
-      'Open smile and easy posture in pencil: a portrait study of one of the most expressive actors, light on the face and collar.',
-    image: '/art/image-7.png',
-    category: 'Portrait',
-    year: '2024',
-    imgW: 640, imgH: 780,
-  },
-  {
-    id: 22,
-    title: 'White cat study',
-    description:
-      'Long-haired cat in profile on black: brushy fur, whiskers, and tail; minimal palette, lots of negative space.',
-    image: '/art/negative-4.png',
-    negativeImage: '/art/negative-4.png',
-    category: 'Animals',
-    year: '2024',
-    imgW: 720, imgH: 900,
-    hasNegative: false,
   },
 ]
 
@@ -659,6 +428,7 @@ export default function ArtPage() {
   const [sequenceCollageOpen, setSequenceCollageOpen] = useState(false)
   const [galleryHeldId, setGalleryHeldId] = useState<number | null>(null)
   const [galleryFilter, setGalleryFilter] = useState<string>('featured')
+  const [gameMode, setGameMode] = useState(false)
   const { startTransition } = usePageTransition()
   const router = useRouter()
 
@@ -673,7 +443,7 @@ export default function ArtPage() {
   }, [])
 
   useEffect(() => {
-    const open = Boolean(selectedArt) || sequenceCollageOpen
+    const open = Boolean(selectedArt) || sequenceCollageOpen || gameMode
     if (!open) {
       document.body.style.overflow = ''
       document.documentElement.style.overflow = ''
@@ -685,7 +455,7 @@ export default function ArtPage() {
       document.body.style.overflow = ''
       document.documentElement.style.overflow = ''
     }
-  }, [selectedArt, sequenceCollageOpen])
+  }, [selectedArt, sequenceCollageOpen, gameMode])
 
   const galleryPieces = useMemo(
     () => artPieces.filter(a => !a.hasNegative && (!a.sequence || a.sequence.length === 0)),
@@ -817,12 +587,24 @@ export default function ArtPage() {
               MY ARTS
             </span>
           </motion.div>
+
+          <motion.button
+            type="button"
+            onClick={() => setGameMode(true)}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="group relative z-10 mt-6 inline-flex items-center gap-2.5 rounded-full border border-violet-500/40 bg-violet-600/10 px-4 py-2 text-xs font-semibold text-violet-700 backdrop-blur-sm transition-colors hover:bg-violet-600/15 dark:border-violet-500/30 dark:bg-violet-500/10 dark:text-violet-300 dark:hover:bg-violet-500/15 sm:mt-8 sm:px-5 sm:py-2.5 sm:text-sm"
+          >
+            <FaGamepad className="transition-transform duration-300 group-hover:scale-110" size={14} />
+            Walk through the gallery
+          </motion.button>
         </section>
 
         {/* ── Negative art: invert to positive (hover / hold) ── */}
         {negativePieces.length > 0 && (
           <section className="bg-zinc-100 px-6 py-10 sm:px-10 sm:py-16 lg:px-16 dark:bg-[#050505]">
-            <SectionHeader ghost="THE JOKER SERIES" />
+            <SectionHeader ghost="PREMIUM · NEGATIVE ART" />
             <div className="mt-3 flex flex-col gap-10 sm:mt-6 sm:gap-16">
               {negativePieces.map((piece, i) => (
                 <JokerCard key={piece.id} piece={piece} index={i} total={negativePieces.length} />
@@ -1169,11 +951,12 @@ export default function ArtPage() {
                 {animationPiece.sequence.map((src, i) => (
                   <div
                     key={`${src}-${i}`}
-                    className="relative aspect-square overflow-hidden rounded-lg border border-zinc-200 bg-zinc-100 shadow-lg dark:border-white/[0.08] dark:bg-zinc-950"
+                    className="overflow-hidden rounded-lg border border-zinc-200 bg-zinc-100 shadow-lg dark:border-white/[0.08] dark:bg-zinc-950"
                   >
+                    <div className="relative aspect-square">
                     <Image
                       src={src}
-                      alt={`${animationPiece.title}, frame ${i + 1}`}
+                      alt={jimCarreyStudies[i]?.title ?? `${animationPiece.title}, frame ${i + 1}`}
                       fill
                       className="object-contain bg-black"
                       sizes="(max-width: 640px) 45vw, 200px"
@@ -1181,6 +964,11 @@ export default function ArtPage() {
                     <span className="absolute bottom-1.5 right-2 font-mono text-[10px] tracking-widest text-white/45">
                       {String(i + 1).padStart(2, '0')}
                     </span>
+                    </div>
+                    <div className="p-3">
+                      <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{jimCarreyStudies[i]?.title.replace('Jim Carrey · ','')}</h3>
+                      <p className="mt-2 text-xs leading-5 text-zinc-600 dark:text-zinc-400">{jimCarreyStudies[i]?.description}</p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -1190,6 +978,8 @@ export default function ArtPage() {
       </AnimatePresence>
 
       <PageToggle />
+
+      {gameMode ? <PhaserGameCanvas onExit={() => setGameMode(false)} /> : null}
     </div>
   )
 }
@@ -1357,5 +1147,3 @@ function JokerCard({ piece, index, total }: { piece: ArtPiece; index: number; to
     </motion.div>
   )
 }
-
-

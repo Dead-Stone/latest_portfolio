@@ -3,23 +3,27 @@ import './globals.css'
 import { ThemeProvider } from '@/contexts/ThemeContext'
 import { PageTransitionProvider } from '@/contexts/PageTransitionContext'
 import PageTransition from '@/components/PageTransition'
-import { Caveat, Shadows_Into_Light_Two, Space_Grotesk } from 'next/font/google'
+import localFont from 'next/font/local'
 
-const caveat = Caveat({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+// Keep the original typefaces local so offline/dev builds never substitute fallbacks.
+const caveat = localFont({
+  src: './fonts/caveat-latin.woff2',
+  weight: '400 700',
+  display: 'swap',
   variable: '--font-caveat',
 })
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+const spaceGrotesk = localFont({
+  src: './fonts/space-grotesk-latin.woff2',
+  weight: '300 700',
+  display: 'swap',
   variable: '--font-jakarta',
 })
 
-const shadowsIntoLightTwo = Shadows_Into_Light_Two({
-  subsets: ['latin'],
+const shadowsIntoLightTwo = localFont({
+  src: './fonts/shadows-into-light-two-latin.woff2',
   weight: '400',
+  display: 'swap',
   variable: '--font-shadows',
 })
 
